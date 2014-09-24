@@ -23,13 +23,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="proto\messages.pb.cc">
-      <Filter>proto</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="proto\messages.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="proto\messages.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,1 +1,1 @@
-..\..\..\tools\protoc messages.protoc --cpp_out .
+..\..\..\tools\protoc messages.proto --cpp_out .

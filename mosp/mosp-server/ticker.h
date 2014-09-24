@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _TICKER_H
+#define _TICKER_H
 
 class Server;
 
@@ -15,3 +16,5 @@ public:
 private:
 	const Server* server;
 };
+
+#endif

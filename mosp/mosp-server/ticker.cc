@@ -12,11 +12,11 @@ void Ticker::Run()
 {
 	while (server->IsRunning())
 	{
-		auto clients = server->GetClientList();
+		auto clients = server->GetClients();
 
 		for (auto it = clients.begin(); it != clients.end(); ++it)
 		{
-			Client* c = (*it).second;
+			Client* client = (*it);
 			
 			//TODO Iterate on all of the clients and process their incoming packets
 			

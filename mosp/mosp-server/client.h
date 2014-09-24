@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _CLIENT_H
+#define _CLIENT_H
 
 #include <queue>
 #include <memory>
@@ -10,20 +11,18 @@ class Client
 public:
 	Client(ENetPeer* peer, int id) :
 		peer(peer),
-		id(id)
-	{}
+		id(id) {}
 
 	~Client();
 	
-	void QueueMessage();
-
 	int GetId() const { return id; }
+	void QueueMessage(const mosp::BaseMessage *message);
 
 private:
-	ENetPeer* peer;
 	int id;
+	ENetPeer* peer;
 
-	std::queue<mosp::BaseMessage*> incomingMessages;
-
-	void ProcessMessage();
+	std::queue<const mosp::BaseMessage*> incomingMessages;
 };
+
+#endif
