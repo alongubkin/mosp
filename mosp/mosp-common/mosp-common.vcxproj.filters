@@ -18,17 +18,17 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="proto\join_request.proto">
+    <None Include="proto\messages.proto">
       <Filter>proto</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="proto\join_request.pb.cc">
+    <ClCompile Include="proto\messages.pb.cc">
       <Filter>proto</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="proto\join_request.pb.h">
+    <ClInclude Include="proto\messages.pb.h">
       <Filter>proto</Filter>
     </ClInclude>
   </ItemGroup>

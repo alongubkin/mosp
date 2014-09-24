@@ -1,4 +1,5 @@
 #include "server.h"
+#include "proto/messages.pb.h"
 
 Server::Server(int port)
 {
@@ -16,10 +17,13 @@ Server::Server(int port)
 	{
 		printf("error");
 	}
+
+	ticker = new Ticker(this);
 }
 
 Server::~Server()
 {
+	delete ticker;
 	enet_host_destroy(server);
 }
 
@@ -29,6 +33,8 @@ void Server::StartListen()
 	isRunning = true;
 	int nextAvailableID = 0;
 	ENetEvent event;
+
+	tickThread = std::thread(&Ticker::Run, ticker);
 
 	while (isRunning)
 	{
@@ -66,14 +72,27 @@ void Server::StartListen()
 		}
 	}
 
+	tickThread.join();
 	isRunning = false;
 }
 
 void Server::ProcessPacket(ENetPacket* packet, ENetPeer* peer)
 {
-	
-	// 2) packet -> protobuf
 	Client* c = static_cast<Client*>(peer->data);
 
+	mosp::BaseMessage base;
 
+	if (!base.ParseFromArray(packet->data, packet->dataLength))
+	{
+		// TODO: throw exception
+	}
+
+
+
+	//Handler
+
+	//JoinRequestHandler 
+	
+
+	// base.type() == mosp::Type::JoinRequest
 }

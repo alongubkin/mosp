@@ -87,10 +87,12 @@
     <ClCompile Include="client.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="server.cc" />
+    <ClCompile Include="ticker.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
     <ClInclude Include="server.h" />
+    <ClInclude Include="ticker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

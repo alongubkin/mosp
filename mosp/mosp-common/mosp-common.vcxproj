@@ -11,13 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <None Include="proto\join_request.proto" />
+    <None Include="proto\messages.proto" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="proto\join_request.pb.cc" />
+    <ClCompile Include="proto\messages.pb.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="proto\join_request.pb.h" />
+    <ClInclude Include="proto\messages.pb.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{23CB0853-0D7F-4687-904A-F51157498914}</ProjectGuid>

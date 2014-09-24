@@ -3,8 +3,7 @@
 #include <queue>
 #include <memory>
 #include "enet/enet.h"
-
-typedef unsigned char byte;
+#include "proto/messages.pb.h"
 
 class Client
 {
@@ -23,6 +22,8 @@ public:
 private:
 	ENetPeer* peer;
 	int id;
+
+	std::queue<mosp::BaseMessage*> incomingMessages;
 
 	void ProcessMessage();
 };
