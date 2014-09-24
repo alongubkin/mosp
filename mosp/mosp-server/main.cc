@@ -2,8 +2,6 @@
 #include <enet/enet.h>
 #include "server.h"
 
-
-
 int main()
 {
 	if (enet_initialize() != 0)
@@ -12,9 +10,6 @@ int main()
 		return EXIT_FAILURE;
 	}
 	
-	Server* server = new Server(1234);
-	server->StartListen();
-
-	
-	atexit(enet_deinitialize);
+	Server server(1234);
+	server.Run();
 }

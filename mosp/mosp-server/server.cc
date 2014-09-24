@@ -24,17 +24,27 @@ Server::Server(int port)
 Server::~Server()
 {
 	delete ticker;
+
 	enet_host_destroy(server);
+	atexit(enet_deinitialize);
 }
 
-void Server::StartListen()
+void Server::Run()
+{
+	isRunning = true;
+	tickThread = std::thread(&Ticker::Run, ticker);
+
+	Listen();
+
+	tickThread.join();
+	isRunning = false;
+}
+
+void Server::Listen()
 {
 	printf("Server is now online and listening to incoming traffic");
-	isRunning = true;
-	int nextAvailableID = 0;
-	ENetEvent event;
 
-	tickThread = std::thread(&Ticker::Run, ticker);
+	ENetEvent event;
 
 	while (isRunning)
 	{
@@ -42,57 +52,65 @@ void Server::StartListen()
 		{
 			switch (event.type)
 			{
-			case ENET_EVENT_TYPE_CONNECT:
-			{
-				Client* c = new Client(event.peer, nextAvailableID);
-				clients.insert(std::pair<int, Client*>(nextAvailableID, c));
-				nextAvailableID++;
-				event.peer->data = c;
-				printf("A new client connected from %x:%u assigned with id %d", event.peer->address.host, event.peer->address.port, clients.size() - 1);
-				break;
-			}
-			case ENET_EVENT_TYPE_RECEIVE:
-			{
-				ProcessPacket(event.packet, event.peer);
-				enet_packet_destroy(event.packet);
-				break;
-			}
-			case ENET_EVENT_TYPE_DISCONNECT:
-			{
-				Client* c = clients[event.data];
-				event.peer->data = nullptr;
-				int clientId = c->GetId();
-				clients.erase(clientId);
-				//delete c; //Delete the client after removed it reference from all other places
-				//BroadcastPacket(std::make_shared<PacketPlayerDisconnected>(playerID), nullptr);
-				printf("Client %d has disconnected", clientId);
-				break;
-			}
+				case ENET_EVENT_TYPE_CONNECT:
+					OnConnect(event);
+					break;
+
+				case ENET_EVENT_TYPE_RECEIVE:
+					OnReceive(event);
+					break;
+
+				case ENET_EVENT_TYPE_DISCONNECT:
+					OnDisconnect(event);
+					break;
 			}
 		}
-	}
-
-	tickThread.join();
-	isRunning = false;
+	}	
 }
 
-void Server::ProcessPacket(ENetPacket* packet, ENetPeer* peer)
+void Server::OnConnect(const ENetEvent &event)
 {
-	Client* c = static_cast<Client*>(peer->data);
+	// Create a new client and push it to the client list
+	Client *client = new Client(event.peer, nextAvailableId);
+	clients.push_back(client);
 
-	mosp::BaseMessage base;
+	// Assign the client object to the peer
+	event.peer->data = client;
 
-	if (!base.ParseFromArray(packet->data, packet->dataLength))
+	nextAvailableId++;
+
+	printf("A new client connected from %x:%u assigned with id %d", event.peer->address.host, event.peer->address.port, nextAvailableId);
+}
+
+void Server::OnReceive(const ENetEvent &event)
+{
+	ProcessPacket(event.packet, event.peer);
+	enet_packet_destroy(event.packet);
+}
+
+void Server::OnDisconnect(const ENetEvent &event)
+{
+	// Find the client using the peer object
+	Client *client = static_cast<Client*>(event.peer->data);
+
+	// Remove the client from the clients vector
+	clients.erase(std::remove(clients.begin(), clients.end(), client), clients.end());
+
+	printf("Client %d has disconnected", client->GetId());
+
+	delete client;
+	event.peer->data = nullptr;
+}
+
+void Server::ProcessPacket(const ENetPacket* packet, const ENetPeer* peer)
+{
+	mosp::BaseMessage *message;
+	Client* client = static_cast<Client*>(peer->data);
+
+	if (!message->ParseFromArray(packet->data, packet->dataLength))
 	{
-		// TODO: throw exception
+		printf("error");
 	}
 
-
-
-	//Handler
-
-	//JoinRequestHandler 
-	
-
-	// base.type() == mosp::Type::JoinRequest
+	client->QueueMessage(message);
 }

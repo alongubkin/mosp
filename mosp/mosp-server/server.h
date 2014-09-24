@@ -1,7 +1,8 @@
-#pragma once
+#ifndef _SERVER_H
+#define _SERVER_H
 
 #include <string>
-#include <hash_map>
+#include <vector>
 #include <thread>
 #include "enet/enet.h"
 #include "client.h"
@@ -13,17 +14,29 @@ public:
 	Server(int port);
 	~Server();
 
-	void StartListen();
-	std::hash_map<int, Client*> GetClientList() const { return clients; }
+	void Run();
+	
 	bool IsRunning() const { return isRunning; }
 
+	const std::vector<Client*>& GetClients() const { return clients; }
+
 private:
-	ENetHost* server;
 	bool isRunning;
-	std::hash_map<int, Client*> clients;
+	int nextAvailableId;
 
-	void ProcessPacket(ENetPacket* packet, ENetPeer* peer);
+	ENetHost *server;
+	Ticker *ticker;
 
-	Ticker* ticker;
+	std::vector<Client*> clients;
 	std::thread tickThread;
+
+	void Listen();
+
+	void OnConnect(const ENetEvent &event);
+	void OnReceive(const ENetEvent &event);
+	void OnDisconnect(const ENetEvent &event);
+
+	void ProcessPacket(const ENetPacket* packet, const ENetPeer* peer);
 };
+
+#endif
