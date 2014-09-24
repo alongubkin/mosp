@@ -1,0 +1,22 @@
+package mosp;
+
+
+message BaseMessage {
+	extensions 1000 to max;
+
+	enum Type {
+		JoinRequest = 1;
+	}
+
+	required Type type = 1;
+}
+
+message JoinRequestMessage {
+	extend BaseMessage {
+		optional JoinRequestMessage msg = 1000;
+	}
+
+	optional string name = 1;
+}
+
+

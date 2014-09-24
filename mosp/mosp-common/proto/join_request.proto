@@ -1,5 +1,0 @@
-package mosp;
-
-message JoinRequestMessage {
-	required string name = 1;
-}
