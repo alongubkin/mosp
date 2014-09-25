@@ -5,7 +5,7 @@ This source file is part of OGRE
 (Object-oriented Graphics Rendering Engine)
 For the latest info, see http://www.ogre3d.org/
 
-Copyright (c) 2000-2013 Torus Knot Software Ltd
+Copyright (c) 2000-2014 Torus Knot Software Ltd
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,177 +44,216 @@ THE SOFTWARE.
 
 namespace Ogre 
 {
-	class D3D11RenderWindowBase 
-		: public RenderWindow
-	{
-	public:
-		D3D11RenderWindowBase(D3D11Device& device, IDXGIFactoryN*	pDXGIFactory);
-		~D3D11RenderWindowBase();
-		virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
-		virtual void destroy(void);
+    class D3D11RenderWindowBase 
+        : public RenderWindow
+    {
+    public:
+        D3D11RenderWindowBase(D3D11Device& device, IDXGIFactoryN*   pDXGIFactory);
+        ~D3D11RenderWindowBase();
+        virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
+        virtual void destroy(void);
 
-		void reposition(int left, int top)						{}
-		void resize(unsigned int width, unsigned int height)	{}
+        void reposition(int left, int top)                      {}
+        void resize(unsigned int width, unsigned int height)    {}
+        /// @copydoc RenderTarget::setFSAA
+        virtual void setFSAA(uint fsaa, const String& fsaaHint) { mFSAA = fsaa; mFSAAHint = fsaaHint; resize(mWidth, mHeight); }
 
-		bool isClosed() const									{ return mClosed; }
-		bool isHidden() const									{ return mHidden; }
+        bool isClosed() const                                   { return mClosed; }
+        bool isHidden() const                                   { return mHidden; }
 
-		void getCustomAttribute( const String& name, void* pData );
-		/** Overridden - see RenderTarget.
-		*/
-		virtual void copyContentsToMemory(const PixelBox &dst, FrameBuffer buffer);
-		bool requiresTextureFlipping() const					{ return false; }
+        void getCustomAttribute( const String& name, void* pData );
+        /** Overridden - see RenderTarget.
+        */
+        virtual void copyContentsToMemory(const PixelBox &dst, FrameBuffer buffer);
+        bool requiresTextureFlipping() const                    { return false; }
 
-	protected:
-		void _createSizeDependedD3DResources(); // assumes mpBackBuffer is already initialized
-		void _destroySizeDependedD3DResources();
+#if OGRE_NO_QUAD_BUFFER_STEREO == 0
+		/** Validate the type of stereo that is enabled for this window.*/
+		void _validateStereo();
+#endif
 
-		IDXGIDeviceN* _queryDxgiDevice(); // release after use
-	
-		// just check if the multisampling requested is supported by the device
-		bool _checkMultiSampleQuality(UINT SampleCount, UINT *outQuality, DXGI_FORMAT format);
+    protected:
+        void _createSizeDependedD3DResources(); // assumes mpBackBuffer is already initialized
+        void _destroySizeDependedD3DResources();
 
-		void _updateViewportsDimensions();
+        IDXGIDeviceN* _queryDxgiDevice(); // release after use
 
-	protected:
-		D3D11Device & mDevice;			// D3D11 driver
-		IDXGIFactoryN*	mpDXGIFactory;
-		bool	mIsExternal;			// window not created by Ogre
-		bool	mSizing;
-		bool	mClosed;
-		bool	mHidden;
+        void _updateViewportsDimensions();
 
-		// -------------------------------------------------------
-		// DirectX-specific
-		// -------------------------------------------------------
-		DXGI_SAMPLE_DESC mFSAAType;
-		UINT mDisplayFrequency;
-		bool mVSync;
-		unsigned int mVSyncInterval;
+    protected:
+        D3D11Device & mDevice;          // D3D11 driver
+        IDXGIFactoryN*  mpDXGIFactory;
+        bool    mIsExternal;            // window not created by Ogre
+        bool    mSizing;
+        bool    mClosed;
+        bool    mHidden;
 
-		// Window size depended resources - must be released before swapchain resize and recreated later
-		ID3D11Texture2D*			mpBackBuffer;
-		ID3D11RenderTargetView*		mRenderTargetView;
-		ID3D11DepthStencilView*		mDepthStencilView;
-	};
+        // -------------------------------------------------------
+        // DirectX-specific
+        // -------------------------------------------------------
+        DXGI_SAMPLE_DESC mFSAAType;
+        UINT mDisplayFrequency;
+        bool mVSync;
+        unsigned int mVSyncInterval;
 
-	
-	class D3D11RenderWindowSwapChainBased
-		: public D3D11RenderWindowBase
-	{
-	public:
-		D3D11RenderWindowSwapChainBased(D3D11Device& device, IDXGIFactoryN*	pDXGIFactory);
-		~D3D11RenderWindowSwapChainBased()						{ destroy(); }
-		virtual void destroy(void);
+        // Window size depended resources - must be released before swapchain resize and recreated later
+        ID3D11Texture2D*            mpBackBuffer;
+        ID3D11RenderTargetView*     mRenderTargetView;
+        ID3D11DepthStencilView*     mDepthStencilView;
+    };
 
-		/// Get the presentation parameters used with this window
-		DXGI_SWAP_CHAIN_DESC_N* getPresentationParameters(void)	{ return &mSwapChainDesc; }
+    
+    class D3D11RenderWindowSwapChainBased
+        : public D3D11RenderWindowBase
+    {
+    public:
+        D3D11RenderWindowSwapChainBased(D3D11Device& device, IDXGIFactoryN* pDXGIFactory);
+        ~D3D11RenderWindowSwapChainBased()                      { destroy(); }
+        virtual void destroy(void);
 
-		void swapBuffers( );
+        /// Get the presentation parameters used with this window
+        DXGI_SWAP_CHAIN_DESC_N* getPresentationParameters(void) { return &mSwapChainDesc; }
 
-	protected:
-		void _createSizeDependedD3DResources(); // obtains mpBackBuffer from mpSwapChain
-		void _createSwapChain();
-		virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice) = 0;
-		void _resizeSwapChainBuffers(unsigned width, unsigned height);
+		int getContainingMonitorNumber();
 
-	protected:
-		// Pointer to swap chain
-		IDXGISwapChainN * mpSwapChain;
-		DXGI_SWAP_CHAIN_DESC_N mSwapChainDesc;
-	};
+		IDXGISwapChainN * _getSwapChain() { return mpSwapChain; }
+
+        /// @copydoc RenderTarget::setFSAA
+        virtual void setFSAA(uint fsaa, const String& fsaaHint) { mFSAA = fsaa; mFSAAHint = fsaaHint; _recreateSwapChain(); }
+
+        void swapBuffers( );
+		void updateStats(void);
+
+		bool IsWindows8OrGreater();
+		
+    protected:
+        void _createSwapChain();
+        virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice) = 0;
+        void _destroySwapChain();
+        void _recreateSwapChain(); // required to change FSAA
+        void _resizeSwapChainBuffers(unsigned width, unsigned height);
+        void _createSizeDependedD3DResources(); // obtains mpBackBuffer from mpSwapChain
+
+		int getVBlankMissCount( );
+
+    protected:
+        // Pointer to swap chain
+        IDXGISwapChainN * mpSwapChain;
+        DXGI_SWAP_CHAIN_DESC_N mSwapChainDesc;
+
+		DXGI_FRAME_STATISTICS		mPreviousPresentStats;			// We save the previous present stats - so we can detect a "vblank miss"
+		bool						mPreviousPresentStatsIsValid;	// Does mLastPresentStats data is valid (it isn't if when you start or resize the window)
+		uint						mVBlankMissCount;				// Number of times we missed the v sync blank
+		bool						mUseFlipMode;					// Flag to determine if the swapchain flip model is enabled.
+
+    };
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
-	class D3D11RenderWindowHwnd 
-		: public D3D11RenderWindowSwapChainBased
-	{
-	public:
-		D3D11RenderWindowHwnd(D3D11Device& device, IDXGIFactoryN*	pDXGIFactory);
-		~D3D11RenderWindowHwnd()								{ destroy(); }
-		virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
-		virtual void destroy(void);
+    class D3D11RenderWindowHwnd 
+        : public D3D11RenderWindowSwapChainBased
+    {
+    public:
+        D3D11RenderWindowHwnd(D3D11Device& device, IDXGIFactoryN*   pDXGIFactory);
+        ~D3D11RenderWindowHwnd()                                { destroy(); }
+        virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
+        virtual void destroy(void);
 
-		bool isVisible() const;
-		void setHidden(bool hidden);
-		void reposition(int left, int top);
-		void resize(unsigned int width, unsigned int height);
-		void setFullscreen(bool fullScreen, unsigned int width, unsigned int height);
+        bool isVisible() const;
+        void setHidden(bool hidden);
+        void reposition(int left, int top);
+        void resize(unsigned int width, unsigned int height);
+        void setFullscreen(bool fullScreen, unsigned int width, unsigned int height);
 
-		// Method for dealing with resize / move & 3d library
-		void windowMovedOrResized();
-	
-		HWND getWindowHandle() const							{ return mHWnd; }
-		void getCustomAttribute( const String& name, void* pData );
+        // Method for dealing with resize / move & 3d library
+        void windowMovedOrResized();
+    
+        HWND getWindowHandle() const                            { return mHWnd; }
+        void getCustomAttribute( const String& name, void* pData );
+		void adjustWindow(unsigned int clientWidth, unsigned int clientHeight, 
+			unsigned int* winWidth, unsigned int* winHeight);
 
-	protected:
-		/// Are we in the middle of switching between fullscreen and windowed
-		bool _getSwitchingFullscreen() const					{ return mSwitchingFullscreen; }
-		/// Indicate that fullscreen / windowed switching has finished
-		void _finishSwitchingFullscreen();
+		DWORD getWindowStyle(bool fullScreen) const { if (fullScreen) return mFullscreenWinStyle; return mWindowedWinStyle; }
+		void updateWindowRect();
+		void _beginUpdate();
 
-		virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice);
-		void setActive(bool state);
-	protected:
-		HWND	mHWnd;					// Win32 window handle
-		bool	mSwitchingFullscreen;	// Are we switching from fullscreen to windowed or vice versa
-	};
+		void				setVSyncEnabled		(bool vsync);
+		bool				isVSyncEnabled		() const;
+		void				setVSyncInterval	(unsigned int interval);
+		unsigned int		getVSyncInterval	() const;
+
+    protected:
+
+        /// Indicate that fullscreen / windowed switching has finished
+        void _finishSwitchingFullscreen();
+
+        virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice);
+        void setActive(bool state);
+    protected:
+        HWND    mHWnd;                  // Win32 window handle
+		DWORD						mWindowedWinStyle;		// Windowed mode window style flags.
+		DWORD						mFullscreenWinStyle;	// Fullscreen mode window style flags.		 
+		unsigned int				mDesiredWidth;			// Desired width after resizing
+		unsigned int				mDesiredHeight;			// Desired height after resizing
+		int							mLastSwitchingFullscreenCounter;	// the last value of the switching fullscreen counter when we switched
+    };
 
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WINRT
-	
-	class D3D11RenderWindowCoreWindow
-		: public D3D11RenderWindowSwapChainBased
-	{
-	public:
-		D3D11RenderWindowCoreWindow(D3D11Device& device, IDXGIFactoryN*	pDXGIFactory);
-		~D3D11RenderWindowCoreWindow()							{ destroy(); }
-		virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
-		virtual void destroy(void);
+    
+    class D3D11RenderWindowCoreWindow
+        : public D3D11RenderWindowSwapChainBased
+    {
+    public:
+        D3D11RenderWindowCoreWindow(D3D11Device& device, IDXGIFactoryN* pDXGIFactory);
+        ~D3D11RenderWindowCoreWindow()                          { destroy(); }
+        virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
+        virtual void destroy(void);
 
-		Windows::UI::Core::CoreWindow^ getCoreWindow() const	{ return mCoreWindow.Get(); }
+        Windows::UI::Core::CoreWindow^ getCoreWindow() const    { return mCoreWindow.Get(); }
 
-		bool isVisible() const;
+        bool isVisible() const;
 
-		// Method for dealing with resize / move & 3d library
-		void windowMovedOrResized();
+        // Method for dealing with resize / move & 3d library
+        void windowMovedOrResized();
 
-	protected:
-		virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice);
+    protected:
+        virtual HRESULT _createSwapChainImpl(IDXGIDeviceN* pDXGIDevice);
 
-	protected:
-		Platform::Agile<Windows::UI::Core::CoreWindow> mCoreWindow;
-	};
+    protected:
+        Platform::Agile<Windows::UI::Core::CoreWindow> mCoreWindow;
+    };
 
 #if (OGRE_PLATFORM == OGRE_PLATFORM_WINRT) && (OGRE_WINRT_TARGET_TYPE == DESKTOP_APP)
 
-	class D3D11RenderWindowImageSource
-		: public D3D11RenderWindowBase
-	{
-	public:
-		D3D11RenderWindowImageSource(D3D11Device& device, IDXGIFactoryN* pDXGIFactory);
-		~D3D11RenderWindowImageSource()							{ destroy(); }
-		virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
-		virtual void destroy(void);
+    class D3D11RenderWindowImageSource
+        : public D3D11RenderWindowBase
+    {
+    public:
+        D3D11RenderWindowImageSource(D3D11Device& device, IDXGIFactoryN* pDXGIFactory);
+        ~D3D11RenderWindowImageSource()                         { destroy(); }
+        virtual void create(const String& name, unsigned width, unsigned height, bool fullScreen, const NameValuePairList *miscParams);
+        virtual void destroy(void);
 
-		virtual void resize(unsigned int width, unsigned int height);
-		virtual void update(bool swapBuffers = true);
-		virtual void swapBuffers();
+        virtual void resize(unsigned int width, unsigned int height);
+        virtual void update(bool swapBuffers = true);
+        virtual void swapBuffers();
 
-		virtual bool isVisible() const							{ return mImageSourceNative != NULL; }
+        virtual bool isVisible() const                          { return mImageSourceNative != NULL; }
 
-		Windows::UI::Xaml::Media::ImageBrush^ getImageBrush() const	{ return mBrush; }
-		virtual void getCustomAttribute( const String& name, void* pData ); // "ImageBrush" -> Windows::UI::Xaml::Media::ImageBrush^
+        Windows::UI::Xaml::Media::ImageBrush^ getImageBrush() const { return mBrush; }
+        virtual void getCustomAttribute( const String& name, void* pData ); // "ImageBrush" -> Windows::UI::Xaml::Media::ImageBrush^
 
-	protected:
-		void _createSizeDependedD3DResources(); // creates mpBackBuffer
+    protected:
+        void _createSizeDependedD3DResources(); // creates mpBackBuffer and optionally mpBackBufferNoMSAA
 
-	protected:
-		Windows::UI::Xaml::Media::ImageBrush^					mBrush;				// size independed
-		Windows::UI::Xaml::Media::Imaging::SurfaceImageSource^	mImageSource;		// size depended, can be NULL
-		ISurfaceImageSourceNative*								mImageSourceNative;	// size depended, can be NULL
-	};
+    protected:
+        Windows::UI::Xaml::Media::ImageBrush^                   mBrush;             // size independed
+        Windows::UI::Xaml::Media::Imaging::SurfaceImageSource^  mImageSource;       // size depended, can be NULL
+        ISurfaceImageSourceNative*                              mImageSourceNative; // size depended, can be NULL
+        ID3D11Texture2D*                                        mpBackBufferNoMSAA; // size depended, optional
+    };
 #endif //  (OGRE_PLATFORM == OGRE_PLATFORM_WINRT) && (OGRE_WINRT_TARGET_TYPE == DESKTOP_APP)
 
 #endif

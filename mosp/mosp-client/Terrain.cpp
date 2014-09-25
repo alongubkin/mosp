@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "Terrain.h"
+#include "OGRE/OgreSceneManager.h"
+#include "OGRE/OgreSceneNode.h"
 
 Terrain::Terrain(Ogre::SceneManager* sceneManager)
 {

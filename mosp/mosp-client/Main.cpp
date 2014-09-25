@@ -3,6 +3,11 @@
 #include <memory>
 #include <exception>
 #include "Game.h"
+#include "OGRE/OgreLogManager.h"
+#include "OGRE/OgreSceneManager.h"
+#include "OGRE/OgreSceneNode.h"
+#include "OGRE/OgreViewport.h"
+#include "OGRE/OgreTimer.h"
 
 Ogre::Root* ogreRoot;
 Ogre::RenderWindow* window;
@@ -37,6 +42,7 @@ void locateResources()
 			Ogre::ResourceGroupManager::getSingleton().addResourceLocation(arch, type, sec);
 		}
 	}
+
 	Ogre::ResourceGroupManager::getSingleton().initialiseAllResourceGroups();
 }
 
@@ -45,6 +51,7 @@ void setupPlugins()
 	std::vector<Ogre::String> pluginNames;
 	pluginNames.push_back("RenderSystem_GL");
 	pluginNames.push_back("Plugin_OctreeSceneManager");
+	pluginNames.push_back("Plugin_CgProgramManager");
 
 	for (std::vector<Ogre::String>::iterator iter = pluginNames.begin(); iter != pluginNames.end(); iter++)
 	{
@@ -137,26 +144,26 @@ int main()
 		setupRenderer();
 		ogreRoot->initialise(false);
 		setupWindow();
-
+		
 		sceneManager = ogreRoot->createSceneManager(Ogre::ST_GENERIC);
 		sceneManager->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 		sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
-
+		
 		locateResources();
 
 		setupViewport();
 		setupInput();
-
+		
 		Ogre::Light* light = sceneManager->createLight("MainLight");
 		light->setType(Ogre::Light::LightTypes::LT_DIRECTIONAL);
 		light->setDirection(1.0f, -5.0f, 3.0f);
 
 		Game* mainGame = new Game(ogreRoot, window, sceneManager, viewport, camera, keyboard, mouse);
-
+		
 		Ogre::Timer* timer = ogreRoot->getTimer();
 		timer->reset();
 		unsigned long lastFrame = timer->getMilliseconds();
-
+		
 		while (!window->isClosed() && !keyboard->isKeyDown(OIS::KC_ESCAPE))
 		{
 			float delta = 0.001f * (timer->getMilliseconds() - lastFrame);
@@ -164,9 +171,9 @@ int main()
 
 			mouse->capture();
 			keyboard->capture();
-
+			
 			mainGame->Update(delta);
-
+			
 			window->update(false);
 			window->swapBuffers();
 			ogreRoot->renderOneFrame();
@@ -194,5 +201,6 @@ int main()
 	{
 		std::cout << "!!!!std::exception!!!!" << e.what() << std::endl;
 	}
+	getchar();
 	return 0;
 }

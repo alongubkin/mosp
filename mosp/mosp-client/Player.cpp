@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "Player.h"
-
+#include "OGRE/OgreSceneNode.h"
+#include "OGRE/OgreBlendMode.h"
+#include "OGRE/OgreSkeleton.h"
+#include "OGRE/OgreSkeletonInstance.h"
 
 Player::Player(Ogre::SceneManager* sceneManager)
 {

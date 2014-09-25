@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "Terrain.h"
 #include "Player.h"
+#include "OGRE/OgreCamera.h"
 
 class Game
 {
