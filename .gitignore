@@ -183,5 +183,7 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-!third_party/ogre3d/boost/boost/preprocessor/debug/
-!third_party/lib/
+!third_party/ogre3d/lib/
+!third_party/ogre3d/lib/debug/
+!third_party/ogre3d/bin/
+!third_party/ogre3d/bin/debug/
