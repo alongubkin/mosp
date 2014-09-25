@@ -94,9 +94,6 @@ void setupViewport()
 	camera->setAspectRatio(viewport->getActualWidth() / (float) viewport->getActualHeight());
 	camera->setNearClipDistance(0.5f);
 	camera->setFarClipDistance(1000.0f);
-	camera->setPosition(0.0f, 60.0f, 60.0f);
-	camera->setDirection(Ogre::Vector3::NEGATIVE_UNIT_Y);
-
 }
 
 void setupInput()

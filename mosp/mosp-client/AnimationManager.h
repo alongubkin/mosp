@@ -34,11 +34,11 @@ public:
 		Ogre::AnimationState* anim = animations[name];
 		anim->setEnabled(true);
 		anim->setLoop(loop);
-		anim->setWeight(1.0);
 		fadeIn.push_back(anim);
 		if (cancel != "")
 		{
 			animations[cancel]->setEnabled(false);
+			fadeOut.push_back(animations[cancel]);
 		}
 	}
 
@@ -49,20 +49,36 @@ public:
 			if ((*it).second->getEnabled())
 				(*it).second->addTime(delta);
 		}
-		/*for (std::vector<Ogre::AnimationState*>::iterator it = fadeIn.begin(); it != fadeIn.end(); it++)
+		/*std::vector<Ogre::AnimationState*> toberemoved;
+		for (std::vector<Ogre::AnimationState*>::iterator it = fadeIn.begin(); it != fadeIn.end(); it++)
 		{
-		float w = (*it)->getWeight();
-		if (w >= 1.0f)
-		{
-
+			float w = (*it)->getWeight();
+			if (w >= 1.0f)
+			{
+				(*it)->setWeight(1.0f);
+				toberemoved.push_back(*it);
+			}
+			else
+				(*it)->setWeight(w + delta);
 		}
-		else
+		for (std::vector<Ogre::AnimationState*>::iterator it = toberemoved.begin(); it != toberemoved.end(); it++)
+			fadeIn.erase(std::remove(fadeIn.begin(), fadeIn.end(), (*it)), fadeIn.end());
+
+		toberemoved.clear();
+		for (std::vector<Ogre::AnimationState*>::iterator it = fadeOut.begin(); it != fadeOut.end(); it++)
 		{
-		(*it)->setWeight(w + 0.01f);
+			float w = (*it)->getWeight();
+			if (w <= 0.0f)
+			{
+				(*it)->setWeight(0.0f);
+				toberemoved.push_back(*it);
+			}
+			else
+				(*it)->setWeight(w - delta);
 		}
-
-
-		}*/
+		for (std::vector<Ogre::AnimationState*>::iterator it = toberemoved.begin(); it != toberemoved.end(); it++)
+			fadeOut.erase(std::remove(fadeOut.begin(), fadeOut.end(), (*it)), fadeOut.end());
+		*/
 	}
 };
 
