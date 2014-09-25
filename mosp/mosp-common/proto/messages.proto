@@ -1,3 +1,9 @@
+// Request messages:       messages sent by the client to the server
+// Response messages:      messages sent by the server back to the client 
+//                         after a request message
+// Notification messages:  messages sent by the server to notify players
+//                         when an event occured.
+
 package mosp;
 
 enum Type {
