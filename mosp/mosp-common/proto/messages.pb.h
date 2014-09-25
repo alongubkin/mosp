@@ -37,15 +37,17 @@ void protobuf_ShutdownFile_messages_2eproto();
 class BaseMessage;
 class Vector3;
 class JoinRequestMessage;
+class JoinResponseMessage;
 class JoinNotificationMessage;
 class MoveRequestMessage;
 class MoveNotificationMessage;
 
 enum Type {
   JoinRequest = 1,
-  JoinNotification = 2,
-  MoveRequest = 3,
-  MoveNotification = 4
+  JoinResponse = 2,
+  JoinNotification = 3,
+  MoveRequest = 4,
+  MoveNotification = 5
 };
 bool Type_IsValid(int value);
 const Type Type_MIN = JoinRequest;
@@ -61,6 +63,25 @@ inline bool Type_Parse(
     const ::std::string& name, Type* value) {
   return ::google::protobuf::internal::ParseNamedEnum<Type>(
     Type_descriptor(), name, value);
+}
+enum JOIN_REQUEST_ERROR {
+  NAME_EXISTS = 1,
+  SERVER_FULL = 2
+};
+bool JOIN_REQUEST_ERROR_IsValid(int value);
+const JOIN_REQUEST_ERROR JOIN_REQUEST_ERROR_MIN = NAME_EXISTS;
+const JOIN_REQUEST_ERROR JOIN_REQUEST_ERROR_MAX = SERVER_FULL;
+const int JOIN_REQUEST_ERROR_ARRAYSIZE = JOIN_REQUEST_ERROR_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* JOIN_REQUEST_ERROR_descriptor();
+inline const ::std::string& JOIN_REQUEST_ERROR_Name(JOIN_REQUEST_ERROR value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    JOIN_REQUEST_ERROR_descriptor(), value);
+}
+inline bool JOIN_REQUEST_ERROR_Parse(
+    const ::std::string& name, JOIN_REQUEST_ERROR* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<JOIN_REQUEST_ERROR>(
+    JOIN_REQUEST_ERROR_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -333,6 +354,127 @@ class JoinRequestMessage : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static JoinRequestMessage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class JoinResponseMessage : public ::google::protobuf::Message {
+ public:
+  JoinResponseMessage();
+  virtual ~JoinResponseMessage();
+
+  JoinResponseMessage(const JoinResponseMessage& from);
+
+  inline JoinResponseMessage& operator=(const JoinResponseMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const JoinResponseMessage& default_instance();
+
+  void Swap(JoinResponseMessage* other);
+
+  // implements Message ----------------------------------------------
+
+  JoinResponseMessage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const JoinResponseMessage& from);
+  void MergeFrom(const JoinResponseMessage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .mosp.Type type = 1 [default = JoinResponse];
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::mosp::Type type() const;
+  inline void set_type(::mosp::Type value);
+
+  // required bool success = 2;
+  inline bool has_success() const;
+  inline void clear_success();
+  static const int kSuccessFieldNumber = 2;
+  inline bool success() const;
+  inline void set_success(bool value);
+
+  // required .mosp.Vector3 position = 3;
+  inline bool has_position() const;
+  inline void clear_position();
+  static const int kPositionFieldNumber = 3;
+  inline const ::mosp::Vector3& position() const;
+  inline ::mosp::Vector3* mutable_position();
+  inline ::mosp::Vector3* release_position();
+  inline void set_allocated_position(::mosp::Vector3* position);
+
+  // required int32 client_id = 4;
+  inline bool has_client_id() const;
+  inline void clear_client_id();
+  static const int kClientIdFieldNumber = 4;
+  inline ::google::protobuf::int32 client_id() const;
+  inline void set_client_id(::google::protobuf::int32 value);
+
+  // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+  inline bool has_error() const;
+  inline void clear_error();
+  static const int kErrorFieldNumber = 5;
+  inline ::mosp::JOIN_REQUEST_ERROR error() const;
+  inline void set_error(::mosp::JOIN_REQUEST_ERROR value);
+
+  // @@protoc_insertion_point(class_scope:mosp.JoinResponseMessage)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_success();
+  inline void clear_has_success();
+  inline void set_has_position();
+  inline void clear_has_position();
+  inline void set_has_client_id();
+  inline void clear_has_client_id();
+  inline void set_has_error();
+  inline void clear_has_error();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  int type_;
+  bool success_;
+  ::mosp::Vector3* position_;
+  ::google::protobuf::int32 client_id_;
+  int error_;
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static JoinResponseMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -857,6 +999,149 @@ inline void JoinRequestMessage::set_allocated_name(::std::string* name) {
 
 // -------------------------------------------------------------------
 
+// JoinResponseMessage
+
+// required .mosp.Type type = 1 [default = JoinResponse];
+inline bool JoinResponseMessage::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void JoinResponseMessage::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void JoinResponseMessage::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void JoinResponseMessage::clear_type() {
+  type_ = 2;
+  clear_has_type();
+}
+inline ::mosp::Type JoinResponseMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.type)
+  return static_cast< ::mosp::Type >(type_);
+}
+inline void JoinResponseMessage::set_type(::mosp::Type value) {
+  assert(::mosp::Type_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.type)
+}
+
+// required bool success = 2;
+inline bool JoinResponseMessage::has_success() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void JoinResponseMessage::set_has_success() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void JoinResponseMessage::clear_has_success() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void JoinResponseMessage::clear_success() {
+  success_ = false;
+  clear_has_success();
+}
+inline bool JoinResponseMessage::success() const {
+  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.success)
+  return success_;
+}
+inline void JoinResponseMessage::set_success(bool value) {
+  set_has_success();
+  success_ = value;
+  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.success)
+}
+
+// required .mosp.Vector3 position = 3;
+inline bool JoinResponseMessage::has_position() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void JoinResponseMessage::set_has_position() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void JoinResponseMessage::clear_has_position() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void JoinResponseMessage::clear_position() {
+  if (position_ != NULL) position_->::mosp::Vector3::Clear();
+  clear_has_position();
+}
+inline const ::mosp::Vector3& JoinResponseMessage::position() const {
+  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.position)
+  return position_ != NULL ? *position_ : *default_instance_->position_;
+}
+inline ::mosp::Vector3* JoinResponseMessage::mutable_position() {
+  set_has_position();
+  if (position_ == NULL) position_ = new ::mosp::Vector3;
+  // @@protoc_insertion_point(field_mutable:mosp.JoinResponseMessage.position)
+  return position_;
+}
+inline ::mosp::Vector3* JoinResponseMessage::release_position() {
+  clear_has_position();
+  ::mosp::Vector3* temp = position_;
+  position_ = NULL;
+  return temp;
+}
+inline void JoinResponseMessage::set_allocated_position(::mosp::Vector3* position) {
+  delete position_;
+  position_ = position;
+  if (position) {
+    set_has_position();
+  } else {
+    clear_has_position();
+  }
+  // @@protoc_insertion_point(field_set_allocated:mosp.JoinResponseMessage.position)
+}
+
+// required int32 client_id = 4;
+inline bool JoinResponseMessage::has_client_id() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void JoinResponseMessage::set_has_client_id() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void JoinResponseMessage::clear_has_client_id() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void JoinResponseMessage::clear_client_id() {
+  client_id_ = 0;
+  clear_has_client_id();
+}
+inline ::google::protobuf::int32 JoinResponseMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.client_id)
+  return client_id_;
+}
+inline void JoinResponseMessage::set_client_id(::google::protobuf::int32 value) {
+  set_has_client_id();
+  client_id_ = value;
+  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.client_id)
+}
+
+// optional .mosp.JOIN_REQUEST_ERROR error = 5;
+inline bool JoinResponseMessage::has_error() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void JoinResponseMessage::set_has_error() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void JoinResponseMessage::clear_has_error() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void JoinResponseMessage::clear_error() {
+  error_ = 1;
+  clear_has_error();
+}
+inline ::mosp::JOIN_REQUEST_ERROR JoinResponseMessage::error() const {
+  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.error)
+  return static_cast< ::mosp::JOIN_REQUEST_ERROR >(error_);
+}
+inline void JoinResponseMessage::set_error(::mosp::JOIN_REQUEST_ERROR value) {
+  assert(::mosp::JOIN_REQUEST_ERROR_IsValid(value));
+  set_has_error();
+  error_ = value;
+  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.error)
+}
+
+// -------------------------------------------------------------------
+
 // JoinNotificationMessage
 
 // required .mosp.Type type = 1 [default = JoinNotification];
@@ -870,7 +1155,7 @@ inline void JoinNotificationMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void JoinNotificationMessage::clear_type() {
-  type_ = 2;
+  type_ = 3;
   clear_has_type();
 }
 inline ::mosp::Type JoinNotificationMessage::type() const {
@@ -1040,7 +1325,7 @@ inline void MoveRequestMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MoveRequestMessage::clear_type() {
-  type_ = 3;
+  type_ = 4;
   clear_has_type();
 }
 inline ::mosp::Type MoveRequestMessage::type() const {
@@ -1110,7 +1395,7 @@ inline void MoveNotificationMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MoveNotificationMessage::clear_type() {
-  type_ = 2;
+  type_ = 3;
   clear_has_type();
 }
 inline ::mosp::Type MoveNotificationMessage::type() const {
@@ -1202,6 +1487,11 @@ template <> struct is_proto_enum< ::mosp::Type> : ::google::protobuf::internal::
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::mosp::Type>() {
   return ::mosp::Type_descriptor();
+}
+template <> struct is_proto_enum< ::mosp::JOIN_REQUEST_ERROR> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::mosp::JOIN_REQUEST_ERROR>() {
+  return ::mosp::JOIN_REQUEST_ERROR_descriptor();
 }
 
 }  // namespace google
