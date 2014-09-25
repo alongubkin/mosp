@@ -15,13 +15,13 @@ public:
 	~Client();
 	
 	int GetId() const { return id; }
-	ConcurrentQueue<const mosp::BaseMessage*>* GetQueue() { return &incomingMessages; }
+	ConcurrentQueue<ENetPacket*>* GetQueue() { return &incomingPackets; }
 
 private:
 	int id;
 	ENetPeer* peer;
 
-	ConcurrentQueue<const mosp::BaseMessage*> incomingMessages;
+	ConcurrentQueue<ENetPacket*> incomingPackets;
 };
 
 #endif

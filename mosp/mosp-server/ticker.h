@@ -1,6 +1,9 @@
 #ifndef _TICKER_H
 #define _TICKER_H
 
+#include "enet/enet.h"
+#include "proto/messages.pb.h"
+
 class Server;
 
 class Ticker
@@ -9,12 +12,16 @@ public:
 	Ticker(const Server* server) : server(server) {}
 	~Ticker() {};
 	
-	void Initialize();
 	void Run();
-	void HandleMesssage();
-
+	
 private:
 	const Server* server;
+
+	template<typename T>
+	T& PacketToMessage(ENetPacket* packet);
+
+	void HandlePacket(ENetPacket* packet);
+	void HandleJoinRequestMessage(const mosp::JoinRequestMessage& message);
 };
 
 #endif
