@@ -21,8 +21,8 @@ public:
 	const std::vector<Client*>& GetClients() const { return clients; }
 
 private:
-	bool isRunning;
-	int nextAvailableId;
+	bool isRunning = false;
+	int nextAvailableId = 0;
 
 	ENetHost *server;
 	Ticker *ticker;

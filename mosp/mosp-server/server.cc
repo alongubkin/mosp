@@ -19,8 +19,6 @@ Server::Server(int port)
 	}
 
 	ticker = new Ticker(this);
-
-	nextAvailableId = 0;
 }
 
 Server::~Server()
@@ -50,9 +48,7 @@ void Server::Listen()
 
 	while (isRunning)
 	{
-		int i;
-
-		while ((i = enet_host_service(server, &event, 1000)) > 0)
+		while (enet_host_service(server, &event, 1000) > 0)
 		{
 			switch (event.type)
 			{
@@ -81,11 +77,12 @@ void Server::OnConnect(const ENetEvent &event)
 	// Assign the client object to the peer
 	event.peer->data = client;
 	nextAvailableId++;
+
 	printf("A new client connected from %x:%u assigned with id %d\n", event.peer->address.host, event.peer->address.port, nextAvailableId);
 
 	//Temp
 	mosp::JoinRequestMessage msg;
-	msg.name = 
+	printf("%d", msg.type());
 }
 
 void Server::OnReceive(const ENetEvent &event)

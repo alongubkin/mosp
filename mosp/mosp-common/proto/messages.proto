@@ -2,13 +2,74 @@ package mosp;
 
 enum Type {
 	JoinRequest = 1;
+	JoinNotification = 2;
+	MoveRequest = 3;
+	MoveNotification = 4;
 }
 
 message BaseMessage {
 	required Type type = 1;
 }
 
+
+// A vector message with 3 components
+message Vector3 {
+	// x-component
+	required double x = 1;
+
+	// y-component
+	required double y = 2;
+
+	// z-component
+	required double z = 3;
+}
+
+// This message is sent by the client immediately after connecting
+// to the server. It is required.
 message JoinRequestMessage {
-	required Type type = 1;
+	// The type of this message. Do not change this field.
+	required Type type = 1 [default = JoinRequest];
+
+	// This field describes the name of the player. It should be unique.
 	required string name = 2;
+}
+
+// This message is sent by the server when a player joins the game
+// to the players around him.
+message JoinNotificationMessage {
+	// The type of this message. Do not change this field.
+	required Type type = 1 [default = JoinNotification];
+
+	// This field describes the name of the player.
+	required string name = 2;
+
+	// The client ID of the player who joined.
+	required int32 client_id = 3;
+
+	// The position of the player who joined.
+	required Vector3 position = 4;
+}
+
+// This message is sent by the client when he wants to move to
+// a specific position.
+message MoveRequestMessage {
+	// The type of this message. Do not change this field.
+	required Type type = 1 [default = MoveRequest];
+
+	// This field describes the position that the client wants to
+	// move to.
+	required Vector3 position = 2;
+}
+
+// This message is sent by the server when a player moves
+// to the players around him.
+message MoveNotificationMessage {
+	// The type of this message. Do not change this field.
+	required Type type = 1 [default = JoinNotification];
+
+	// The client ID of the player who joined.
+	required int32 client_id = 2;
+
+	// The position of the player who joined.
+	required Vector3 position = 3;
 }
