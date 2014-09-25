@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mosp-common", "mosp-common\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "dummy-client", "dummy-client\dummy-client.vcxproj", "{100E9C9D-26C3-4F20-9AF3-EC85AD28D8A5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mosp-client", "mosp-client\mosp-client.vcxproj", "{013399A3-5C35-48C4-80C9-7C35520A91DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -27,6 +29,10 @@ Global
 		{100E9C9D-26C3-4F20-9AF3-EC85AD28D8A5}.Debug|Win32.Build.0 = Debug|Win32
 		{100E9C9D-26C3-4F20-9AF3-EC85AD28D8A5}.Release|Win32.ActiveCfg = Release|Win32
 		{100E9C9D-26C3-4F20-9AF3-EC85AD28D8A5}.Release|Win32.Build.0 = Release|Win32
+		{013399A3-5C35-48C4-80C9-7C35520A91DD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{013399A3-5C35-48C4-80C9-7C35520A91DD}.Debug|Win32.Build.0 = Debug|Win32
+		{013399A3-5C35-48C4-80C9-7C35520A91DD}.Release|Win32.ActiveCfg = Release|Win32
+		{013399A3-5C35-48C4-80C9-7C35520A91DD}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
