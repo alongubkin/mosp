@@ -42,7 +42,7 @@ void Server::Run()
 
 void Server::Listen()
 {
-	printf("Server is now online and listening to incoming traffic");
+	printf("Server is now online and listening to incoming traffic\n");
 
 	ENetEvent event;
 
@@ -109,7 +109,7 @@ void Server::ProcessPacket(const ENetPacket* packet, const ENetPeer* peer)
 
 	if (!message->ParseFromArray(packet->data, packet->dataLength))
 	{
-		printf("error");
+		printf("error\n");
 	}
 
 	client->QueueMessage(message);
