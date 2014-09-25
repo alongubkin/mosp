@@ -4,8 +4,7 @@
 
 Player::Player(Ogre::SceneManager* sceneManager)
 {
-	ogreNode = sceneManager->getRootSceneNode()->createChildSceneNode("OgreNode", Ogre::Vector3::UNIT_Y * 10.0f);
-	ogreNode->scale(1.0f, 2.0f, 1.0f);
+	ogreNode = sceneManager->getRootSceneNode()->createChildSceneNode("OgreNode", Ogre::Vector3::UNIT_Y * 5.0f);
 
 	ogre = sceneManager->createEntity("Ogre", "Sinbad.mesh");
 	ogreNode->attachObject(ogre);
@@ -37,12 +36,8 @@ void Player::SetTarget(float x, float y)
 void Player::Update(float delta)
 {
 	animationManager->Update(delta);
-	if (animationBase)
-		animationBase->addTime(delta);
-	if (animationTop)
-		animationTop->addTime(delta);
 
-	float MOVE_SPEED = 30.0f;
+	float MOVE_SPEED = 20.0f;
 	Ogre::Vector3 pos = ogreNode->getPosition();
 
 	if (target.x == 0 && target.z == 0)
@@ -54,12 +49,12 @@ void Player::Update(float delta)
 		dir.normalise();
 
 		Ogre::Vector3 src = ogreNode->getOrientation() * Ogre::Vector3::UNIT_Z;
-		Ogre::Quaternion quat = src.getRotationTo(dir);             // Get a quaternion rotation operation 
+		Ogre::Quaternion quat = src.getRotationTo(dir, Ogre::Vector3::UNIT_Y);
 		quat.x = 0;
 		quat.z = 0;
 		ogreNode->rotate(quat);
 
-		if (pos.distance(target) < (dir * delta * MOVE_SPEED).length()) {
+		if (pos.squaredDistance(target) < (dir * delta * MOVE_SPEED).squaredLength()) {
 			ogreNode->setPosition(target);
 			target.x = 0;
 			target.z = 0;

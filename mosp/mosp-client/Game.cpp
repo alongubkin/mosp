@@ -23,23 +23,31 @@ Game::~Game()
 
 void Game::Update(float delta)
 {
-	float RUN_SPEED = 50.0f;
+	camera->setPosition(player->ogreNode->getPosition() + Ogre::Vector3(0, 60, 60));
+	camera->lookAt(player->ogreNode->getPosition());
+
+	Ogre::Vector3 movement = Ogre::Vector3::ZERO;
 	if (keyboard->isKeyDown(OIS::KC_W))
 	{
-		camera->setPosition(camera->getPosition() + Ogre::Vector3(0, 0, -RUN_SPEED) * delta);
+		movement.z += -1;
 	}
 	if (keyboard->isKeyDown(OIS::KC_S))
 	{
-		camera->setPosition(camera->getPosition() + Ogre::Vector3(0, 0, RUN_SPEED) * delta);
+		movement.z += 1;
 	}
 	if (keyboard->isKeyDown(OIS::KC_A))
 	{
-		camera->setPosition(camera->getPosition() + Ogre::Vector3(-RUN_SPEED, 0, 0) * delta);
+		movement.x += -1;
 	}
 	if (keyboard->isKeyDown(OIS::KC_D))
 	{
-		camera->setPosition(camera->getPosition() + Ogre::Vector3(RUN_SPEED, 0, 0) * delta);
+		movement.x += 1;
 	}
+	movement.normalise();
+	
+	if (movement != Ogre::Vector3::ZERO)
+		player->SetTarget(player->ogreNode->getPosition().x + movement.x, player->ogreNode->getPosition().z + movement.z);
+
 	OIS::MouseState mouseState = mouse->getMouseState();
 	if (mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
 	{
