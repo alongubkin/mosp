@@ -87,8 +87,8 @@ void Server::OnConnect(const ENetEvent &event)
 
 void Server::OnReceive(const ENetEvent &event)
 {
-	ProcessPacket(event.packet, event.peer);
-	enet_packet_destroy(event.packet);
+	Client* client = static_cast<Client*>(event.peer->data);
+	client->GetQueue()->push(event.packet);
 }
 
 void Server::OnDisconnect(const ENetEvent &event)
@@ -103,17 +103,4 @@ void Server::OnDisconnect(const ENetEvent &event)
 
 	delete client;
 	event.peer->data = nullptr;
-}
-
-void Server::ProcessPacket(const ENetPacket* packet, const ENetPeer* peer)
-{
-	mosp::BaseMessage* message;
-	Client* client = static_cast<Client*>(peer->data);
-
-	if (!message->ParseFromArray(packet->data, packet->dataLength))
-	{
-		printf("error\n");
-	}
-
-	client->GetQueue()->push(message);
 }

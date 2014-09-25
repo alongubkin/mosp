@@ -3,11 +3,6 @@
 #include "client.h"
 #include "proto/messages.pb.h"
 
-void Ticker::Initialize()
-{
-
-}
-
 void Ticker::Run()
 {
 	while (server->IsRunning())
@@ -18,12 +13,53 @@ void Ticker::Run()
 		{
 			auto queue = (*it)->GetQueue();
 			
-			const mosp::BaseMessage* message = nullptr;
+			ENetPacket* message = nullptr;
 			while ((message = queue->pop()) != nullptr)
 			{
-				// TODO: Handle message
+				HandlePacket(message);
 				delete message;
 			}
 		}
 	}
 }
+
+template<typename T>
+T& Ticker::PacketToMessage(ENetPacket* packet)
+{
+	T& message = T();
+	if (!message.ParseFromArray(packet->data, packet->dataLength))
+	{
+		// TODO: throw exception
+		assert("packet parsing error");
+	}
+
+	return message;
+}
+
+void Ticker::HandlePacket(ENetPacket* packet)
+{
+	mosp::BaseMessage baseMessage = PacketToMessage<mosp::BaseMessage>(packet);
+
+	switch (baseMessage.type())
+	{
+		case mosp::Type::JoinRequest:
+			HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
+			break;
+
+		case mosp::Type::MoveRequest:
+
+			break;
+
+		default:
+			printf("unhandled message");
+			break;
+	}
+
+	enet_packet_destroy(packet);
+}
+
+void Ticker::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message) 
+{
+
+}
+
