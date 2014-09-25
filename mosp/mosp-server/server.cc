@@ -19,6 +19,8 @@ Server::Server(int port)
 	}
 
 	ticker = new Ticker(this);
+
+	nextAvailableId = 0;
 }
 
 Server::~Server()
@@ -48,7 +50,9 @@ void Server::Listen()
 
 	while (isRunning)
 	{
-		while (enet_host_service(server, &event, 1000) > 0)
+		int i;
+
+		while ((i = enet_host_service(server, &event, 1000)) > 0)
 		{
 			switch (event.type)
 			{
@@ -76,10 +80,12 @@ void Server::OnConnect(const ENetEvent &event)
 
 	// Assign the client object to the peer
 	event.peer->data = client;
-
 	nextAvailableId++;
+	printf("A new client connected from %x:%u assigned with id %d\n", event.peer->address.host, event.peer->address.port, nextAvailableId);
 
-	printf("A new client connected from %x:%u assigned with id %d", event.peer->address.host, event.peer->address.port, nextAvailableId);
+	//Temp
+	mosp::JoinRequestMessage msg;
+	msg.name = 
 }
 
 void Server::OnReceive(const ENetEvent &event)
@@ -96,7 +102,7 @@ void Server::OnDisconnect(const ENetEvent &event)
 	// Remove the client from the clients vector
 	clients.erase(std::remove(clients.begin(), clients.end(), client), clients.end());
 
-	printf("Client %d has disconnected", client->GetId());
+	printf("Client %d has disconnected\n", client->GetId());
 
 	delete client;
 	event.peer->data = nullptr;
@@ -104,7 +110,7 @@ void Server::OnDisconnect(const ENetEvent &event)
 
 void Server::ProcessPacket(const ENetPacket* packet, const ENetPeer* peer)
 {
-	mosp::BaseMessage *message;
+	mosp::BaseMessage* message;
 	Client* client = static_cast<Client*>(peer->data);
 
 	if (!message->ParseFromArray(packet->data, packet->dataLength))
