@@ -115,5 +115,5 @@ void Server::ProcessPacket(const ENetPacket* packet, const ENetPeer* peer)
 		printf("error\n");
 	}
 
-	client->QueueMessage(message);
+	client->GetQueue()->push(message);
 }

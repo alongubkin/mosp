@@ -1,10 +1,9 @@
 #ifndef _CLIENT_H
 #define _CLIENT_H
 
-#include <queue>
-#include <memory>
 #include "enet/enet.h"
 #include "proto/messages.pb.h"
+#include "concurrent_queue.h"
 
 class Client
 {
@@ -16,13 +15,13 @@ public:
 	~Client();
 	
 	int GetId() const { return id; }
-	void QueueMessage(const mosp::BaseMessage *message);
+	ConcurrentQueue<const mosp::BaseMessage*>* GetQueue() { return &incomingMessages; }
 
 private:
 	int id;
 	ENetPeer* peer;
 
-	std::queue<const mosp::BaseMessage*> incomingMessages;
+	ConcurrentQueue<const mosp::BaseMessage*> incomingMessages;
 };
 
 #endif
