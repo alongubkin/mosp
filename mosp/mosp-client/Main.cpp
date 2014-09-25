@@ -198,6 +198,5 @@ int main()
 	{
 		std::cout << "!!!!std::exception!!!!" << e.what() << std::endl;
 	}
-	getchar();
 	return 0;
 }
