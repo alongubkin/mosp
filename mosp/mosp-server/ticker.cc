@@ -1,7 +1,7 @@
 #include "ticker.h"
 #include "server.h"
 #include "client.h"
-#include <map>
+#include "proto/messages.pb.h"
 
 void Ticker::Initialize()
 {
@@ -16,10 +16,14 @@ void Ticker::Run()
 
 		for (auto it = clients.begin(); it != clients.end(); ++it)
 		{
-			Client* client = (*it);
+			auto queue = (*it)->GetQueue();
 			
-			//TODO Iterate on all of the clients and process their incoming packets
-			
+			const mosp::BaseMessage* message = nullptr;
+			while ((message = queue->pop()) != nullptr)
+			{
+				// TODO: Handle message
+				delete message;
+			}
 		}
 	}
 }
