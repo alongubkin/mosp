@@ -5,9 +5,10 @@
 #include "OGRE/OgreRenderWindow.h"
 #include "OGRE/OgreWindowEventUtilities.h"
 #include "OGRE/OgreEntity.h"
-#include "OGRE\OgreConfigFile.h"
-#include "OIS\OIS.h"
-#include "OGRE\OgreMeshManager.h"
+#include "OGRE/OgreConfigFile.h"
+#include "OIS/OIS.h"
+#include "OGRE/OgreMeshManager.h"
+#include "OGRE/OgreSceneNode.h"
 
 // any other header can be included, as usual
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
