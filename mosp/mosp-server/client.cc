@@ -26,7 +26,9 @@ void Client::QueuePacket(ENetPacket* packet)
 
 void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 {
-	printf("Name: %s\n", message.name().c_str());
+	this->name = message.name();
+
+	printf("Name: %s\n", this->name.c_str());
 
 	/*
 	mosp::JoinResponseMessage response;
@@ -59,7 +61,7 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 			notification.set_type(mosp::Type::JoinNotification);
 			notification.set_client_id(client->GetId());
 			notification.set_allocated_position(new mosp::Vector2(*client->targetPosition));
-			notification.set_name(message.name());
+			notification.set_name(client->name);
 
 			this->Send(notification);
 		}

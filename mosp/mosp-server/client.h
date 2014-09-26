@@ -31,7 +31,8 @@ private:
 	int id = 0;
 	ENetPeer* peer;
 	Server* server;
-	
+	std::string name;
+
 	std::mutex incomingPacketsMutex;
 	std::queue<ENetPacket*> incomingPackets;
 
