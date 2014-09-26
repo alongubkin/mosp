@@ -32,6 +32,7 @@ private:
 	Terrain* terrain;
 	Player* player;
 	float camera_distance;
+	bool wasMouseDown;
 
 	Client* client;
 	std::thread clientThread;

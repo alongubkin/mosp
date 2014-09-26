@@ -37,6 +37,7 @@ Game::Game()
 	terrain = new Terrain(sceneManager);
 	player = new Player(this, sceneManager);
 	camera_distance = 40.0f;
+	wasMouseDown = false;
 
 	client = new Client();
 	client->Connect("127.0.0.1", 1234);
@@ -114,7 +115,8 @@ void Game::Update(float delta)
 	OIS::MouseState mouseState = mouse->getMouseState();
 	if (mouseState.Z.rel)
 		camera_distance -= mouseState.Z.rel / 20.0f;
-	if (mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
+
+	if (!wasMouseDown && mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
 	{
 		Ogre::Ray mouseRay = camera->getCameraToViewportRay(mouseState.X.abs / (Ogre::Real) mouseState.width, mouseState.Y.abs / (Ogre::Real) mouseState.height);
 		std::pair<bool, Ogre::Real> floorPoint = mouseRay.intersects(Ogre::Plane(Ogre::Vector3::UNIT_Y, 0));
@@ -123,6 +125,8 @@ void Game::Update(float delta)
 			player->SetTarget(point.x, point.z);
 		}
 	}
+	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
+
 	player->Update(delta);
 	
 	/* Multiplayer sync */
