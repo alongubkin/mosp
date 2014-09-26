@@ -39,6 +39,9 @@ private:
 
 	template <typename T>
 	void Send(const T& message);
+
+	template <typename T>
+	void Broadcast(const T& message);
 };
 
 template <typename T>
@@ -51,6 +54,20 @@ void Client::Send(const T& message)
 	enet_peer_send(peer, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
 
 	delete data;
+}
+
+template <typename T>
+void Client::Broadcast(const T& message)
+{
+	auto clients = server->GetClients();
+	for (auto it = clients.begin(); it != clients.end(); it++)
+	{
+		Client* client = *it;
+		if (client != this)
+		{
+			client->Send(message);
+		}
+	}
 }
 
 #endif

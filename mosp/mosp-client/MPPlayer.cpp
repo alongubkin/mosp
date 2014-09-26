@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "Player.h"
+#include "MPPlayer.h"
 #include "OGRE/OgreSkeleton.h"
 #include "Game.h"
 #include "proto/messages.pb.h"
 
-Player::Player(Game* game, Ogre::SceneManager* sceneManager) 
-	: Entity(game, sceneManager, "Sinbad.mesh")
+MPPlayer::MPPlayer(Game* game, Ogre::SceneManager* sceneManager)
+: Entity(game, sceneManager, "Sinbad.mesh")
 {
 	animationManager = new AnimationManager(entity);
 	animationManager->SetAnimation("IdleBase");
@@ -13,36 +13,25 @@ Player::Player(Game* game, Ogre::SceneManager* sceneManager)
 }
 
 
-Player::~Player()
+MPPlayer::~MPPlayer()
 {
 	Entity::~Entity();
 }
 
-void Player::SetTarget(float x, float y)
+void MPPlayer::SetTarget(float x, float y)
 {
 	Entity::SetTarget(x, y);
 	animationManager->SetAnimation("RunBase", "IdleBase");
 	animationManager->SetAnimation("RunTop", "IdleTop");
-
-	mosp::Vector3 *position = new mosp::Vector3();
-	position->set_x(x);
-	position->set_y(0);
-	position->set_z(y);
-
-	mosp::MoveRequestMessage message;
-	message.set_type(mosp::Type::MoveRequest);
-	message.set_allocated_position(position);
-
-	this->game->GetClient()->Send(message);
 }
 
-void Player::Update(float delta)
+void MPPlayer::Update(float delta)
 {
 	Entity::Update(delta);
 	animationManager->Update(delta);
 }
 
-void Player::OnReachingTarget()
+void MPPlayer::OnReachingTarget()
 {
 	Entity::OnReachingTarget();
 	animationManager->SetAnimation("IdleBase", "RunBase");

@@ -1,10 +1,12 @@
 #pragma once
 #include "stdafx.h"
 #include <thread>
+#include <hash_map>
 #include "enet/enet.h"
 #include "Terrain.h"
 #include "Player.h"
 #include "Client.h"
+#include "MPPlayer.h"
 #include "proto/messages.pb.h"
 
 class Game
@@ -33,6 +35,8 @@ private:
 
 	Client* client;
 	std::thread clientThread;
+
+	std::hash_map<int, MPPlayer*> players;
 
 	void Update(float delta);
 	void HandlePacket(ENetPacket* packet);

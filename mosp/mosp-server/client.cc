@@ -48,7 +48,23 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 	notification.set_allocated_position(new mosp::Vector3(*targetPosition));
 	notification.set_name(message.name());
 	
-	server->Broadcast(notification);
+	this->Broadcast(notification);
+
+	auto clients = server->GetClients();
+	for (auto it = clients.begin(); it != clients.end(); it++)
+	{
+		Client* client = *it;
+		if (client != this)
+		{
+			mosp::JoinNotificationMessage notification;
+			notification.set_type(mosp::Type::JoinNotification);
+			notification.set_client_id(client->GetId());
+			notification.set_allocated_position(new mosp::Vector3(*client->targetPosition));
+			notification.set_name(message.name());
+
+			this->Send(notification);
+		}
+	}
 }
 
 void Client::HandleMoveRequestMessage(const mosp::MoveRequestMessage& message)
@@ -62,5 +78,5 @@ void Client::HandleMoveRequestMessage(const mosp::MoveRequestMessage& message)
 
 	printf("clientid: %d - position: %f, %f, %f\n", GetId(), targetPosition->x(), targetPosition->y(), targetPosition->z());
 
-	//server->Broadcast(notification);
+	this->Broadcast(notification);
 }

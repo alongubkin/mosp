@@ -124,8 +124,7 @@ void Game::Update(float delta)
 		}
 	}
 	player->Update(delta);
-
-
+	
 	/* Multiplayer sync */
 	
 	auto incomingPacketsQueue = client->CopyQueue();
@@ -135,6 +134,11 @@ void Game::Update(float delta)
 		ENetPacket* packet = incomingPacketsQueue.front();
 		incomingPacketsQueue.pop();
 		HandlePacket(packet);
+	}
+
+	for (auto it = players.begin(); it != players.end(); it++)
+	{
+		(*it).second->Update(delta);
 	}
 }
 
@@ -162,12 +166,15 @@ void Game::HandlePacket(ENetPacket* packet)
 
 void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& message)
 {
-	printf("joined\n");
+	printf("New player joined with id %d\n", message.client_id());
+
+	players[message.client_id()] = new MPPlayer(this, sceneManager);
+	players[message.client_id()]->SetPosition(message.position().x(), message.position().y(), message.position().z());
 }
 
 void Game::HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message)
 {
-	printf("moved\n");
+	players[message.client_id()]->SetTarget(message.position().x(), message.position().z());
 }
 
 template<typename T>
