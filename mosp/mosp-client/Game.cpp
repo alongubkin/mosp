@@ -44,7 +44,7 @@ void Game::Update(float delta)
 		movement.x += 1;
 	}
 	movement.normalise();
-	
+
 	if (movement != Ogre::Vector3::ZERO)
 		player->SetTarget(player->ogreNode->getPosition().x + movement.x, player->ogreNode->getPosition().z + movement.z);
 

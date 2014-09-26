@@ -32,6 +32,9 @@ public:
 	void SetAnimation(Ogre::String name, Ogre::String cancel = "", bool loop = true)
 	{
 		Ogre::AnimationState* anim = animations[name];
+		if (anim->getEnabled())
+			return;
+
 		anim->setEnabled(true);
 		anim->setLoop(loop);
 		fadeIn.push_back(anim);

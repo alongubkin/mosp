@@ -51,7 +51,6 @@ void setupPlugins()
 	std::vector<Ogre::String> pluginNames;
 	pluginNames.push_back("RenderSystem_GL");
 	pluginNames.push_back("Plugin_OctreeSceneManager");
-	pluginNames.push_back("Plugin_CgProgramManager");
 
 	for (std::vector<Ogre::String>::iterator iter = pluginNames.begin(); iter != pluginNames.end(); iter++)
 	{
@@ -144,7 +143,7 @@ int main()
 		
 		sceneManager = ogreRoot->createSceneManager(Ogre::ST_GENERIC);
 		sceneManager->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-		sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
+		//sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
 		
 		locateResources();
 

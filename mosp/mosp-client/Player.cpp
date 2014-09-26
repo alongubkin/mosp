@@ -4,6 +4,7 @@
 #include "OGRE/OgreBlendMode.h"
 #include "OGRE/OgreSkeleton.h"
 #include "OGRE/OgreSkeletonInstance.h"
+#include "OGRE\OgreShadowVolumeExtrudeProgram.h"
 
 Player::Player(Ogre::SceneManager* sceneManager)
 {
@@ -46,27 +47,22 @@ void Player::Update(float delta)
 	if (target.x == 0 && target.z == 0)
 		return;
 
-	if (pos.x != target.x || pos.z != target.z)
-	{
-		Ogre::Vector3 dir = target - ogreNode->getPosition();
-		dir.normalise();
+	Ogre::Vector3 dir = target - ogreNode->getPosition();
+	dir.normalise();
 
-		Ogre::Vector3 src = ogreNode->getOrientation() * Ogre::Vector3::UNIT_Z;
-		Ogre::Quaternion quat = src.getRotationTo(dir, Ogre::Vector3::UNIT_Y);
-		quat.x = 0;
-		quat.z = 0;
-		ogreNode->rotate(quat);
+	Ogre::Vector3 src = ogreNode->getOrientation() * Ogre::Vector3::UNIT_Z;
+	Ogre::Quaternion quat = src.getRotationTo(dir, Ogre::Vector3::UNIT_Y);
+	quat.x = 0;
+	quat.z = 0;
+	ogreNode->rotate(quat);
 
-		if (pos.squaredDistance(target) < (dir * delta * MOVE_SPEED).squaredLength()) {
-			ogreNode->setPosition(target);
-			target.x = 0;
-			target.z = 0;
-			animationManager->SetAnimation("IdleBase", "RunBase");
-			animationManager->SetAnimation("IdleTop", "RunTop");
-		}
-		else
-			ogreNode->translate(dir * delta * MOVE_SPEED);
-
-
+	if (pos.squaredDistance(target) <= (dir * delta * MOVE_SPEED).squaredLength()) {
+		ogreNode->setPosition(target);
+		target.x = 0;
+		target.z = 0;
+		animationManager->SetAnimation("IdleBase", "RunBase");
+		animationManager->SetAnimation("IdleTop", "RunTop");
 	}
+	else
+		ogreNode->translate(dir * delta * MOVE_SPEED);
 }
