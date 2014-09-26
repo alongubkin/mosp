@@ -9,6 +9,12 @@
 #include "OIS/OIS.h"
 #include "OGRE/OgreMeshManager.h"
 #include "OGRE/OgreSceneNode.h"
+#include "OGRE/OgreLogManager.h"
+#include "OGRE/OgreSceneManager.h"
+#include "OGRE/OgreSceneNode.h"
+#include "OGRE/OgreViewport.h"
+#include "OGRE/OgreTimer.h"
+#include "OGRE/OgreCamera.h"
 
 // any other header can be included, as usual
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
