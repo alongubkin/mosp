@@ -71,7 +71,7 @@ void Server::Listen()
 void Server::OnConnect(const ENetEvent &event)
 {
 	// Create a new client and push it to the client list
-	Client *client = new Client(event.peer, nextAvailableId);
+	Client *client = new Client(this, event.peer, nextAvailableId);
 	clients.push_back(client);
 
 	// Assign the client object to the peer

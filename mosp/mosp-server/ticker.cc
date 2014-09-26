@@ -47,7 +47,7 @@ void Ticker::HandlePacket(ENetPacket* packet)
 			break;
 
 		case mosp::Type::MoveRequest:
-
+			client->HandleMoveRequestMessage(PacketToMessage<mosp::MoveRequestMessage>(packet));
 			break;
 
 		default:
