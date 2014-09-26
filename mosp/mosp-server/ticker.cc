@@ -37,12 +37,13 @@ T Ticker::PacketToMessage(ENetPacket* packet)
 
 void Ticker::HandlePacket(ENetPacket* packet)
 {
+	Client* client = static_cast<Client*>(packet->userData);
 	mosp::BaseMessage baseMessage = PacketToMessage<mosp::BaseMessage>(packet);
 
 	switch (baseMessage.type())
 	{
 		case mosp::Type::JoinRequest:
-			HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
+			client->HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
 			break;
 
 		case mosp::Type::MoveRequest:
@@ -56,9 +57,3 @@ void Ticker::HandlePacket(ENetPacket* packet)
 
 	enet_packet_destroy(packet);
 }
-
-void Ticker::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message) 
-{
-	printf("Name: %s\n", message.name().c_str());
-}
-
