@@ -124,8 +124,51 @@ void Game::Update(float delta)
 		}
 	}
 	player->Update(delta);
+
+
+	/* Multiplayer sync */
+	
+	auto incomingPacketsQueue = client->CopyQueue();
+
+	while (!incomingPacketsQueue.empty())
+	{
+		ENetPacket* packet = incomingPacketsQueue.front();
+		incomingPacketsQueue.pop();
+		HandlePacket(packet);
+	}
 }
 
+void Game::HandlePacket(ENetPacket* packet)
+{
+	mosp::BaseMessage baseMessage = PacketToMessage<mosp::BaseMessage>(packet);
+
+	switch (baseMessage.type())
+	{
+	case mosp::Type::JoinNotification:
+		HandleJoinNotificationMessage(PacketToMessage<mosp::JoinNotificationMessage>(packet));
+		break;
+
+	case mosp::Type::MoveNotification:
+		HandleMoveNotificationMessage(PacketToMessage<mosp::MoveNotificationMessage>(packet));
+		break;
+
+	default:
+		printf("unhandled message");
+		break;
+	}
+
+	enet_packet_destroy(packet);
+}
+
+void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& message)
+{
+	printf("joined\n");
+}
+
+void Game::HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message)
+{
+	printf("moved\n");
+}
 
 template<typename T>
 T Game::PacketToMessage(ENetPacket* packet)

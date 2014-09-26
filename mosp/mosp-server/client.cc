@@ -6,16 +6,22 @@ Client::~Client()
 	delete peer;
 }
 
-template <typename T>
-void Client::Send(const T& message)
+
+std::queue<ENetPacket*> Client::CopyQueue()
 {
-	unsigned char* data = new unsigned char[message.ByteSize()];
-	message.SerializeToArray(data, message.ByteSize());
+	incomingPacketsMutex.lock();
+	std::queue<ENetPacket*> _result(incomingPackets);
+	std::queue<ENetPacket*> empty;
+	std::swap(incomingPackets, empty);
+	incomingPacketsMutex.unlock();
+	return _result;
+}
 
-	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
-
-	delete data;
+void Client::QueuePacket(ENetPacket* packet)
+{
+	incomingPacketsMutex.lock();
+	incomingPackets.push(packet);
+	incomingPacketsMutex.unlock();
 }
 
 void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
@@ -37,6 +43,7 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 	targetPosition->set_z(0);
 
 	mosp::JoinNotificationMessage notification;
+	notification.set_type(mosp::Type::JoinNotification);
 	notification.set_client_id(this->GetId());
 	notification.set_allocated_position(new mosp::Vector3(*targetPosition));
 	notification.set_name(message.name());
@@ -49,8 +56,11 @@ void Client::HandleMoveRequestMessage(const mosp::MoveRequestMessage& message)
 	this->targetPosition = new mosp::Vector3(message.position());
 
 	mosp::MoveNotificationMessage notification;
+	notification.set_type(mosp::Type::MoveNotification);
 	notification.set_client_id(this->GetId());
 	notification.set_allocated_position(new mosp::Vector3(message.position()));
 
-	server->Broadcast(notification);
+	printf("clientid: %d - position: %f, %f, %f\n", GetId(), targetPosition->x(), targetPosition->y(), targetPosition->z());
+
+	//server->Broadcast(notification);
 }

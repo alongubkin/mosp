@@ -14,7 +14,6 @@
     <None Include="proto\messages.proto" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="concurrent_queue.h" />
     <ClInclude Include="proto\messages.pb.h" />
   </ItemGroup>
   <ItemGroup>

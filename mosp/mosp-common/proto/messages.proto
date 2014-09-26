@@ -21,7 +21,7 @@ enum JOIN_REQUEST_ERROR {
 }
 
 message BaseMessage {
-	required Type type = 1;
+	optional Type type = 1;
 }
 
 

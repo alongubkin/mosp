@@ -64,6 +64,16 @@ void Client::Run()
 	isRunning = false;
 }
 
+std::queue<ENetPacket*> Client::CopyQueue()
+{
+	incomingPacketsQueueMutex.lock();
+	std::queue<ENetPacket*> _result(incomingPackets);
+	std::queue<ENetPacket*> empty;
+	std::swap(incomingPackets, empty);
+	incomingPacketsQueueMutex.unlock();
+	return _result;
+}
+
 void Client::OnConnect(ENetEvent& evt)
 {
 	printf("Connection to remote server succeeded!\n");
@@ -77,23 +87,12 @@ void Client::OnConnect(ENetEvent& evt)
 
 void Client::OnReceive(ENetEvent& evt)
 {
-	
+	incomingPacketsQueueMutex.lock();
+	incomingPackets.push(evt.packet);
+	incomingPacketsQueueMutex.unlock();
 }
 
 void Client::OnDisconnect(ENetEvent& evt)
 {
 	enet_peer_reset(server);
-}
-
-
-template <typename T>
-void Client::Send(const T& message)
-{
-	unsigned char* data = new unsigned char[message.ByteSize()];
-	message.SerializeToArray(data, message.ByteSize());
-
-	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(server, 0, packet); //Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
-
-	delete data;
 }

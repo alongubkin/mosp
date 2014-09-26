@@ -24,8 +24,16 @@ void Player::SetTarget(float x, float y)
 	animationManager->SetAnimation("RunBase", "IdleBase");
 	animationManager->SetAnimation("RunTop", "IdleTop");
 
-	
-	// this->game->GetClient()->Send();
+	mosp::Vector3 *position = new mosp::Vector3();
+	position->set_x(x);
+	position->set_y(y);
+	position->set_z(0);
+
+	mosp::MoveRequestMessage message;
+	message.set_type(mosp::Type::MoveRequest);
+	message.set_allocated_position(position);
+
+	this->game->GetClient()->Send(message);
 }
 
 void Player::Update(float delta)

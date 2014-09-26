@@ -86,7 +86,7 @@ void Server::OnReceive(const ENetEvent &event)
 	Client* client = static_cast<Client*>(event.peer->data);
 	event.packet->userData = client;
 
-	client->GetQueue()->push(event.packet);
+	client->QueuePacket(event.packet);
 }
 
 void Server::OnDisconnect(const ENetEvent &event)

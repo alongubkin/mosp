@@ -138,7 +138,7 @@ class BaseMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1;
+  // optional .mosp.Type type = 1;
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -738,7 +738,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = MoveNotification];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -791,7 +791,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
 
 // BaseMessage
 
-// required .mosp.Type type = 1;
+// optional .mosp.Type type = 1;
 inline bool BaseMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1384,7 +1384,7 @@ inline void MoveRequestMessage::set_allocated_position(::mosp::Vector3* position
 
 // MoveNotificationMessage
 
-// optional .mosp.Type type = 1 [default = JoinNotification];
+// optional .mosp.Type type = 1 [default = MoveNotification];
 inline bool MoveNotificationMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1395,7 +1395,7 @@ inline void MoveNotificationMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void MoveNotificationMessage::clear_type() {
-  type_ = 3;
+  type_ = 5;
   clear_has_type();
 }
 inline ::mosp::Type MoveNotificationMessage::type() const {

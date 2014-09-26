@@ -1,9 +1,11 @@
 #pragma once
 #include "stdafx.h"
+#include <thread>
 #include "enet/enet.h"
 #include "Terrain.h"
 #include "Player.h"
 #include "Client.h"
+#include "proto/messages.pb.h"
 
 class Game
 {
@@ -33,6 +35,7 @@ private:
 	std::thread clientThread;
 
 	void Update(float delta);
+	void HandlePacket(ENetPacket* packet);
 
 	template<typename T>
 	T PacketToMessage(ENetPacket* packet);
@@ -44,5 +47,10 @@ private:
 	void SetupWindow();
 	void SetupViewport();
 	void SetupInput();
+
+
+	/* Events */
+	void HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& message);
+	void HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message);
 };
 

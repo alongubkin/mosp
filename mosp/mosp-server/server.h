@@ -49,6 +49,8 @@ void Server::Broadcast(const T& message)
 	message.SerializeToArray(data, message.ByteSize());
 
 	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
+
+
 	enet_host_broadcast(server, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
 
 	delete data;

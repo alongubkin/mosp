@@ -91,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
-    <ClInclude Include="concurrent_queue.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="ticker.h" />
   </ItemGroup>

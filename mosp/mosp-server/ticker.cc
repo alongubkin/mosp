@@ -11,12 +11,14 @@ void Ticker::Run()
 
 		for (auto it = clients.begin(); it != clients.end(); ++it)
 		{
-			auto queue = (*it)->GetQueue();
+			auto queue = (*it)->CopyQueue();
 			
-			ENetPacket* message = nullptr;
-			while ((message = queue->pop()) != nullptr)
+			while (!queue.empty())
 			{
-				HandlePacket(message);
+				ENetPacket* packet = queue.front();
+				queue.pop();
+
+				HandlePacket(packet); //Handles deallocation of packet as well...
 			}
 		}
 	}
