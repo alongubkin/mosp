@@ -14,6 +14,7 @@ Game::Game(Ogre::Root* ogreRoot, Ogre::RenderWindow* window, Ogre::SceneManager*
 
 	terrain = new Terrain(sceneManager);
 	player = new Player(sceneManager);
+	camera_distance = 40.0f;
 }
 
 
@@ -23,8 +24,8 @@ Game::~Game()
 
 void Game::Update(float delta)
 {
-	camera->setPosition(player->ogreNode->getPosition() + Ogre::Vector3(0, 60, 60));
-	camera->lookAt(player->ogreNode->getPosition());
+	camera->setPosition(player->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
+	camera->lookAt(player->getPos());
 
 	Ogre::Vector3 movement = Ogre::Vector3::ZERO;
 	if (keyboard->isKeyDown(OIS::KC_W))
@@ -44,11 +45,13 @@ void Game::Update(float delta)
 		movement.x += 1;
 	}
 	movement.normalise();
-
+	
 	if (movement != Ogre::Vector3::ZERO)
-		player->SetTarget(player->ogreNode->getPosition().x + movement.x, player->ogreNode->getPosition().z + movement.z);
+		player->SetTarget(player->getPos().x + movement.x, player->getPos().z + movement.z);
 
 	OIS::MouseState mouseState = mouse->getMouseState();
+	if (mouseState.Z.rel)
+		camera_distance -= mouseState.Z.rel / 20.0f;
 	if (mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
 	{
 		Ogre::Ray mouseRay = camera->getCameraToViewportRay(mouseState.X.abs / (Ogre::Real) mouseState.width, mouseState.Y.abs / (Ogre::Real) mouseState.height);
