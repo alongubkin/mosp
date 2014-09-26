@@ -51,6 +51,7 @@ void setupPlugins()
 	std::vector<Ogre::String> pluginNames;
 	pluginNames.push_back("RenderSystem_GL");
 	pluginNames.push_back("Plugin_OctreeSceneManager");
+	pluginNames.push_back("Plugin_CgProgramManager");
 
 	for (std::vector<Ogre::String>::iterator iter = pluginNames.begin(); iter != pluginNames.end(); iter++)
 	{
@@ -134,6 +135,9 @@ int main()
 {
 	try
 	{
+		Ogre::Timer* initTimer = new Ogre::Timer();
+		initTimer->reset();
+
 		ogreRoot = new Ogre::Root();
 
 		setupPlugins();
@@ -143,7 +147,7 @@ int main()
 		
 		sceneManager = ogreRoot->createSceneManager(Ogre::ST_GENERIC);
 		sceneManager->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
-		//sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
+		sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
 		
 		locateResources();
 
@@ -156,6 +160,11 @@ int main()
 
 		Game* mainGame = new Game(ogreRoot, window, sceneManager, viewport, camera, keyboard, mouse);
 		
+		printf("============== Init Stats ==============\n");
+		printf("Init Time: %f seconds.\n", initTimer->getMilliseconds() * 0.001f);
+		printf("========================================\n");
+		delete initTimer;
+
 		Ogre::Timer* timer = ogreRoot->getTimer();
 		timer->reset();
 		unsigned long lastFrame = timer->getMilliseconds();
