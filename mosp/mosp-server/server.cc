@@ -79,10 +79,6 @@ void Server::OnConnect(const ENetEvent &event)
 	nextAvailableId++;
 
 	printf("A new client connected from %x:%u assigned with id %d\n", event.peer->address.host, event.peer->address.port, nextAvailableId);
-
-	//Temp
-	mosp::JoinRequestMessage msg;
-	printf("%d", msg.type());
 }
 
 void Server::OnReceive(const ENetEvent &event)
