@@ -31,6 +31,11 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 	Send(response);
 	*/
 
+	targetPosition = new mosp::Vector3();
+	targetPosition->set_x(0);
+	targetPosition->set_y(5);
+	targetPosition->set_z(0);
+
 	mosp::JoinNotificationMessage notification;
 	notification.set_client_id(this->GetId());
 	notification.set_allocated_position(new mosp::Vector3(*targetPosition));

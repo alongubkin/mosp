@@ -13,7 +13,6 @@ Client::Client()
 	if (client == NULL)
 	{
 		fprintf(stderr, "An error occurred while trying to create an ENet client host.\n");
-		exit(EXIT_FAILURE);
 	}
 }
 

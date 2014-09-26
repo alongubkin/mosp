@@ -38,7 +38,8 @@ Game::Game()
 	player = new Player(sceneManager);
 	camera_distance = 40.0f;
 
-	client.Connect("127.0.0.1", 1234);
+	client = new Client();
+	client->Connect("127.0.0.1", 1234);
 }
 
 
@@ -58,7 +59,7 @@ Game::~Game()
 
 void Game::Run()
 {
-	clientThread = std::thread(&Client::Run, &client);
+	clientThread = std::thread(&Client::Run, client);
 
 	Ogre::Timer* timer = ogreRoot->getTimer();
 	timer->reset();

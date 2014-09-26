@@ -28,7 +28,7 @@ private:
 	Player* player;
 	float camera_distance;
 
-	Client client;
+	Client* client;
 	std::thread clientThread;
 
 	void Update(float delta);
