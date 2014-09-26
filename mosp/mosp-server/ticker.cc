@@ -17,16 +17,15 @@ void Ticker::Run()
 			while ((message = queue->pop()) != nullptr)
 			{
 				HandlePacket(message);
-				delete message;
 			}
 		}
 	}
 }
 
 template<typename T>
-T& Ticker::PacketToMessage(ENetPacket* packet)
+T Ticker::PacketToMessage(ENetPacket* packet)
 {
-	T& message = T();
+	T message;
 	if (!message.ParseFromArray(packet->data, packet->dataLength))
 	{
 		// TODO: throw exception
@@ -38,12 +37,13 @@ T& Ticker::PacketToMessage(ENetPacket* packet)
 
 void Ticker::HandlePacket(ENetPacket* packet)
 {
+	Client* client = static_cast<Client*>(packet->userData);
 	mosp::BaseMessage baseMessage = PacketToMessage<mosp::BaseMessage>(packet);
 
 	switch (baseMessage.type())
 	{
 		case mosp::Type::JoinRequest:
-			HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
+			client->HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
 			break;
 
 		case mosp::Type::MoveRequest:
@@ -57,9 +57,3 @@ void Ticker::HandlePacket(ENetPacket* packet)
 
 	enet_packet_destroy(packet);
 }
-
-void Ticker::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message) 
-{
-
-}
-

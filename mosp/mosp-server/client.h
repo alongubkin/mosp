@@ -17,11 +17,16 @@ public:
 	int GetId() const { return id; }
 	ConcurrentQueue<ENetPacket*>* GetQueue() { return &incomingPackets; }
 
+	void HandleJoinRequestMessage(const mosp::JoinRequestMessage& message);
+
 private:
-	int id;
+	int id = 0;
 	ENetPeer* peer;
 
 	ConcurrentQueue<ENetPacket*> incomingPackets;
+
+	template <typename T>
+	void Send(const T& message);
 };
 
 #endif

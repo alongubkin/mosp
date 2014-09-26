@@ -230,19 +230,19 @@ void protobuf_AddDesc_messages_2eproto() {
     "\n\016messages.proto\022\004mosp\"\'\n\013BaseMessage\022\030\n"
     "\004type\030\001 \002(\0162\n.mosp.Type\"*\n\007Vector3\022\t\n\001x\030"
     "\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\001\"I\n\022JoinReque"
-    "stMessage\022%\n\004type\030\001 \002(\0162\n.mosp.Type:\013Joi"
+    "stMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013Joi"
     "nRequest\022\014\n\004name\030\002 \002(\t\"\253\001\n\023JoinResponseM"
-    "essage\022&\n\004type\030\001 \002(\0162\n.mosp.Type:\014JoinRe"
+    "essage\022&\n\004type\030\001 \001(\0162\n.mosp.Type:\014JoinRe"
     "sponse\022\017\n\007success\030\002 \002(\010\022\037\n\010position\030\003 \002("
     "\0132\r.mosp.Vector3\022\021\n\tclient_id\030\004 \002(\005\022\'\n\005e"
     "rror\030\005 \001(\0162\030.mosp.JOIN_REQUEST_ERROR\"\207\001\n"
-    "\027JoinNotificationMessage\022*\n\004type\030\001 \002(\0162\n"
+    "\027JoinNotificationMessage\022*\n\004type\030\001 \001(\0162\n"
     ".mosp.Type:\020JoinNotification\022\014\n\004name\030\002 \002"
     "(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132"
     "\r.mosp.Vector3\"\\\n\022MoveRequestMessage\022%\n\004"
-    "type\030\001 \002(\0162\n.mosp.Type:\013MoveRequest\022\037\n\010p"
+    "type\030\001 \001(\0162\n.mosp.Type:\013MoveRequest\022\037\n\010p"
     "osition\030\002 \002(\0132\r.mosp.Vector3\"y\n\027MoveNoti"
-    "ficationMessage\022*\n\004type\030\001 \002(\0162\n.mosp.Typ"
+    "ficationMessage\022*\n\004type\030\001 \001(\0162\n.mosp.Typ"
     "e:\020JoinNotification\022\021\n\tclient_id\030\002 \002(\005\022\037"
     "\n\010position\030\003 \002(\0132\r.mosp.Vector3*f\n\004Type\022"
     "\017\n\013JoinRequest\020\001\022\020\n\014JoinResponse\020\002\022\024\n\020Jo"
@@ -930,7 +930,7 @@ bool JoinRequestMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .mosp.Type type = 1 [default = JoinRequest];
+      // optional .mosp.Type type = 1 [default = JoinRequest];
       case 1: {
         if (tag == 8) {
           int value;
@@ -991,7 +991,7 @@ failure:
 void JoinRequestMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.JoinRequestMessage)
-  // required .mosp.Type type = 1 [default = JoinRequest];
+  // optional .mosp.Type type = 1 [default = JoinRequest];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -1017,7 +1017,7 @@ void JoinRequestMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* JoinRequestMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinRequestMessage)
-  // required .mosp.Type type = 1 [default = JoinRequest];
+  // optional .mosp.Type type = 1 [default = JoinRequest];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -1046,7 +1046,7 @@ int JoinRequestMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .mosp.Type type = 1 [default = JoinRequest];
+    // optional .mosp.Type type = 1 [default = JoinRequest];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -1109,7 +1109,7 @@ void JoinRequestMessage::CopyFrom(const JoinRequestMessage& from) {
 }
 
 bool JoinRequestMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   return true;
 }
@@ -1226,7 +1226,7 @@ bool JoinResponseMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .mosp.Type type = 1 [default = JoinResponse];
+      // optional .mosp.Type type = 1 [default = JoinResponse];
       case 1: {
         if (tag == 8) {
           int value;
@@ -1333,7 +1333,7 @@ failure:
 void JoinResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.JoinResponseMessage)
-  // required .mosp.Type type = 1 [default = JoinResponse];
+  // optional .mosp.Type type = 1 [default = JoinResponse];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -1371,7 +1371,7 @@ void JoinResponseMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* JoinResponseMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinResponseMessage)
-  // required .mosp.Type type = 1 [default = JoinResponse];
+  // optional .mosp.Type type = 1 [default = JoinResponse];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -1412,7 +1412,7 @@ int JoinResponseMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .mosp.Type type = 1 [default = JoinResponse];
+    // optional .mosp.Type type = 1 [default = JoinResponse];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -1502,7 +1502,7 @@ void JoinResponseMessage::CopyFrom(const JoinResponseMessage& from) {
 }
 
 bool JoinResponseMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;
@@ -1630,7 +1630,7 @@ bool JoinNotificationMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .mosp.Type type = 1 [default = JoinNotification];
+      // optional .mosp.Type type = 1 [default = JoinNotification];
       case 1: {
         if (tag == 8) {
           int value;
@@ -1719,7 +1719,7 @@ failure:
 void JoinNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.JoinNotificationMessage)
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -1756,7 +1756,7 @@ void JoinNotificationMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* JoinNotificationMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinNotificationMessage)
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -1797,7 +1797,7 @@ int JoinNotificationMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .mosp.Type type = 1 [default = JoinNotification];
+    // optional .mosp.Type type = 1 [default = JoinNotification];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -1880,7 +1880,7 @@ void JoinNotificationMessage::CopyFrom(const JoinNotificationMessage& from) {
 }
 
 bool JoinNotificationMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;
@@ -1993,7 +1993,7 @@ bool MoveRequestMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .mosp.Type type = 1 [default = MoveRequest];
+      // optional .mosp.Type type = 1 [default = MoveRequest];
       case 1: {
         if (tag == 8) {
           int value;
@@ -2050,7 +2050,7 @@ failure:
 void MoveRequestMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.MoveRequestMessage)
-  // required .mosp.Type type = 1 [default = MoveRequest];
+  // optional .mosp.Type type = 1 [default = MoveRequest];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -2072,7 +2072,7 @@ void MoveRequestMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* MoveRequestMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.MoveRequestMessage)
-  // required .mosp.Type type = 1 [default = MoveRequest];
+  // optional .mosp.Type type = 1 [default = MoveRequest];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -2097,7 +2097,7 @@ int MoveRequestMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .mosp.Type type = 1 [default = MoveRequest];
+    // optional .mosp.Type type = 1 [default = MoveRequest];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -2160,7 +2160,7 @@ void MoveRequestMessage::CopyFrom(const MoveRequestMessage& from) {
 }
 
 bool MoveRequestMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;
@@ -2274,7 +2274,7 @@ bool MoveNotificationMessage::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .mosp.Type type = 1 [default = JoinNotification];
+      // optional .mosp.Type type = 1 [default = JoinNotification];
       case 1: {
         if (tag == 8) {
           int value;
@@ -2346,7 +2346,7 @@ failure:
 void MoveNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.MoveNotificationMessage)
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -2373,7 +2373,7 @@ void MoveNotificationMessage::SerializeWithCachedSizes(
 ::google::protobuf::uint8* MoveNotificationMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.MoveNotificationMessage)
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -2403,7 +2403,7 @@ int MoveNotificationMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .mosp.Type type = 1 [default = JoinNotification];
+    // optional .mosp.Type type = 1 [default = JoinNotification];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -2476,7 +2476,7 @@ void MoveNotificationMessage::CopyFrom(const MoveNotificationMessage& from) {
 }
 
 bool MoveNotificationMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000006) != 0x00000006) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;

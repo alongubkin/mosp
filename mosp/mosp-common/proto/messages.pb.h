@@ -316,7 +316,7 @@ class JoinRequestMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1 [default = JoinRequest];
+  // optional .mosp.Type type = 1 [default = JoinRequest];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -410,7 +410,7 @@ class JoinResponseMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1 [default = JoinResponse];
+  // optional .mosp.Type type = 1 [default = JoinResponse];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -531,7 +531,7 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -647,7 +647,7 @@ class MoveRequestMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1 [default = MoveRequest];
+  // optional .mosp.Type type = 1 [default = MoveRequest];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -738,7 +738,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = JoinNotification];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -896,7 +896,7 @@ inline void Vector3::set_z(double value) {
 
 // JoinRequestMessage
 
-// required .mosp.Type type = 1 [default = JoinRequest];
+// optional .mosp.Type type = 1 [default = JoinRequest];
 inline bool JoinRequestMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1001,7 +1001,7 @@ inline void JoinRequestMessage::set_allocated_name(::std::string* name) {
 
 // JoinResponseMessage
 
-// required .mosp.Type type = 1 [default = JoinResponse];
+// optional .mosp.Type type = 1 [default = JoinResponse];
 inline bool JoinResponseMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1144,7 +1144,7 @@ inline void JoinResponseMessage::set_error(::mosp::JOIN_REQUEST_ERROR value) {
 
 // JoinNotificationMessage
 
-// required .mosp.Type type = 1 [default = JoinNotification];
+// optional .mosp.Type type = 1 [default = JoinNotification];
 inline bool JoinNotificationMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1314,7 +1314,7 @@ inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector3* pos
 
 // MoveRequestMessage
 
-// required .mosp.Type type = 1 [default = MoveRequest];
+// optional .mosp.Type type = 1 [default = MoveRequest];
 inline bool MoveRequestMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1384,7 +1384,7 @@ inline void MoveRequestMessage::set_allocated_position(::mosp::Vector3* position
 
 // MoveNotificationMessage
 
-// required .mosp.Type type = 1 [default = JoinNotification];
+// optional .mosp.Type type = 1 [default = JoinNotification];
 inline bool MoveNotificationMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
