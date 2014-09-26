@@ -20,6 +20,9 @@ public:
 
 	const std::vector<Client*>& GetClients() const { return clients; }
 
+	template <typename T>
+	void Broadcast(const T& message);
+
 private:
 	bool isRunning = false;
 	int nextAvailableId = 0;
@@ -38,5 +41,17 @@ private:
 
 	void ProcessPacket(const ENetPacket* packet, const ENetPeer* peer);
 };
+
+template <typename T>
+void Server::Broadcast(const T& message)
+{
+	unsigned char* data = new unsigned char[message.ByteSize()];
+	message.SerializeToArray(data, message.ByteSize());
+
+	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
+	enet_host_broadcast(server, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
+
+	delete data;
+}
 
 #endif

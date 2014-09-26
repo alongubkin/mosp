@@ -1,4 +1,5 @@
 #include "client.h"
+#include "server.h"
 
 Client::~Client() 
 {
@@ -12,7 +13,7 @@ void Client::Send(const T& message)
 	message.SerializeToArray(data, message.ByteSize());
 
 	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet); //Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
+	enet_peer_send(peer, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
 
 	delete data;
 }
@@ -21,15 +22,30 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 {
 	printf("Name: %s\n", message.name().c_str());
 
-	mosp::Vector3* position = new mosp::Vector3();
-	position->set_x(0);
-	position->set_y(0);
-	position->set_z(0);
-
+	/*
 	mosp::JoinResponseMessage response;
 	response.set_success(true);
 	response.set_client_id(this->GetId());
-	response.set_allocated_position(position);
+	response.set_allocated_position(new mosp::Vector3(*targetPosition));
 
 	Send(response);
+	*/
+
+	mosp::JoinNotificationMessage notification;
+	notification.set_client_id(this->GetId());
+	notification.set_allocated_position(new mosp::Vector3(*targetPosition));
+	notification.set_name(message.name());
+	
+	server->Broadcast(notification);
+}
+
+void Client::HandleMoveRequestMessage(const mosp::MoveRequestMessage& message)
+{
+	this->targetPosition = new mosp::Vector3(message.position());
+
+	mosp::MoveNotificationMessage notification;
+	notification.set_client_id(this->GetId());
+	notification.set_allocated_position(new mosp::Vector3(message.position()));
+
+	server->Broadcast(notification);
 }
