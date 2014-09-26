@@ -13,7 +13,8 @@ public:
 	~Game();
 
 	void Run();
-	
+	Client* GetClient() const { return client; }
+
 private:
 	Ogre::Root* ogreRoot;
 	Ogre::RenderWindow* window;

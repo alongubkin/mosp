@@ -13,6 +13,9 @@ public:
 	void Run();
 	ConcurrentQueue<ENetPacket*>* GetQueue() { return &incomingPackets; }
 
+	template <typename T>
+	void Send(const T& message);
+
 private:
 	ENetHost* client;
 	ENetPeer* server;
@@ -22,9 +25,4 @@ private:
 	void OnConnect(ENetEvent& evt);
 	void OnReceive(ENetEvent& evt);
 	void OnDisconnect(ENetEvent& evt);
-
-	
-
-	template <typename T> 
-	void Send(const T& message);
 };

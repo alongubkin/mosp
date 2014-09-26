@@ -1,15 +1,19 @@
 #pragma once
 #include "AnimationManager.h"
 
+class Game;
+
 class Entity
 {
 protected:
+	Game* game;
 	Ogre::SceneNode* node;
 	Ogre::Entity* entity;
 	Ogre::Vector2 target;
 	float MOVE_SPEED;
+
 public:
-	Entity(Ogre::SceneManager* sceneManager, Ogre::String meshName);
+	Entity(Game *game, Ogre::SceneManager* sceneManager, Ogre::String meshName);
 	~Entity();
 	virtual void SetTarget(float x, float y);
 	virtual void Update(float delta);

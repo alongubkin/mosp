@@ -35,7 +35,7 @@ Game::Game()
 
 	/* Game engine intiliaztion */
 	terrain = new Terrain(sceneManager);
-	player = new Player(sceneManager);
+	player = new Player(this, sceneManager);
 	camera_distance = 40.0f;
 
 	client = new Client();

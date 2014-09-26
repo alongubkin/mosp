@@ -7,7 +7,7 @@ class Player : public Entity
 public:
 	AnimationManager* animationManager;
 
-	Player(Ogre::SceneManager* sceneManager);
+	Player(Game* game, Ogre::SceneManager* sceneManager);
 	~Player();
 	void SetTarget(float x, float y);
 	void Update(float delta);

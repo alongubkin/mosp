@@ -1,9 +1,11 @@
 #include "stdafx.h"
 #include "Player.h"
 #include "OGRE/OgreSkeleton.h"
+#include "Game.h"
+#include "proto/messages.pb.h"
 
-Player::Player(Ogre::SceneManager* sceneManager) 
-	: Entity(sceneManager, "Sinbad.mesh")
+Player::Player(Game* game, Ogre::SceneManager* sceneManager) 
+	: Entity(game, sceneManager, "Sinbad.mesh")
 {
 	animationManager = new AnimationManager(entity);
 	animationManager->SetAnimation("IdleBase");
@@ -21,6 +23,9 @@ void Player::SetTarget(float x, float y)
 	Entity::SetTarget(x, y);
 	animationManager->SetAnimation("RunBase", "IdleBase");
 	animationManager->SetAnimation("RunTop", "IdleTop");
+
+	
+	// this->game->GetClient()->Send();
 }
 
 void Player::Update(float delta)

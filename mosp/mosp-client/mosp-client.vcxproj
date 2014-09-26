@@ -48,7 +48,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>../../third_party/ogre3d/include;../../third_party/ogre3d/include/OIS;../../third_party/ogre3d/include/OGRE;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../third_party/ogre3d/include;../../third_party/ogre3d/include/OIS;../../third_party/ogre3d/include/OGRE;../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>/Zm200 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>

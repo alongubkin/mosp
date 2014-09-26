@@ -2,8 +2,9 @@
 #include "Entity.h"
 
 
-Entity::Entity(Ogre::SceneManager* sceneManager, Ogre::String meshName)
+Entity::Entity(Game* game, Ogre::SceneManager* sceneManager, Ogre::String meshName)
 {
+	this->game = game;
 	node = sceneManager->getRootSceneNode()->createChildSceneNode(Ogre::Vector3::UNIT_Y * 5.0f);
 
 	entity = sceneManager->createEntity(meshName);
