@@ -23,6 +23,9 @@ namespace {
 const ::google::protobuf::Descriptor* BaseMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   BaseMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Vector2_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Vector2_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Vector3_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Vector3_reflection_ = NULL;
@@ -68,7 +71,23 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(BaseMessage));
-  Vector3_descriptor_ = file->message_type(1);
+  Vector2_descriptor_ = file->message_type(1);
+  static const int Vector2_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, x_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, y_),
+  };
+  Vector2_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Vector2_descriptor_,
+      Vector2::default_instance_,
+      Vector2_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector2, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Vector2));
+  Vector3_descriptor_ = file->message_type(2);
   static const int Vector3_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, x_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vector3, y_),
@@ -85,7 +104,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Vector3));
-  JoinRequestMessage_descriptor_ = file->message_type(2);
+  JoinRequestMessage_descriptor_ = file->message_type(3);
   static const int JoinRequestMessage_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, name_),
@@ -101,7 +120,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinRequestMessage));
-  JoinResponseMessage_descriptor_ = file->message_type(3);
+  JoinResponseMessage_descriptor_ = file->message_type(4);
   static const int JoinResponseMessage_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, success_),
@@ -120,7 +139,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinResponseMessage));
-  JoinNotificationMessage_descriptor_ = file->message_type(4);
+  JoinNotificationMessage_descriptor_ = file->message_type(5);
   static const int JoinNotificationMessage_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, name_),
@@ -138,7 +157,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinNotificationMessage));
-  MoveRequestMessage_descriptor_ = file->message_type(5);
+  MoveRequestMessage_descriptor_ = file->message_type(6);
   static const int MoveRequestMessage_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, position_),
@@ -154,7 +173,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveRequestMessage));
-  MoveNotificationMessage_descriptor_ = file->message_type(6);
+  MoveNotificationMessage_descriptor_ = file->message_type(7);
   static const int MoveNotificationMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, client_id_),
@@ -188,6 +207,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     BaseMessage_descriptor_, &BaseMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Vector2_descriptor_, &Vector2::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Vector3_descriptor_, &Vector3::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     JoinRequestMessage_descriptor_, &JoinRequestMessage::default_instance());
@@ -206,6 +227,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_messages_2eproto() {
   delete BaseMessage::default_instance_;
   delete BaseMessage_reflection_;
+  delete Vector2::default_instance_;
+  delete Vector2_reflection_;
   delete Vector3::default_instance_;
   delete Vector3_reflection_;
   delete JoinRequestMessage::default_instance_;
@@ -228,30 +251,32 @@ void protobuf_AddDesc_messages_2eproto() {
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\016messages.proto\022\004mosp\"\'\n\013BaseMessage\022\030\n"
-    "\004type\030\001 \001(\0162\n.mosp.Type\"*\n\007Vector3\022\t\n\001x\030"
-    "\001 \002(\001\022\t\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\001\"I\n\022JoinReque"
-    "stMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013Joi"
-    "nRequest\022\014\n\004name\030\002 \002(\t\"\253\001\n\023JoinResponseM"
-    "essage\022&\n\004type\030\001 \001(\0162\n.mosp.Type:\014JoinRe"
-    "sponse\022\017\n\007success\030\002 \002(\010\022\037\n\010position\030\003 \002("
-    "\0132\r.mosp.Vector3\022\021\n\tclient_id\030\004 \002(\005\022\'\n\005e"
-    "rror\030\005 \001(\0162\030.mosp.JOIN_REQUEST_ERROR\"\207\001\n"
-    "\027JoinNotificationMessage\022*\n\004type\030\001 \001(\0162\n"
-    ".mosp.Type:\020JoinNotification\022\014\n\004name\030\002 \002"
-    "(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132"
-    "\r.mosp.Vector3\"\\\n\022MoveRequestMessage\022%\n\004"
-    "type\030\001 \001(\0162\n.mosp.Type:\013MoveRequest\022\037\n\010p"
-    "osition\030\002 \002(\0132\r.mosp.Vector3\"y\n\027MoveNoti"
-    "ficationMessage\022*\n\004type\030\001 \001(\0162\n.mosp.Typ"
-    "e:\020MoveNotification\022\021\n\tclient_id\030\002 \002(\005\022\037"
-    "\n\010position\030\003 \002(\0132\r.mosp.Vector3*f\n\004Type\022"
-    "\017\n\013JoinRequest\020\001\022\020\n\014JoinResponse\020\002\022\024\n\020Jo"
-    "inNotification\020\003\022\017\n\013MoveRequest\020\004\022\024\n\020Mov"
-    "eNotification\020\005*6\n\022JOIN_REQUEST_ERROR\022\017\n"
-    "\013NAME_EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 871);
+    "\004type\030\001 \001(\0162\n.mosp.Type\"\037\n\007Vector2\022\t\n\001x\030"
+    "\001 \002(\001\022\t\n\001y\030\002 \002(\001\"*\n\007Vector3\022\t\n\001x\030\001 \002(\001\022\t"
+    "\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\001\"I\n\022JoinRequestMessa"
+    "ge\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013JoinReques"
+    "t\022\014\n\004name\030\002 \002(\t\"\253\001\n\023JoinResponseMessage\022"
+    "&\n\004type\030\001 \001(\0162\n.mosp.Type:\014JoinResponse\022"
+    "\017\n\007success\030\002 \002(\010\022\037\n\010position\030\003 \002(\0132\r.mos"
+    "p.Vector3\022\021\n\tclient_id\030\004 \002(\005\022\'\n\005error\030\005 "
+    "\001(\0162\030.mosp.JOIN_REQUEST_ERROR\"\207\001\n\027JoinNo"
+    "tificationMessage\022*\n\004type\030\001 \001(\0162\n.mosp.T"
+    "ype:\020JoinNotification\022\014\n\004name\030\002 \002(\t\022\021\n\tc"
+    "lient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132\r.mosp."
+    "Vector2\"\\\n\022MoveRequestMessage\022%\n\004type\030\001 "
+    "\001(\0162\n.mosp.Type:\013MoveRequest\022\037\n\010position"
+    "\030\002 \002(\0132\r.mosp.Vector2\"y\n\027MoveNotificatio"
+    "nMessage\022*\n\004type\030\001 \001(\0162\n.mosp.Type:\020Move"
+    "Notification\022\021\n\tclient_id\030\002 \002(\005\022\037\n\010posit"
+    "ion\030\003 \002(\0132\r.mosp.Vector2*f\n\004Type\022\017\n\013Join"
+    "Request\020\001\022\020\n\014JoinResponse\020\002\022\024\n\020JoinNotif"
+    "ication\020\003\022\017\n\013MoveRequest\020\004\022\024\n\020MoveNotifi"
+    "cation\020\005*6\n\022JOIN_REQUEST_ERROR\022\017\n\013NAME_E"
+    "XISTS\020\001\022\017\n\013SERVER_FULL\020\002", 904);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "messages.proto", &protobuf_RegisterTypes);
   BaseMessage::default_instance_ = new BaseMessage();
+  Vector2::default_instance_ = new Vector2();
   Vector3::default_instance_ = new Vector3();
   JoinRequestMessage::default_instance_ = new JoinRequestMessage();
   JoinResponseMessage::default_instance_ = new JoinResponseMessage();
@@ -259,6 +284,7 @@ void protobuf_AddDesc_messages_2eproto() {
   MoveRequestMessage::default_instance_ = new MoveRequestMessage();
   MoveNotificationMessage::default_instance_ = new MoveNotificationMessage();
   BaseMessage::default_instance_->InitAsDefaultInstance();
+  Vector2::default_instance_->InitAsDefaultInstance();
   Vector3::default_instance_->InitAsDefaultInstance();
   JoinRequestMessage::default_instance_->InitAsDefaultInstance();
   JoinResponseMessage::default_instance_->InitAsDefaultInstance();
@@ -530,6 +556,277 @@ void BaseMessage::Swap(BaseMessage* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = BaseMessage_descriptor_;
   metadata.reflection = BaseMessage_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Vector2::kXFieldNumber;
+const int Vector2::kYFieldNumber;
+#endif  // !_MSC_VER
+
+Vector2::Vector2()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mosp.Vector2)
+}
+
+void Vector2::InitAsDefaultInstance() {
+}
+
+Vector2::Vector2(const Vector2& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:mosp.Vector2)
+}
+
+void Vector2::SharedCtor() {
+  _cached_size_ = 0;
+  x_ = 0;
+  y_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Vector2::~Vector2() {
+  // @@protoc_insertion_point(destructor:mosp.Vector2)
+  SharedDtor();
+}
+
+void Vector2::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Vector2::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Vector2::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Vector2_descriptor_;
+}
+
+const Vector2& Vector2::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
+  return *default_instance_;
+}
+
+Vector2* Vector2::default_instance_ = NULL;
+
+Vector2* Vector2::New() const {
+  return new Vector2;
+}
+
+void Vector2::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Vector2*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  ZR_(x_, y_);
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Vector2::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:mosp.Vector2)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required double x = 1;
+      case 1: {
+        if (tag == 9) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &x_)));
+          set_has_x();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(17)) goto parse_y;
+        break;
+      }
+
+      // required double y = 2;
+      case 2: {
+        if (tag == 17) {
+         parse_y:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                 input, &y_)));
+          set_has_y();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:mosp.Vector2)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:mosp.Vector2)
+  return false;
+#undef DO_
+}
+
+void Vector2::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:mosp.Vector2)
+  // required double x = 1;
+  if (has_x()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
+  }
+
+  // required double y = 2;
+  if (has_y()) {
+    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:mosp.Vector2)
+}
+
+::google::protobuf::uint8* Vector2::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.Vector2)
+  // required double x = 1;
+  if (has_x()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
+  }
+
+  // required double y = 2;
+  if (has_y()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.Vector2)
+  return target;
+}
+
+int Vector2::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required double x = 1;
+    if (has_x()) {
+      total_size += 1 + 8;
+    }
+
+    // required double y = 2;
+    if (has_y()) {
+      total_size += 1 + 8;
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Vector2::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Vector2* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Vector2*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Vector2::MergeFrom(const Vector2& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_x()) {
+      set_x(from.x());
+    }
+    if (from.has_y()) {
+      set_y(from.y());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Vector2::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Vector2::CopyFrom(const Vector2& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Vector2::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void Vector2::Swap(Vector2* other) {
+  if (other != this) {
+    std::swap(x_, other->x_);
+    std::swap(y_, other->y_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Vector2::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Vector2_descriptor_;
+  metadata.reflection = Vector2_reflection_;
   return metadata;
 }
 
@@ -1547,7 +1844,7 @@ JoinNotificationMessage::JoinNotificationMessage()
 }
 
 void JoinNotificationMessage::InitAsDefaultInstance() {
-  position_ = const_cast< ::mosp::Vector3*>(&::mosp::Vector3::default_instance());
+  position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
 JoinNotificationMessage::JoinNotificationMessage(const JoinNotificationMessage& from)
@@ -1612,7 +1909,7 @@ void JoinNotificationMessage::Clear() {
     }
     client_id_ = 0;
     if (has_position()) {
-      if (position_ != NULL) position_->::mosp::Vector3::Clear();
+      if (position_ != NULL) position_->::mosp::Vector2::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1680,7 +1977,7 @@ bool JoinNotificationMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required .mosp.Vector3 position = 4;
+      // required .mosp.Vector2 position = 4;
       case 4: {
         if (tag == 34) {
          parse_position:
@@ -1739,7 +2036,7 @@ void JoinNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->client_id(), output);
   }
 
-  // required .mosp.Vector3 position = 4;
+  // required .mosp.Vector2 position = 4;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, this->position(), output);
@@ -1777,7 +2074,7 @@ void JoinNotificationMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->client_id(), target);
   }
 
-  // required .mosp.Vector3 position = 4;
+  // required .mosp.Vector2 position = 4;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1816,7 +2113,7 @@ int JoinNotificationMessage::ByteSize() const {
           this->client_id());
     }
 
-    // required .mosp.Vector3 position = 4;
+    // required .mosp.Vector2 position = 4;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1860,7 +2157,7 @@ void JoinNotificationMessage::MergeFrom(const JoinNotificationMessage& from) {
       set_client_id(from.client_id());
     }
     if (from.has_position()) {
-      mutable_position()->::mosp::Vector3::MergeFrom(from.position());
+      mutable_position()->::mosp::Vector2::MergeFrom(from.position());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1922,7 +2219,7 @@ MoveRequestMessage::MoveRequestMessage()
 }
 
 void MoveRequestMessage::InitAsDefaultInstance() {
-  position_ = const_cast< ::mosp::Vector3*>(&::mosp::Vector3::default_instance());
+  position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
 MoveRequestMessage::MoveRequestMessage(const MoveRequestMessage& from)
@@ -1975,7 +2272,7 @@ void MoveRequestMessage::Clear() {
   if (_has_bits_[0 / 32] & 3) {
     type_ = 4;
     if (has_position()) {
-      if (position_ != NULL) position_->::mosp::Vector3::Clear();
+      if (position_ != NULL) position_->::mosp::Vector2::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -2011,7 +2308,7 @@ bool MoveRequestMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required .mosp.Vector3 position = 2;
+      // required .mosp.Vector2 position = 2;
       case 2: {
         if (tag == 18) {
          parse_position:
@@ -2055,7 +2352,7 @@ void MoveRequestMessage::SerializeWithCachedSizes(
       1, this->type(), output);
   }
 
-  // required .mosp.Vector3 position = 2;
+  // required .mosp.Vector2 position = 2;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, this->position(), output);
@@ -2077,7 +2374,7 @@ void MoveRequestMessage::SerializeWithCachedSizes(
       1, this->type(), target);
   }
 
-  // required .mosp.Vector3 position = 2;
+  // required .mosp.Vector2 position = 2;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -2102,7 +2399,7 @@ int MoveRequestMessage::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // required .mosp.Vector3 position = 2;
+    // required .mosp.Vector2 position = 2;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -2140,7 +2437,7 @@ void MoveRequestMessage::MergeFrom(const MoveRequestMessage& from) {
       set_type(from.type());
     }
     if (from.has_position()) {
-      mutable_position()->::mosp::Vector3::MergeFrom(from.position());
+      mutable_position()->::mosp::Vector2::MergeFrom(from.position());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -2201,7 +2498,7 @@ MoveNotificationMessage::MoveNotificationMessage()
 }
 
 void MoveNotificationMessage::InitAsDefaultInstance() {
-  position_ = const_cast< ::mosp::Vector3*>(&::mosp::Vector3::default_instance());
+  position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
 MoveNotificationMessage::MoveNotificationMessage(const MoveNotificationMessage& from)
@@ -2256,7 +2553,7 @@ void MoveNotificationMessage::Clear() {
     type_ = 5;
     client_id_ = 0;
     if (has_position()) {
-      if (position_ != NULL) position_->::mosp::Vector3::Clear();
+      if (position_ != NULL) position_->::mosp::Vector2::Clear();
     }
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -2307,7 +2604,7 @@ bool MoveNotificationMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required .mosp.Vector3 position = 3;
+      // required .mosp.Vector2 position = 3;
       case 3: {
         if (tag == 26) {
          parse_position:
@@ -2356,7 +2653,7 @@ void MoveNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->client_id(), output);
   }
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->position(), output);
@@ -2383,7 +2680,7 @@ void MoveNotificationMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->client_id(), target);
   }
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -2415,7 +2712,7 @@ int MoveNotificationMessage::ByteSize() const {
           this->client_id());
     }
 
-    // required .mosp.Vector3 position = 3;
+    // required .mosp.Vector2 position = 3;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -2456,7 +2753,7 @@ void MoveNotificationMessage::MergeFrom(const MoveNotificationMessage& from) {
       set_client_id(from.client_id());
     }
     if (from.has_position()) {
-      mutable_position()->::mosp::Vector3::MergeFrom(from.position());
+      mutable_position()->::mosp::Vector2::MergeFrom(from.position());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());

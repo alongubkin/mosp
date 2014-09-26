@@ -35,7 +35,7 @@ private:
 	std::mutex incomingPacketsMutex;
 	std::queue<ENetPacket*> incomingPackets;
 
-	mosp::Vector3* targetPosition;
+	mosp::Vector2* targetPosition;
 
 	template <typename T>
 	void Send(const T& message);

@@ -35,6 +35,7 @@ void protobuf_AssignDesc_messages_2eproto();
 void protobuf_ShutdownFile_messages_2eproto();
 
 class BaseMessage;
+class Vector2;
 class Vector3;
 class JoinRequestMessage;
 class JoinResponseMessage;
@@ -161,6 +162,95 @@ class BaseMessage : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static BaseMessage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Vector2 : public ::google::protobuf::Message {
+ public:
+  Vector2();
+  virtual ~Vector2();
+
+  Vector2(const Vector2& from);
+
+  inline Vector2& operator=(const Vector2& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Vector2& default_instance();
+
+  void Swap(Vector2* other);
+
+  // implements Message ----------------------------------------------
+
+  Vector2* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Vector2& from);
+  void MergeFrom(const Vector2& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required double x = 1;
+  inline bool has_x() const;
+  inline void clear_x();
+  static const int kXFieldNumber = 1;
+  inline double x() const;
+  inline void set_x(double value);
+
+  // required double y = 2;
+  inline bool has_y() const;
+  inline void clear_y();
+  static const int kYFieldNumber = 2;
+  inline double y() const;
+  inline void set_y(double value);
+
+  // @@protoc_insertion_point(class_scope:mosp.Vector2)
+ private:
+  inline void set_has_x();
+  inline void clear_has_x();
+  inline void set_has_y();
+  inline void clear_has_y();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  double x_;
+  double y_;
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static Vector2* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -557,14 +647,14 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // required .mosp.Vector3 position = 4;
+  // required .mosp.Vector2 position = 4;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 4;
-  inline const ::mosp::Vector3& position() const;
-  inline ::mosp::Vector3* mutable_position();
-  inline ::mosp::Vector3* release_position();
-  inline void set_allocated_position(::mosp::Vector3* position);
+  inline const ::mosp::Vector2& position() const;
+  inline ::mosp::Vector2* mutable_position();
+  inline ::mosp::Vector2* release_position();
+  inline void set_allocated_position(::mosp::Vector2* position);
 
   // @@protoc_insertion_point(class_scope:mosp.JoinNotificationMessage)
  private:
@@ -584,7 +674,7 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
   ::std::string* name_;
   int type_;
   ::google::protobuf::int32 client_id_;
-  ::mosp::Vector3* position_;
+  ::mosp::Vector2* position_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
   friend void protobuf_ShutdownFile_messages_2eproto();
@@ -654,14 +744,14 @@ class MoveRequestMessage : public ::google::protobuf::Message {
   inline ::mosp::Type type() const;
   inline void set_type(::mosp::Type value);
 
-  // required .mosp.Vector3 position = 2;
+  // required .mosp.Vector2 position = 2;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 2;
-  inline const ::mosp::Vector3& position() const;
-  inline ::mosp::Vector3* mutable_position();
-  inline ::mosp::Vector3* release_position();
-  inline void set_allocated_position(::mosp::Vector3* position);
+  inline const ::mosp::Vector2& position() const;
+  inline ::mosp::Vector2* mutable_position();
+  inline ::mosp::Vector2* release_position();
+  inline void set_allocated_position(::mosp::Vector2* position);
 
   // @@protoc_insertion_point(class_scope:mosp.MoveRequestMessage)
  private:
@@ -674,7 +764,7 @@ class MoveRequestMessage : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::mosp::Vector3* position_;
+  ::mosp::Vector2* position_;
   int type_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -752,14 +842,14 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 3;
-  inline const ::mosp::Vector3& position() const;
-  inline ::mosp::Vector3* mutable_position();
-  inline ::mosp::Vector3* release_position();
-  inline void set_allocated_position(::mosp::Vector3* position);
+  inline const ::mosp::Vector2& position() const;
+  inline ::mosp::Vector2* mutable_position();
+  inline ::mosp::Vector2* release_position();
+  inline void set_allocated_position(::mosp::Vector2* position);
 
   // @@protoc_insertion_point(class_scope:mosp.MoveNotificationMessage)
  private:
@@ -776,7 +866,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
   mutable int _cached_size_;
   int type_;
   ::google::protobuf::int32 client_id_;
-  ::mosp::Vector3* position_;
+  ::mosp::Vector2* position_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
   friend void protobuf_ShutdownFile_messages_2eproto();
@@ -814,6 +904,58 @@ inline void BaseMessage::set_type(::mosp::Type value) {
   set_has_type();
   type_ = value;
   // @@protoc_insertion_point(field_set:mosp.BaseMessage.type)
+}
+
+// -------------------------------------------------------------------
+
+// Vector2
+
+// required double x = 1;
+inline bool Vector2::has_x() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Vector2::set_has_x() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Vector2::clear_has_x() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Vector2::clear_x() {
+  x_ = 0;
+  clear_has_x();
+}
+inline double Vector2::x() const {
+  // @@protoc_insertion_point(field_get:mosp.Vector2.x)
+  return x_;
+}
+inline void Vector2::set_x(double value) {
+  set_has_x();
+  x_ = value;
+  // @@protoc_insertion_point(field_set:mosp.Vector2.x)
+}
+
+// required double y = 2;
+inline bool Vector2::has_y() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Vector2::set_has_y() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Vector2::clear_has_y() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Vector2::clear_y() {
+  y_ = 0;
+  clear_has_y();
+}
+inline double Vector2::y() const {
+  // @@protoc_insertion_point(field_get:mosp.Vector2.y)
+  return y_;
+}
+inline void Vector2::set_y(double value) {
+  set_has_y();
+  y_ = value;
+  // @@protoc_insertion_point(field_set:mosp.Vector2.y)
 }
 
 // -------------------------------------------------------------------
@@ -1269,7 +1411,7 @@ inline void JoinNotificationMessage::set_client_id(::google::protobuf::int32 val
   // @@protoc_insertion_point(field_set:mosp.JoinNotificationMessage.client_id)
 }
 
-// required .mosp.Vector3 position = 4;
+// required .mosp.Vector2 position = 4;
 inline bool JoinNotificationMessage::has_position() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -1280,26 +1422,26 @@ inline void JoinNotificationMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000008u;
 }
 inline void JoinNotificationMessage::clear_position() {
-  if (position_ != NULL) position_->::mosp::Vector3::Clear();
+  if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector3& JoinNotificationMessage::position() const {
+inline const ::mosp::Vector2& JoinNotificationMessage::position() const {
   // @@protoc_insertion_point(field_get:mosp.JoinNotificationMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector3* JoinNotificationMessage::mutable_position() {
+inline ::mosp::Vector2* JoinNotificationMessage::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::mosp::Vector3;
+  if (position_ == NULL) position_ = new ::mosp::Vector2;
   // @@protoc_insertion_point(field_mutable:mosp.JoinNotificationMessage.position)
   return position_;
 }
-inline ::mosp::Vector3* JoinNotificationMessage::release_position() {
+inline ::mosp::Vector2* JoinNotificationMessage::release_position() {
   clear_has_position();
-  ::mosp::Vector3* temp = position_;
+  ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector3* position) {
+inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -1339,7 +1481,7 @@ inline void MoveRequestMessage::set_type(::mosp::Type value) {
   // @@protoc_insertion_point(field_set:mosp.MoveRequestMessage.type)
 }
 
-// required .mosp.Vector3 position = 2;
+// required .mosp.Vector2 position = 2;
 inline bool MoveRequestMessage::has_position() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1350,26 +1492,26 @@ inline void MoveRequestMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000002u;
 }
 inline void MoveRequestMessage::clear_position() {
-  if (position_ != NULL) position_->::mosp::Vector3::Clear();
+  if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector3& MoveRequestMessage::position() const {
+inline const ::mosp::Vector2& MoveRequestMessage::position() const {
   // @@protoc_insertion_point(field_get:mosp.MoveRequestMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector3* MoveRequestMessage::mutable_position() {
+inline ::mosp::Vector2* MoveRequestMessage::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::mosp::Vector3;
+  if (position_ == NULL) position_ = new ::mosp::Vector2;
   // @@protoc_insertion_point(field_mutable:mosp.MoveRequestMessage.position)
   return position_;
 }
-inline ::mosp::Vector3* MoveRequestMessage::release_position() {
+inline ::mosp::Vector2* MoveRequestMessage::release_position() {
   clear_has_position();
-  ::mosp::Vector3* temp = position_;
+  ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void MoveRequestMessage::set_allocated_position(::mosp::Vector3* position) {
+inline void MoveRequestMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -1433,7 +1575,7 @@ inline void MoveNotificationMessage::set_client_id(::google::protobuf::int32 val
   // @@protoc_insertion_point(field_set:mosp.MoveNotificationMessage.client_id)
 }
 
-// required .mosp.Vector3 position = 3;
+// required .mosp.Vector2 position = 3;
 inline bool MoveNotificationMessage::has_position() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1444,26 +1586,26 @@ inline void MoveNotificationMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000004u;
 }
 inline void MoveNotificationMessage::clear_position() {
-  if (position_ != NULL) position_->::mosp::Vector3::Clear();
+  if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector3& MoveNotificationMessage::position() const {
+inline const ::mosp::Vector2& MoveNotificationMessage::position() const {
   // @@protoc_insertion_point(field_get:mosp.MoveNotificationMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector3* MoveNotificationMessage::mutable_position() {
+inline ::mosp::Vector2* MoveNotificationMessage::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::mosp::Vector3;
+  if (position_ == NULL) position_ = new ::mosp::Vector2;
   // @@protoc_insertion_point(field_mutable:mosp.MoveNotificationMessage.position)
   return position_;
 }
-inline ::mosp::Vector3* MoveNotificationMessage::release_position() {
+inline ::mosp::Vector2* MoveNotificationMessage::release_position() {
   clear_has_position();
-  ::mosp::Vector3* temp = position_;
+  ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void MoveNotificationMessage::set_allocated_position(::mosp::Vector3* position) {
+inline void MoveNotificationMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {

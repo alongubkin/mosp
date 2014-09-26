@@ -24,6 +24,14 @@ message BaseMessage {
 	optional Type type = 1;
 }
 
+// A vector message with 2 components
+message Vector2 {
+	// x-component
+	required double x = 1;
+
+	// y-component
+	required double y = 2;
+}
 
 // A vector message with 3 components
 message Vector3 {
@@ -79,7 +87,7 @@ message JoinNotificationMessage {
 	required int32 client_id = 3;
 
 	// The position of the player who joined.
-	required Vector3 position = 4;
+	required Vector2 position = 4;
 }
 
 // This message is sent by the client when he wants to move to
@@ -90,7 +98,7 @@ message MoveRequestMessage {
 
 	// This field describes the position that the client wants to
 	// move to.
-	required Vector3 position = 2;
+	required Vector2 position = 2;
 }
 
 // This message is sent by the server when a player moves
@@ -103,5 +111,5 @@ message MoveNotificationMessage {
 	required int32 client_id = 2;
 
 	// The position of the player who joined.
-	required Vector3 position = 3;
+	required Vector2 position = 3;
 }

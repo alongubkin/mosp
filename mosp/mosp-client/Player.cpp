@@ -24,10 +24,9 @@ void Player::SetTarget(float x, float y)
 	animationManager->SetAnimation("RunBase", "IdleBase");
 	animationManager->SetAnimation("RunTop", "IdleTop");
 
-	mosp::Vector3 *position = new mosp::Vector3();
+	mosp::Vector2 *position = new mosp::Vector2();
 	position->set_x(x);
-	position->set_y(0);
-	position->set_z(y);
+	position->set_y(y);
 
 	mosp::MoveRequestMessage message;
 	message.set_type(mosp::Type::MoveRequest);

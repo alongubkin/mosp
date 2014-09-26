@@ -37,15 +37,14 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 	Send(response);
 	*/
 
-	targetPosition = new mosp::Vector3();
+	targetPosition = new mosp::Vector2();
 	targetPosition->set_x(0);
-	targetPosition->set_y(5);
-	targetPosition->set_z(0);
+	targetPosition->set_y(0);
 
 	mosp::JoinNotificationMessage notification;
 	notification.set_type(mosp::Type::JoinNotification);
 	notification.set_client_id(this->GetId());
-	notification.set_allocated_position(new mosp::Vector3(*targetPosition));
+	notification.set_allocated_position(new mosp::Vector2(*targetPosition));
 	notification.set_name(message.name());
 	
 	this->Broadcast(notification);
@@ -59,7 +58,7 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 			mosp::JoinNotificationMessage notification;
 			notification.set_type(mosp::Type::JoinNotification);
 			notification.set_client_id(client->GetId());
-			notification.set_allocated_position(new mosp::Vector3(*client->targetPosition));
+			notification.set_allocated_position(new mosp::Vector2(*client->targetPosition));
 			notification.set_name(message.name());
 
 			this->Send(notification);
@@ -69,14 +68,14 @@ void Client::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message)
 
 void Client::HandleMoveRequestMessage(const mosp::MoveRequestMessage& message)
 {
-	this->targetPosition = new mosp::Vector3(message.position());
+	this->targetPosition = new mosp::Vector2(message.position());
 
 	mosp::MoveNotificationMessage notification;
 	notification.set_type(mosp::Type::MoveNotification);
 	notification.set_client_id(this->GetId());
-	notification.set_allocated_position(new mosp::Vector3(message.position()));
+	notification.set_allocated_position(new mosp::Vector2(message.position()));
 
-	printf("clientid: %d - position: %f, %f, %f\n", GetId(), targetPosition->x(), targetPosition->y(), targetPosition->z());
+	printf("clientid: %d - position: %f, %f\n", GetId(), targetPosition->x(), targetPosition->y());
 
 	this->Broadcast(notification);
 }

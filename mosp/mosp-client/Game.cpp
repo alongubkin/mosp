@@ -173,12 +173,12 @@ void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& me
 	printf("New player joined with id %d\n", message.client_id());
 
 	players[message.client_id()] = new MPPlayer(this, sceneManager);
-	players[message.client_id()]->SetPosition(message.position().x(), message.position().y(), message.position().z());
+	players[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 
 void Game::HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message)
 {
-	players[message.client_id()]->SetTarget(message.position().x(), message.position().z());
+	players[message.client_id()]->SetTarget(message.position().x(), message.position().y());
 }
 
 template<typename T>
