@@ -18,8 +18,9 @@ private:
 	const Server* server;
 
 	template<typename T>
-	T& PacketToMessage(ENetPacket* packet);
+	T PacketToMessage(ENetPacket* packet);
 
+	/* Handle incoming packets */
 	void HandlePacket(ENetPacket* packet);
 	void HandleJoinRequestMessage(const mosp::JoinRequestMessage& message);
 };

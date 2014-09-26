@@ -17,16 +17,15 @@ void Ticker::Run()
 			while ((message = queue->pop()) != nullptr)
 			{
 				HandlePacket(message);
-				delete message;
 			}
 		}
 	}
 }
 
 template<typename T>
-T& Ticker::PacketToMessage(ENetPacket* packet)
+T Ticker::PacketToMessage(ENetPacket* packet)
 {
-	T& message = T();
+	T message;
 	if (!message.ParseFromArray(packet->data, packet->dataLength))
 	{
 		// TODO: throw exception
@@ -60,6 +59,6 @@ void Ticker::HandlePacket(ENetPacket* packet)
 
 void Ticker::HandleJoinRequestMessage(const mosp::JoinRequestMessage& message) 
 {
-
+	printf("Name: %s\n", message.name().c_str());
 }
 

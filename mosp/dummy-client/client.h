@@ -23,7 +23,8 @@ private:
 	void OnReceive(ENetEvent& evt);
 	void OnDisconnect(ENetEvent& evt);
 
-	void Send(void* data, int dataLength, int channel);
+	template <typename T>
+	void Send(const T& message);
 };
 
 #endif

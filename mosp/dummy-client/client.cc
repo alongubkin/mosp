@@ -68,13 +68,11 @@ void Client::OnConnect(ENetEvent& evt)
 {
 	printf("Connection to remote server succeeded!\n");
 
-	mosp::JoinNotificationMessage msg;
+	mosp::JoinRequestMessage msg;
+	msg.set_type(mosp::Type::JoinRequest); //Should make it default via proto
 	msg.set_name("DummyClient");
 
-	unsigned char* data = new unsigned char[msg.ByteSize()];
-	msg.SerializeToArray(data, msg.ByteSize());
-	
-	Send(data, msg.ByteSize(), 0);
+	Send(msg);
 }
 
 void Client::OnReceive(ENetEvent& evt)
@@ -87,9 +85,14 @@ void Client::OnDisconnect(ENetEvent& evt)
 	enet_peer_reset(server);
 }
 
-void Client::Send(void* data, int dataLength, int channel)
+template <typename T>
+void Client::Send(const T& message)
 {
-	ENetPacket* packet = enet_packet_create(data, dataLength, ENET_PACKET_FLAG_RELIABLE);
-	delete data; //It's safe to delete it now because enet_packet_create() makes a copy of the data internally
+	unsigned char* data = new unsigned char[message.ByteSize()];
+	message.SerializeToArray(data, message.ByteSize());
+
+	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
 	enet_peer_send(server, 0, packet); //Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
+
+	delete data;
 }
