@@ -9,7 +9,7 @@ Entity::Entity(Ogre::SceneManager* sceneManager, Ogre::String meshName)
 	entity = sceneManager->createEntity(meshName);
 	node->attachObject(entity);
 	target = Ogre::Vector2::ZERO;
-	MOVE_SPEED = 20.0f;
+	MOVE_SPEED = 15.0f;
 }
 
 
