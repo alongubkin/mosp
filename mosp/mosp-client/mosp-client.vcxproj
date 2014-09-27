@@ -85,31 +85,27 @@
   <ItemGroup>
     <ClInclude Include="animation_manager.h" />
     <ClInclude Include="client.h" />
-    <ClInclude Include="client_player.h" />
-    <ClInclude Include="creature.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
-    <ClInclude Include="game_player.h" />
     <ClInclude Include="input_manager.h" />
     <ClInclude Include="movable_text.h" />
     <ClInclude Include="network_manager.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="controller_player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terrain.h" />
     <ClInclude Include="viewport_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
-    <ClCompile Include="client_player.cc" />
-    <ClCompile Include="creature.cpp" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="game.cc" />
-    <ClCompile Include="game_player.cc" />
     <ClCompile Include="input_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="movable_text.cc" />
     <ClCompile Include="network_manager.cc" />
     <ClCompile Include="player.cc" />
+    <ClCompile Include="controller_player.cc" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="terrain.cc" />
     <ClCompile Include="viewport_manager.cc" />
