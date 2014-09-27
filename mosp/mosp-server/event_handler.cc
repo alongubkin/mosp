@@ -32,6 +32,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 	responseMessage.set_success(true);
 	responseMessage.set_allocated_position(new mosp::Vector2(sender->GetTargetPosition()));
 	responseMessage.set_client_id(sender->GetId());
+	responseMessage.set_name(tempName);
 
 	sender->Send(responseMessage);
 

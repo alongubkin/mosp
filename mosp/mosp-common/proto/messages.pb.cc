@@ -121,11 +121,12 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ConnectRequestMessage));
   ConnectResponseMessage_descriptor_ = file->message_type(4);
-  static const int ConnectResponseMessage_offsets_[5] = {
+  static const int ConnectResponseMessage_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, success_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, position_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, client_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, error_),
   };
   ConnectResponseMessage_reflection_ =
@@ -255,24 +256,24 @@ void protobuf_AddDesc_messages_2eproto() {
     "\001 \002(\002\022\t\n\001y\030\002 \002(\002\"*\n\007Vector3\022\t\n\001x\030\001 \002(\002\022\t"
     "\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"O\n\025ConnectRequestMe"
     "ssage\022(\n\004type\030\001 \001(\0162\n.mosp.Type:\016Connect"
-    "Request\022\014\n\004name\030\002 \002(\t\"\264\001\n\026ConnectRespons"
+    "Request\022\014\n\004name\030\002 \002(\t\"\302\001\n\026ConnectRespons"
     "eMessage\022)\n\004type\030\001 \001(\0162\n.mosp.Type:\017Conn"
     "ectResponse\022\017\n\007success\030\002 \002(\010\022\037\n\010position"
     "\030\003 \002(\0132\r.mosp.Vector2\022\021\n\tclient_id\030\004 \002(\005"
-    "\022*\n\005error\030\005 \001(\0162\033.mosp.CONNECT_REQUEST_E"
-    "RROR\"\201\001\n\024PlayerConnectMessage\022\'\n\004type\030\001 "
-    "\001(\0162\n.mosp.Type:\rPlayerConnect\022\014\n\004name\030\002"
-    " \002(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n\010position\030\004 \002("
-    "\0132\r.mosp.Vector2\"X\n\027PlayerDisconnectMess"
-    "age\022*\n\004type\030\001 \001(\0162\n.mosp.Type:\020PlayerDis"
-    "connect\022\021\n\tclient_id\030\002 \002(\005\"o\n\022PlayerMove"
-    "dMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013Play"
-    "erMoved\022\021\n\tclient_id\030\002 \002(\005\022\037\n\010position\030\003"
-    " \002(\0132\r.mosp.Vector2*i\n\004Type\022\022\n\016ConnectRe"
-    "quest\020\001\022\023\n\017ConnectResponse\020\002\022\021\n\rPlayerCo"
-    "nnect\020\003\022\024\n\020PlayerDisconnect\020\004\022\017\n\013PlayerM"
-    "oved\020\005*9\n\025CONNECT_REQUEST_ERROR\022\017\n\013NAME_"
-    "EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 905);
+    "\022\014\n\004name\030\005 \002(\t\022*\n\005error\030\006 \001(\0162\033.mosp.CON"
+    "NECT_REQUEST_ERROR\"\201\001\n\024PlayerConnectMess"
+    "age\022\'\n\004type\030\001 \001(\0162\n.mosp.Type:\rPlayerCon"
+    "nect\022\014\n\004name\030\002 \002(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n"
+    "\010position\030\004 \002(\0132\r.mosp.Vector2\"X\n\027Player"
+    "DisconnectMessage\022*\n\004type\030\001 \001(\0162\n.mosp.T"
+    "ype:\020PlayerDisconnect\022\021\n\tclient_id\030\002 \002(\005"
+    "\"o\n\022PlayerMovedMessage\022%\n\004type\030\001 \001(\0162\n.m"
+    "osp.Type:\013PlayerMoved\022\021\n\tclient_id\030\002 \002(\005"
+    "\022\037\n\010position\030\003 \002(\0132\r.mosp.Vector2*i\n\004Typ"
+    "e\022\022\n\016ConnectRequest\020\001\022\023\n\017ConnectResponse"
+    "\020\002\022\021\n\rPlayerConnect\020\003\022\024\n\020PlayerDisconnec"
+    "t\020\004\022\017\n\013PlayerMoved\020\005*9\n\025CONNECT_REQUEST_"
+    "ERROR\022\017\n\013NAME_EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 919);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "messages.proto", &protobuf_RegisterTypes);
   BaseMessage::default_instance_ = new BaseMessage();
@@ -1436,6 +1437,7 @@ const int ConnectResponseMessage::kTypeFieldNumber;
 const int ConnectResponseMessage::kSuccessFieldNumber;
 const int ConnectResponseMessage::kPositionFieldNumber;
 const int ConnectResponseMessage::kClientIdFieldNumber;
+const int ConnectResponseMessage::kNameFieldNumber;
 const int ConnectResponseMessage::kErrorFieldNumber;
 #endif  // !_MSC_VER
 
@@ -1457,11 +1459,13 @@ ConnectResponseMessage::ConnectResponseMessage(const ConnectResponseMessage& fro
 }
 
 void ConnectResponseMessage::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   type_ = 2;
   success_ = false;
   position_ = NULL;
   client_id_ = 0;
+  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   error_ = 1;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1472,6 +1476,9 @@ ConnectResponseMessage::~ConnectResponseMessage() {
 }
 
 void ConnectResponseMessage::SharedDtor() {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete name_;
+  }
   if (this != default_instance_) {
     delete position_;
   }
@@ -1499,13 +1506,18 @@ ConnectResponseMessage* ConnectResponseMessage::New() const {
 }
 
 void ConnectResponseMessage::Clear() {
-  if (_has_bits_[0 / 32] & 31) {
+  if (_has_bits_[0 / 32] & 63) {
     type_ = 2;
     success_ = false;
     if (has_position()) {
       if (position_ != NULL) position_->::mosp::Vector2::Clear();
     }
     client_id_ = 0;
+    if (has_name()) {
+      if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        name_->clear();
+      }
+    }
     error_ = 1;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1580,13 +1592,30 @@ bool ConnectResponseMessage::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(40)) goto parse_error;
+        if (input->ExpectTag(42)) goto parse_name;
         break;
       }
 
-      // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+      // required string name = 5;
       case 5: {
-        if (tag == 40) {
+        if (tag == 42) {
+         parse_name:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_name()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->name().data(), this->name().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "name");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_error;
+        break;
+      }
+
+      // optional .mosp.CONNECT_REQUEST_ERROR error = 6;
+      case 6: {
+        if (tag == 48) {
          parse_error:
           int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
@@ -1595,7 +1624,7 @@ bool ConnectResponseMessage::MergePartialFromCodedStream(
           if (::mosp::CONNECT_REQUEST_ERROR_IsValid(value)) {
             set_error(static_cast< ::mosp::CONNECT_REQUEST_ERROR >(value));
           } else {
-            mutable_unknown_fields()->AddVarint(5, value);
+            mutable_unknown_fields()->AddVarint(6, value);
           }
         } else {
           goto handle_unusual;
@@ -1651,10 +1680,20 @@ void ConnectResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->client_id(), output);
   }
 
-  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+  // required string name = 5;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->name(), output);
+  }
+
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 6;
   if (has_error()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      5, this->error(), output);
+      6, this->error(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1690,10 +1729,21 @@ void ConnectResponseMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->client_id(), target);
   }
 
-  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+  // required string name = 5;
+  if (has_name()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->name().data(), this->name().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "name");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->name(), target);
+  }
+
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 6;
   if (has_error()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      5, this->error(), target);
+      6, this->error(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1733,7 +1783,14 @@ int ConnectResponseMessage::ByteSize() const {
           this->client_id());
     }
 
-    // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+    // required string name = 5;
+    if (has_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->name());
+    }
+
+    // optional .mosp.CONNECT_REQUEST_ERROR error = 6;
     if (has_error()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->error());
@@ -1778,6 +1835,9 @@ void ConnectResponseMessage::MergeFrom(const ConnectResponseMessage& from) {
     if (from.has_client_id()) {
       set_client_id(from.client_id());
     }
+    if (from.has_name()) {
+      set_name(from.name());
+    }
     if (from.has_error()) {
       set_error(from.error());
     }
@@ -1798,7 +1858,7 @@ void ConnectResponseMessage::CopyFrom(const ConnectResponseMessage& from) {
 }
 
 bool ConnectResponseMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
+  if ((_has_bits_[0] & 0x0000001e) != 0x0000001e) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;
@@ -1812,6 +1872,7 @@ void ConnectResponseMessage::Swap(ConnectResponseMessage* other) {
     std::swap(success_, other->success_);
     std::swap(position_, other->position_);
     std::swap(client_id_, other->client_id_);
+    std::swap(name_, other->name_);
     std::swap(error_, other->error_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);

@@ -530,10 +530,22 @@ class ConnectResponseMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+  // required string name = 5;
+  inline bool has_name() const;
+  inline void clear_name();
+  static const int kNameFieldNumber = 5;
+  inline const ::std::string& name() const;
+  inline void set_name(const ::std::string& value);
+  inline void set_name(const char* value);
+  inline void set_name(const char* value, size_t size);
+  inline ::std::string* mutable_name();
+  inline ::std::string* release_name();
+  inline void set_allocated_name(::std::string* name);
+
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 6;
   inline bool has_error() const;
   inline void clear_error();
-  static const int kErrorFieldNumber = 5;
+  static const int kErrorFieldNumber = 6;
   inline ::mosp::CONNECT_REQUEST_ERROR error() const;
   inline void set_error(::mosp::CONNECT_REQUEST_ERROR value);
 
@@ -547,6 +559,8 @@ class ConnectResponseMessage : public ::google::protobuf::Message {
   inline void clear_has_position();
   inline void set_has_client_id();
   inline void clear_has_client_id();
+  inline void set_has_name();
+  inline void clear_has_name();
   inline void set_has_error();
   inline void clear_has_error();
 
@@ -557,6 +571,7 @@ class ConnectResponseMessage : public ::google::protobuf::Message {
   int type_;
   bool success_;
   ::mosp::Vector2* position_;
+  ::std::string* name_;
   ::google::protobuf::int32 client_id_;
   int error_;
   friend void  protobuf_AddDesc_messages_2eproto();
@@ -1255,15 +1270,91 @@ inline void ConnectResponseMessage::set_client_id(::google::protobuf::int32 valu
   // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.client_id)
 }
 
-// optional .mosp.CONNECT_REQUEST_ERROR error = 5;
-inline bool ConnectResponseMessage::has_error() const {
+// required string name = 5;
+inline bool ConnectResponseMessage::has_name() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ConnectResponseMessage::set_has_error() {
+inline void ConnectResponseMessage::set_has_name() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void ConnectResponseMessage::clear_has_error() {
+inline void ConnectResponseMessage::clear_has_name() {
   _has_bits_[0] &= ~0x00000010u;
+}
+inline void ConnectResponseMessage::clear_name() {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_->clear();
+  }
+  clear_has_name();
+}
+inline const ::std::string& ConnectResponseMessage::name() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.name)
+  return *name_;
+}
+inline void ConnectResponseMessage::set_name(const ::std::string& value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+  // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.name)
+}
+inline void ConnectResponseMessage::set_name(const char* value) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(value);
+  // @@protoc_insertion_point(field_set_char:mosp.ConnectResponseMessage.name)
+}
+inline void ConnectResponseMessage::set_name(const char* value, size_t size) {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  name_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:mosp.ConnectResponseMessage.name)
+}
+inline ::std::string* ConnectResponseMessage::mutable_name() {
+  set_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    name_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:mosp.ConnectResponseMessage.name)
+  return name_;
+}
+inline ::std::string* ConnectResponseMessage::release_name() {
+  clear_has_name();
+  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = name_;
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ConnectResponseMessage::set_allocated_name(::std::string* name) {
+  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete name_;
+  }
+  if (name) {
+    set_has_name();
+    name_ = name;
+  } else {
+    clear_has_name();
+    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectResponseMessage.name)
+}
+
+// optional .mosp.CONNECT_REQUEST_ERROR error = 6;
+inline bool ConnectResponseMessage::has_error() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void ConnectResponseMessage::set_has_error() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void ConnectResponseMessage::clear_has_error() {
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline void ConnectResponseMessage::clear_error() {
   error_ = 1;
