@@ -24,24 +24,10 @@ Game::Game()
 
 	LocateResources();
 
-	SetupViewport();
-	SetupInput();
-
-	Ogre::Light* light = sceneManager->createLight("MainLight");
-	light->setType(Ogre::Light::LightTypes::LT_DIRECTIONAL);
-	light->setDirection(1.0f, -5.0f, 3.0f);
-
-	printf("============== Init Stats ==============\n");
-	printf("Init Time: %f seconds.\n", initTimer->getMilliseconds() * 0.001f);
-	printf("========================================\n");
-	delete initTimer;
-
-	/* Game engine intiliaztion */
-	terrain = new Terrain(sceneManager);
-	camera_distance = 40.0f;
-	wasMouseDown = false;
-
+	
 	networkManager = new NetworkManager(this);
+	viewportManager = new ViewportManager(this);
+	
 }
 
 
@@ -51,19 +37,35 @@ Game::~Game()
 	keyboard = nullptr;
 	OIS::InputManager::destroyInputSystem(inputManager);
 	inputManager = nullptr;
-	window->removeAllViewports();
-	sceneManager->destroyAllCameras();
+	
+	viewportManager->Close();
+	networkManager->Close();
+
 	sceneManager->destroyAllManualObjects();
 	sceneManager->destroyAllEntities();
 	sceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
 	Ogre::LogManager::getSingleton().logMessage("end of the program");
 
-	delete networkManager;
+	delete viewportManager;
+	delete networkManager;	
 }
 
 void Game::Run()
 {
 	networkManager->Initialize();
+	viewportManager->Initialize();
+
+	SetupInput();
+
+	Ogre::Light* light = sceneManager->createLight("MainLight");
+	light->setType(Ogre::Light::LightTypes::LT_DIRECTIONAL);
+	light->setDirection(1.0f, -5.0f, 3.0f);
+
+
+
+	/* Game engine intiliaztion */
+	terrain = new Terrain(sceneManager);
+	wasMouseDown = false;
 
 	Ogre::Timer* timer = ogreRoot->getTimer();
 	timer->reset();
@@ -90,13 +92,7 @@ void Game::Run()
 
 void Game::Update(float delta)
 {
-	Entity* player = GetEntity(networkManager->GetCurrentClientId());
-	if (player != nullptr)
-	{
-		camera->setPosition(player->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
-		camera->lookAt(player->getPos());
-	}
-
+	ControllerPlayer* player = GetControllerPlayer();
 
 	Ogre::Vector3 movement = Ogre::Vector3::ZERO;
 	if (keyboard->isKeyDown(OIS::KC_W))
@@ -122,11 +118,11 @@ void Game::Update(float delta)
 
 	OIS::MouseState mouseState = mouse->getMouseState();
 	if (mouseState.Z.rel)
-		camera_distance -= mouseState.Z.rel / 20.0f;
+		viewportManager->SetCameraDistance(mouseState.Z.rel / 20.0f);
 
 	if (!wasMouseDown && mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
 	{
-		Ogre::Ray mouseRay = camera->getCameraToViewportRay(mouseState.X.abs / (Ogre::Real) mouseState.width, mouseState.Y.abs / (Ogre::Real) mouseState.height);
+		Ogre::Ray mouseRay = viewportManager->GetCamera()->getCameraToViewportRay(mouseState.X.abs / (Ogre::Real) mouseState.width, mouseState.Y.abs / (Ogre::Real) mouseState.height);
 		std::pair<bool, Ogre::Real> floorPoint = mouseRay.intersects(Ogre::Plane(Ogre::Vector3::UNIT_Y, 0));
 		if (floorPoint.first) {
 			Ogre::Vector3 point = mouseRay.getPoint(floorPoint.second);
@@ -134,6 +130,7 @@ void Game::Update(float delta)
 		}
 	}
 
+	viewportManager->Update();
 	networkManager->Update();
 
 	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
@@ -155,6 +152,11 @@ Entity* Game::GetEntity(int id)
 		return nullptr;
 
 	return entities[id];
+}
+
+ControllerPlayer* Game::GetControllerPlayer()
+{
+	return static_cast<ControllerPlayer*>(GetEntity(networkManager->GetCurrentClientId()));
 }
 
 void Game::LocateResources()
@@ -222,18 +224,6 @@ void Game::SetupWindow()
 	ogreRoot->clearEventTimes();
 }
 
-void Game::SetupViewport()
-{
-	camera = sceneManager->createCamera("MainCamera");
-	sceneManager->getRootSceneNode()->createChildSceneNode("CameraNode")->attachObject(camera);
-
-	viewport = window->addViewport(camera, 100, 0, 0, 1.0f, 1.0f);
-	viewport->setAutoUpdated(true);
-	viewport->setBackgroundColour(Ogre::ColourValue(1.0f, 1.0f, 1.0f));
-	camera->setAspectRatio(viewport->getActualWidth() / (float)viewport->getActualHeight());
-	camera->setNearClipDistance(0.5f);
-	camera->setFarClipDistance(1000.0f);
-}
 
 void Game::SetupInput()
 {
@@ -265,6 +255,6 @@ void Game::SetupInput()
 
 	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, true));
 	keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, false));
-	mouse->getMouseState().width = viewport->getActualWidth();
-	mouse->getMouseState().height = viewport->getActualHeight();
+	mouse->getMouseState().width = viewportManager->GetActualWidth();
+	mouse->getMouseState().height = viewportManager->GetActualHeight();
 }

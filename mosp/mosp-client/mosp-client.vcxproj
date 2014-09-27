@@ -93,6 +93,7 @@
     <ClInclude Include="controller_player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terrain.h" />
+    <ClInclude Include="viewport_manager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
@@ -105,6 +106,7 @@
     <ClCompile Include="controller_player.cc" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="terrain.cc" />
+    <ClCompile Include="viewport_manager.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
