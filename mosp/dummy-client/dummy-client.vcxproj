@@ -85,12 +85,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
-    <ClCompile Include="game.cpp" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
-    <ClInclude Include="game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
