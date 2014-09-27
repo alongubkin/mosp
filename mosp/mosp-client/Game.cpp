@@ -79,8 +79,7 @@ void Game::Run()
 
 		Update(delta);
 
-		window->update(false);
-		window->swapBuffers();
+		window->update(true);
 		ogreRoot->renderOneFrame();
 		Ogre::WindowEventUtilities::messagePump();
 	}

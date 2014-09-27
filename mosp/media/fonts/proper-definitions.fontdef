@@ -31,3 +31,19 @@ BlueHighway-12
 	size 		12
 	resolution 	96
 }
+
+Arial
+{
+	type 		truetype
+	source 		arial.ttf
+	size 		32
+	resolution 	96
+}
+
+ArialBold
+{
+	type 		truetype
+	source 		arialbd.ttf
+	size 		32
+	resolution 	96
+}

@@ -14,12 +14,9 @@ MPPlayer::MPPlayer(Game* game, Ogre::SceneManager* sceneManager, const std::stri
 	animationManager->SetAnimation("IdleBase");
 	animationManager->SetAnimation("IdleTop");
 
-	Ogre::Vector3 *translate = new Ogre::Vector3(0.0f, 5.0f, 0.0f);
-	Ogre::SceneNode* nameContainerNode = node->createChildSceneNode(*translate);
-
-	Ogre::MovableText* nameNode = new Ogre::MovableText("TXT_001", name);
+	Ogre::SceneNode* nameContainerNode = node->createChildSceneNode(Ogre::Vector3(0.0f, 5.0f, 0.0f));
+	Ogre::MovableText* nameNode = new Ogre::MovableText(name, name, "ArialBold", 1.5f);
 	nameNode->setTextAlignment(Ogre::MovableText::H_CENTER, Ogre::MovableText::V_ABOVE);
-
 	nameContainerNode->attachObject(nameNode);
 
 }
