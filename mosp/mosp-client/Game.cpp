@@ -189,7 +189,10 @@ void Game::HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message)
 
 void Game::HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message)
 {
-	players[message.client_id()]->SetTarget(message.position().x(), message.position().y());
+	if (players.count(message.client_id()))
+	{
+		players[message.client_id()]->SetTarget(message.position().x(), message.position().y());
+	}
 }
 
 template<typename T>

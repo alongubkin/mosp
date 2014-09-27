@@ -67,7 +67,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 			playerConnect.set_allocated_position(new mosp::Vector2(client->GetTargetPosition()));
 			playerConnect.set_name(tempName);
 
-			client->Send(playerConnect);
+			sender->Send(playerConnect);
 		}
 	}
 }
