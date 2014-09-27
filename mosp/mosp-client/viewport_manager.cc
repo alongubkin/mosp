@@ -1,17 +1,6 @@
 #include "viewport_manager.h"
 #include "game.h"
 
-ViewportManager::ViewportManager(Game* game)
-	: _game(game)
-{
-
-}
-
-ViewportManager::~ViewportManager()
-{
-
-}
-
 void ViewportManager::Initialize()
 {
 	_camera = _game->GetSceneManager()->createCamera("MainCamera");

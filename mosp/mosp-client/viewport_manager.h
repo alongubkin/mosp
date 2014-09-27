@@ -8,8 +8,10 @@ class Game;
 class ViewportManager
 {
 public:
-	ViewportManager(Game* game);
-	~ViewportManager();
+	ViewportManager(Game* game)
+		: _game(game) {}
+
+	~ViewportManager() {};
 
 	void Initialize();
 	void Update();
