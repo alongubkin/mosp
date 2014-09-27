@@ -89,7 +89,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="movable_text.h" />
     <ClInclude Include="mpplayer.h" />
-    <ClInclude Include="player.h" />
+    <ClInclude Include="controller_player.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="terrain.h" />
   </ItemGroup>
@@ -100,7 +100,7 @@
     <ClCompile Include="main.cc" />
     <ClCompile Include="movable_text.cc" />
     <ClCompile Include="mpplayer.cc" />
-    <ClCompile Include="player.cc" />
+    <ClCompile Include="controller_player.cc" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="terrain.cc" />
   </ItemGroup>

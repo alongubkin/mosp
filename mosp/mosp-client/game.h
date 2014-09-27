@@ -4,7 +4,7 @@
 #include <hash_map>
 #include "enet/enet.h"
 #include "terrain.h"
-#include "player.h"
+#include "controller_player.h"
 #include "client.h"
 #include "mpplayer.h"
 #include "proto/messages.pb.h"
@@ -30,7 +30,7 @@ private:
 	OIS::Mouse* mouse;
 
 	Terrain* terrain;
-	Player* player;
+	ControllerPlayer* player;
 	float camera_distance;
 	bool wasMouseDown;
 

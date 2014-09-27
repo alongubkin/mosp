@@ -38,7 +38,7 @@ Game::Game()
 
 	/* Game engine intiliaztion */
 	terrain = new Terrain(sceneManager);
-	player = new Player(this, sceneManager);
+	player = new ControllerPlayer(this, sceneManager);
 	camera_distance = 40.0f;
 	wasMouseDown = false;
 

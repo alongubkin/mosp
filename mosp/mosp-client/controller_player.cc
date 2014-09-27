@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "player.h"
+#include "controller_player.h"
 #include "OGRE/OgreSkeleton.h"
 #include "game.h"
 #include "proto/messages.pb.h"
 #include "movable_text.h"
 
-Player::Player(Game* game, Ogre::SceneManager* sceneManager) 
+ControllerPlayer::ControllerPlayer(Game* game, Ogre::SceneManager* sceneManager)
 	: Entity(game, sceneManager, "Sinbad.mesh")
 {
 	animationManager = new AnimationManager(entity);
@@ -14,12 +14,12 @@ Player::Player(Game* game, Ogre::SceneManager* sceneManager)
 }
 
 
-Player::~Player()
+ControllerPlayer::~ControllerPlayer()
 {
 	Entity::~Entity();
 }
 
-void Player::SetTarget(float x, float y)
+void ControllerPlayer::SetTarget(float x, float y)
 {
 	Entity::SetTarget(x, y);
 	animationManager->SetAnimation("RunBase", "IdleBase");
@@ -37,13 +37,13 @@ void Player::SetTarget(float x, float y)
 	this->game->GetClient()->Send(message);
 }
 
-void Player::Update(float delta)
+void ControllerPlayer::Update(float delta)
 {
 	Entity::Update(delta);
 	animationManager->Update(delta);
 }
 
-void Player::OnReachingTarget()
+void ControllerPlayer::OnReachingTarget()
 {
 	Entity::OnReachingTarget();
 	animationManager->SetAnimation("IdleBase", "RunBase");
