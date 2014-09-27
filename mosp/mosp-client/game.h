@@ -5,7 +5,8 @@
 #include "enet/enet.h"
 #include "terrain.h"
 #include "entity.h"
-#include "controller_player.h"
+#include "game_player.h"
+#include "creature.h"
 
 #include "network_manager.h"
 #include "viewport_manager.h"
@@ -28,7 +29,7 @@ public:
 
 	void SetEntity(int id, Entity* entity);
 	Entity* GetEntity(int id);
-	ControllerPlayer* GetControllerPlayer();
+	GamePlayer* GetGamePlayer();
 
 private:
 	Ogre::Root* ogreRoot;

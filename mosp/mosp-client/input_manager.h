@@ -1,7 +1,7 @@
 #ifndef _INPUT_MANAGER_H
 #define _INPUT_MANAGER_H
 
-#include "controller_player.h"
+#include "game_player.h"
 
 class Game;
 
@@ -24,8 +24,8 @@ private:
 	OIS::Keyboard* _keyboard;
 	OIS::Mouse* _mouse;
 
-	void HandleKeyboardInput(ControllerPlayer* player);
-	void HandleMouseInput(ControllerPlayer* player);
+	void HandleKeyboardInput(GamePlayer* player);
+	void HandleMouseInput(GamePlayer* player);
 };
 
 #endif

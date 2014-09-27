@@ -41,12 +41,6 @@
     <ClInclude Include="terrain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="controller_player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="network_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,6 +48,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="input_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="client_player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="creature.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -79,9 +85,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="controller_player.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="player.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -92,6 +95,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="input_manager.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game_player.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="client_player.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="creature.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

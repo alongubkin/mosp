@@ -53,6 +53,8 @@ void Game::Run()
 	viewportManager->Initialize();
 	inputManager->Initialize();
 
+	
+
 	Ogre::Light* light = sceneManager->createLight("MainLight");
 	light->setType(Ogre::Light::LightTypes::LT_DIRECTIONAL);
 	light->setDirection(1.0f, -5.0f, 3.0f);
@@ -107,9 +109,9 @@ Entity* Game::GetEntity(int id)
 	return entities[id];
 }
 
-ControllerPlayer* Game::GetControllerPlayer()
+GamePlayer* Game::GetGamePlayer()
 {
-	return static_cast<ControllerPlayer*>(GetEntity(networkManager->GetCurrentClientId()));
+	return static_cast<GamePlayer*>(GetEntity(networkManager->GetCurrentClientId()));
 }
 
 void Game::LocateResources()
@@ -170,7 +172,7 @@ void Game::SetupRenderer()
 
 void Game::SetupWindow()
 {
-	window = ogreRoot->createRenderWindow("Ogre Test", 640, 480, false);
+	window = ogreRoot->createRenderWindow("Ogre Test", 1280, 720, false);
 	window->setVSyncEnabled(true);
 	window->setActive(true);
 	window->setAutoUpdated(false);
