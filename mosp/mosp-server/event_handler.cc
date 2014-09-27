@@ -19,21 +19,18 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 	tempName.append(std::to_string(sender->GetId()));
 
 	sender->SetName(tempName);
-	mosp::Vector2 v2;
-	v2.set_x(0.0f);
-	v2.set_y(0.0f);
-	sender->SetTargetPosition(v2);
+
+	mosp::Vector2 spawnPoint;
+	spawnPoint.set_x(0.0f);
+	spawnPoint.set_y(0.0f);
+
+	sender->SetTargetPosition(spawnPoint);
 
 	// Send an OK response
 	mosp::ConnectResponseMessage responseMessage;
 	responseMessage.set_type(mosp::Type::ConnectResponse);
 	responseMessage.set_success(true);
-
-	mosp::Vector2* vec2 = new mosp::Vector2();
-	vec2->set_x(0);
-	vec2->set_y(0);
-
-	responseMessage.set_allocated_position(vec2);
+	responseMessage.set_allocated_position(new mosp::Vector2(sender->GetTargetPosition()));
 	responseMessage.set_client_id(sender->GetId());
 
 	sender->Send(responseMessage);
@@ -43,12 +40,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 	msg.set_type(mosp::Type::PlayerConnect);
 	msg.set_name(tempName);
 	msg.set_client_id(sender->GetId());
-
-	mosp::Vector2* spawnpoint = new mosp::Vector2();
-	spawnpoint->set_x(0.0f);
-	spawnpoint->set_y(0.0f);
-
-	msg.set_allocated_position(spawnpoint);
+	msg.set_allocated_position(new mosp::Vector2(sender->GetTargetPosition()));
 
 	server->Broadcast(msg, sender);
 
