@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Terrain.h"
+#include "terrain.h"
 #include "OGRE/OgreSceneManager.h"
 #include "OGRE/OgreSceneNode.h"
 

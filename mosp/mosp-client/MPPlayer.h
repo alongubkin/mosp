@@ -1,6 +1,6 @@
 #pragma once
-#include "AnimationManager.h"
-#include "Entity.h"
+#include "animation_manager.h"
+#include "entity.h"
 
 class MPPlayer : public Entity
 {

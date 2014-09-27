@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "MPPlayer.h"
+#include "mpplayer.h"
 #include "OGRE/OgreSkeleton.h"
-#include "Game.h"
+#include "game.h"
 #include "proto/messages.pb.h"
-#include "MovableText.h"
+#include "movable_text.h"
 
 MPPlayer::MPPlayer(Game* game, Ogre::SceneManager* sceneManager, const std::string& name)
 : Entity(game, sceneManager, "Sinbad.mesh")

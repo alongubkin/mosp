@@ -11,7 +11,7 @@
 
 
 #include "stdafx.h"
-#include "movableText.h"
+#include "movable_text.h"
 
 using namespace Ogre;
 

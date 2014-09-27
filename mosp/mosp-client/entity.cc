@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Entity.h"
+#include "entity.h"
 
 
 Entity::Entity(Game* game, Ogre::SceneManager* sceneManager, Ogre::String meshName)

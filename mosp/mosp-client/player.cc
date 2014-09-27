@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "Player.h"
+#include "player.h"
 #include "OGRE/OgreSkeleton.h"
-#include "Game.h"
+#include "game.h"
 #include "proto/messages.pb.h"
-#include "MovableText.h"
+#include "movable_text.h"
 
 Player::Player(Game* game, Ogre::SceneManager* sceneManager) 
 	: Entity(game, sceneManager, "Sinbad.mesh")

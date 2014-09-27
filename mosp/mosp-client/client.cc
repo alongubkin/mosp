@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Client.h"
+#include "client.h"
 #include "proto/messages.pb.h"
 
 Client::Client()

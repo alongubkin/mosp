@@ -1,5 +1,5 @@
 #pragma once
-#include "AnimationManager.h"
+#include "animation_manager.h"
 
 class Game;
 
