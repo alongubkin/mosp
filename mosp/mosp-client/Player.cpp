@@ -29,9 +29,10 @@ void Player::SetTarget(float x, float y)
 	position->set_x(x);
 	position->set_y(y);
 
-	mosp::MoveRequestMessage message;
-	message.set_type(mosp::Type::MoveRequest);
+	mosp::PlayerMovedMessage message;
+	message.set_type(mosp::Type::PlayerMoved);
 	message.set_allocated_position(position);
+	message.set_client_id(0); // The server ignores this value
 
 	this->game->GetClient()->Send(message);
 }

@@ -154,23 +154,32 @@ void Game::HandlePacket(ENetPacket* packet)
 
 	switch (baseMessage.type())
 	{
-	case mosp::Type::JoinNotification:
-		HandleJoinNotificationMessage(PacketToMessage<mosp::JoinNotificationMessage>(packet));
+	case mosp::Type::ConnectResponse:
+		HandleConnectResponseMessage(PacketToMessage<mosp::ConnectResponseMessage>(packet));
 		break;
 
-	case mosp::Type::MoveNotification:
-		HandleMoveNotificationMessage(PacketToMessage<mosp::MoveNotificationMessage>(packet));
+	case mosp::Type::PlayerConnect:
+		HandlePlayerConnectMessage(PacketToMessage<mosp::PlayerConnectMessage>(packet));
+		break;
+
+	case mosp::Type::PlayerMoved:
+		HandlePlayerMovedMessage(PacketToMessage<mosp::PlayerMovedMessage>(packet));
 		break;
 
 	default:
-		printf("unhandled message");
+		printf("unhandled message\n");
 		break;
 	}
 
 	enet_packet_destroy(packet);
 }
 
-void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& message)
+void Game::HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message)
+{
+	// TODO: Verify response
+}
+
+void Game::HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message)
 {
 	printf("New player joined with id %d\n", message.client_id());
 
@@ -178,7 +187,7 @@ void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& me
 	players[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 
-void Game::HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message)
+void Game::HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message)
 {
 	players[message.client_id()]->SetTarget(message.position().x(), message.position().y());
 }

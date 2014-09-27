@@ -55,7 +55,8 @@ private:
 
 
 	/* Events */
-	void HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& message);
-	void HandleMoveNotificationMessage(const mosp::MoveNotificationMessage& message);
+	void HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message);
+	void HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message);
+	void HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message);
 };
 

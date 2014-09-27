@@ -78,8 +78,8 @@ void Client::OnConnect(ENetEvent& evt)
 {
 	printf("Connection to remote server succeeded!\n");
 
-	mosp::JoinRequestMessage msg;
-	msg.set_type(mosp::Type::JoinRequest); //Should make it default via proto
+	mosp::ConnectRequestMessage msg;
+	msg.set_type(mosp::Type::ConnectRequest); //Should make it default via proto
 	msg.set_name("DummyClient");
 
 	Send(msg);
