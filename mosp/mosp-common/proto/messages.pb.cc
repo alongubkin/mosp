@@ -29,26 +29,23 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* Vector3_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Vector3_reflection_ = NULL;
-const ::google::protobuf::Descriptor* JoinRequestMessage_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* ConnectRequestMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  JoinRequestMessage_reflection_ = NULL;
-const ::google::protobuf::Descriptor* JoinResponseMessage_descriptor_ = NULL;
+  ConnectRequestMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* ConnectResponseMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  JoinResponseMessage_reflection_ = NULL;
-const ::google::protobuf::Descriptor* JoinNotificationMessage_descriptor_ = NULL;
+  ConnectResponseMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PlayerConnectMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  JoinNotificationMessage_reflection_ = NULL;
-const ::google::protobuf::Descriptor* DisconnectNotificationMessage_descriptor_ = NULL;
+  PlayerConnectMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PlayerDisconnectMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  DisconnectNotificationMessage_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MoveRequestMessage_descriptor_ = NULL;
+  PlayerDisconnectMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* PlayerMovedMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  MoveRequestMessage_reflection_ = NULL;
-const ::google::protobuf::Descriptor* MoveNotificationMessage_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  MoveNotificationMessage_reflection_ = NULL;
+  PlayerMovedMessage_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Type_descriptor_ = NULL;
-const ::google::protobuf::EnumDescriptor* JOIN_REQUEST_ERROR_descriptor_ = NULL;
+const ::google::protobuf::EnumDescriptor* CONNECT_REQUEST_ERROR_descriptor_ = NULL;
 
 }  // namespace
 
@@ -107,110 +104,94 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Vector3));
-  JoinRequestMessage_descriptor_ = file->message_type(3);
-  static const int JoinRequestMessage_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, name_),
+  ConnectRequestMessage_descriptor_ = file->message_type(3);
+  static const int ConnectRequestMessage_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, name_),
   };
-  JoinRequestMessage_reflection_ =
+  ConnectRequestMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      JoinRequestMessage_descriptor_,
-      JoinRequestMessage::default_instance_,
-      JoinRequestMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinRequestMessage, _unknown_fields_),
+      ConnectRequestMessage_descriptor_,
+      ConnectRequestMessage::default_instance_,
+      ConnectRequestMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(JoinRequestMessage));
-  JoinResponseMessage_descriptor_ = file->message_type(4);
-  static const int JoinResponseMessage_offsets_[5] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, success_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, position_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, client_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, error_),
+      sizeof(ConnectRequestMessage));
+  ConnectResponseMessage_descriptor_ = file->message_type(4);
+  static const int ConnectResponseMessage_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, success_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, position_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, client_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, error_),
   };
-  JoinResponseMessage_reflection_ =
+  ConnectResponseMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      JoinResponseMessage_descriptor_,
-      JoinResponseMessage::default_instance_,
-      JoinResponseMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinResponseMessage, _unknown_fields_),
+      ConnectResponseMessage_descriptor_,
+      ConnectResponseMessage::default_instance_,
+      ConnectResponseMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectResponseMessage, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(JoinResponseMessage));
-  JoinNotificationMessage_descriptor_ = file->message_type(5);
-  static const int JoinNotificationMessage_offsets_[4] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, client_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, position_),
+      sizeof(ConnectResponseMessage));
+  PlayerConnectMessage_descriptor_ = file->message_type(5);
+  static const int PlayerConnectMessage_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, client_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, position_),
   };
-  JoinNotificationMessage_reflection_ =
+  PlayerConnectMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      JoinNotificationMessage_descriptor_,
-      JoinNotificationMessage::default_instance_,
-      JoinNotificationMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(JoinNotificationMessage, _unknown_fields_),
+      PlayerConnectMessage_descriptor_,
+      PlayerConnectMessage::default_instance_,
+      PlayerConnectMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerConnectMessage, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(JoinNotificationMessage));
-  DisconnectNotificationMessage_descriptor_ = file->message_type(6);
-  static const int DisconnectNotificationMessage_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, client_id_),
+      sizeof(PlayerConnectMessage));
+  PlayerDisconnectMessage_descriptor_ = file->message_type(6);
+  static const int PlayerDisconnectMessage_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerDisconnectMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerDisconnectMessage, client_id_),
   };
-  DisconnectNotificationMessage_reflection_ =
+  PlayerDisconnectMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      DisconnectNotificationMessage_descriptor_,
-      DisconnectNotificationMessage::default_instance_,
-      DisconnectNotificationMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, _unknown_fields_),
+      PlayerDisconnectMessage_descriptor_,
+      PlayerDisconnectMessage::default_instance_,
+      PlayerDisconnectMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerDisconnectMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerDisconnectMessage, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(DisconnectNotificationMessage));
-  MoveRequestMessage_descriptor_ = file->message_type(7);
-  static const int MoveRequestMessage_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, position_),
+      sizeof(PlayerDisconnectMessage));
+  PlayerMovedMessage_descriptor_ = file->message_type(7);
+  static const int PlayerMovedMessage_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerMovedMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerMovedMessage, client_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerMovedMessage, position_),
   };
-  MoveRequestMessage_reflection_ =
+  PlayerMovedMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      MoveRequestMessage_descriptor_,
-      MoveRequestMessage::default_instance_,
-      MoveRequestMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, _unknown_fields_),
+      PlayerMovedMessage_descriptor_,
+      PlayerMovedMessage::default_instance_,
+      PlayerMovedMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerMovedMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PlayerMovedMessage, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MoveRequestMessage));
-  MoveNotificationMessage_descriptor_ = file->message_type(8);
-  static const int MoveNotificationMessage_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, client_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, position_),
-  };
-  MoveNotificationMessage_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      MoveNotificationMessage_descriptor_,
-      MoveNotificationMessage::default_instance_,
-      MoveNotificationMessage_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(MoveNotificationMessage));
+      sizeof(PlayerMovedMessage));
   Type_descriptor_ = file->enum_type(0);
-  JOIN_REQUEST_ERROR_descriptor_ = file->enum_type(1);
+  CONNECT_REQUEST_ERROR_descriptor_ = file->enum_type(1);
 }
 
 namespace {
@@ -230,17 +211,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Vector3_descriptor_, &Vector3::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    JoinRequestMessage_descriptor_, &JoinRequestMessage::default_instance());
+    ConnectRequestMessage_descriptor_, &ConnectRequestMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    JoinResponseMessage_descriptor_, &JoinResponseMessage::default_instance());
+    ConnectResponseMessage_descriptor_, &ConnectResponseMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    JoinNotificationMessage_descriptor_, &JoinNotificationMessage::default_instance());
+    PlayerConnectMessage_descriptor_, &PlayerConnectMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    DisconnectNotificationMessage_descriptor_, &DisconnectNotificationMessage::default_instance());
+    PlayerDisconnectMessage_descriptor_, &PlayerDisconnectMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MoveRequestMessage_descriptor_, &MoveRequestMessage::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    MoveNotificationMessage_descriptor_, &MoveNotificationMessage::default_instance());
+    PlayerMovedMessage_descriptor_, &PlayerMovedMessage::default_instance());
 }
 
 }  // namespace
@@ -252,18 +231,16 @@ void protobuf_ShutdownFile_messages_2eproto() {
   delete Vector2_reflection_;
   delete Vector3::default_instance_;
   delete Vector3_reflection_;
-  delete JoinRequestMessage::default_instance_;
-  delete JoinRequestMessage_reflection_;
-  delete JoinResponseMessage::default_instance_;
-  delete JoinResponseMessage_reflection_;
-  delete JoinNotificationMessage::default_instance_;
-  delete JoinNotificationMessage_reflection_;
-  delete DisconnectNotificationMessage::default_instance_;
-  delete DisconnectNotificationMessage_reflection_;
-  delete MoveRequestMessage::default_instance_;
-  delete MoveRequestMessage_reflection_;
-  delete MoveNotificationMessage::default_instance_;
-  delete MoveNotificationMessage_reflection_;
+  delete ConnectRequestMessage::default_instance_;
+  delete ConnectRequestMessage_reflection_;
+  delete ConnectResponseMessage::default_instance_;
+  delete ConnectResponseMessage_reflection_;
+  delete PlayerConnectMessage::default_instance_;
+  delete PlayerConnectMessage_reflection_;
+  delete PlayerDisconnectMessage::default_instance_;
+  delete PlayerDisconnectMessage_reflection_;
+  delete PlayerMovedMessage::default_instance_;
+  delete PlayerMovedMessage_reflection_;
 }
 
 void protobuf_AddDesc_messages_2eproto() {
@@ -275,50 +252,45 @@ void protobuf_AddDesc_messages_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\016messages.proto\022\004mosp\"\'\n\013BaseMessage\022\030\n"
     "\004type\030\001 \001(\0162\n.mosp.Type\"\037\n\007Vector2\022\t\n\001x\030"
-    "\001 \002(\001\022\t\n\001y\030\002 \002(\001\"*\n\007Vector3\022\t\n\001x\030\001 \002(\001\022\t"
-    "\n\001y\030\002 \002(\001\022\t\n\001z\030\003 \002(\001\"I\n\022JoinRequestMessa"
-    "ge\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013JoinReques"
-    "t\022\014\n\004name\030\002 \002(\t\"\253\001\n\023JoinResponseMessage\022"
-    "&\n\004type\030\001 \001(\0162\n.mosp.Type:\014JoinResponse\022"
-    "\017\n\007success\030\002 \002(\010\022\037\n\010position\030\003 \002(\0132\r.mos"
-    "p.Vector3\022\021\n\tclient_id\030\004 \002(\005\022\'\n\005error\030\005 "
-    "\001(\0162\030.mosp.JOIN_REQUEST_ERROR\"\207\001\n\027JoinNo"
-    "tificationMessage\022*\n\004type\030\001 \001(\0162\n.mosp.T"
-    "ype:\020JoinNotification\022\014\n\004name\030\002 \002(\t\022\021\n\tc"
-    "lient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132\r.mosp."
-    "Vector2\"d\n\035DisconnectNotificationMessage"
-    "\0220\n\004type\030\001 \001(\0162\n.mosp.Type:\026DisconnectNo"
-    "tification\022\021\n\tclient_id\030\002 \002(\005\"\\\n\022MoveReq"
-    "uestMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013M"
-    "oveRequest\022\037\n\010position\030\002 \002(\0132\r.mosp.Vect"
-    "or2\"y\n\027MoveNotificationMessage\022*\n\004type\030\001"
-    " \001(\0162\n.mosp.Type:\020MoveNotification\022\021\n\tcl"
-    "ient_id\030\002 \002(\005\022\037\n\010position\030\003 \002(\0132\r.mosp.V"
-    "ector2*\202\001\n\004Type\022\017\n\013JoinRequest\020\001\022\020\n\014Join"
-    "Response\020\002\022\024\n\020JoinNotification\020\003\022\017\n\013Move"
-    "Request\020\004\022\024\n\020MoveNotification\020\005\022\032\n\026Disco"
-    "nnectNotification\020\006*6\n\022JOIN_REQUEST_ERRO"
-    "R\022\017\n\013NAME_EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 1035);
+    "\001 \002(\002\022\t\n\001y\030\002 \002(\002\"*\n\007Vector3\022\t\n\001x\030\001 \002(\002\022\t"
+    "\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"O\n\025ConnectRequestMe"
+    "ssage\022(\n\004type\030\001 \001(\0162\n.mosp.Type:\016Connect"
+    "Request\022\014\n\004name\030\002 \002(\t\"\264\001\n\026ConnectRespons"
+    "eMessage\022)\n\004type\030\001 \001(\0162\n.mosp.Type:\017Conn"
+    "ectResponse\022\017\n\007success\030\002 \002(\010\022\037\n\010position"
+    "\030\003 \002(\0132\r.mosp.Vector2\022\021\n\tclient_id\030\004 \002(\005"
+    "\022*\n\005error\030\005 \001(\0162\033.mosp.CONNECT_REQUEST_E"
+    "RROR\"\201\001\n\024PlayerConnectMessage\022\'\n\004type\030\001 "
+    "\001(\0162\n.mosp.Type:\rPlayerConnect\022\014\n\004name\030\002"
+    " \002(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n\010position\030\004 \002("
+    "\0132\r.mosp.Vector2\"X\n\027PlayerDisconnectMess"
+    "age\022*\n\004type\030\001 \001(\0162\n.mosp.Type:\020PlayerDis"
+    "connect\022\021\n\tclient_id\030\002 \002(\005\"o\n\022PlayerMove"
+    "dMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013Play"
+    "erMoved\022\021\n\tclient_id\030\002 \002(\005\022\037\n\010position\030\003"
+    " \002(\0132\r.mosp.Vector2*i\n\004Type\022\022\n\016ConnectRe"
+    "quest\020\001\022\023\n\017ConnectResponse\020\002\022\021\n\rPlayerCo"
+    "nnect\020\003\022\024\n\020PlayerDisconnect\020\004\022\017\n\013PlayerM"
+    "oved\020\005*9\n\025CONNECT_REQUEST_ERROR\022\017\n\013NAME_"
+    "EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 905);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "messages.proto", &protobuf_RegisterTypes);
   BaseMessage::default_instance_ = new BaseMessage();
   Vector2::default_instance_ = new Vector2();
   Vector3::default_instance_ = new Vector3();
-  JoinRequestMessage::default_instance_ = new JoinRequestMessage();
-  JoinResponseMessage::default_instance_ = new JoinResponseMessage();
-  JoinNotificationMessage::default_instance_ = new JoinNotificationMessage();
-  DisconnectNotificationMessage::default_instance_ = new DisconnectNotificationMessage();
-  MoveRequestMessage::default_instance_ = new MoveRequestMessage();
-  MoveNotificationMessage::default_instance_ = new MoveNotificationMessage();
+  ConnectRequestMessage::default_instance_ = new ConnectRequestMessage();
+  ConnectResponseMessage::default_instance_ = new ConnectResponseMessage();
+  PlayerConnectMessage::default_instance_ = new PlayerConnectMessage();
+  PlayerDisconnectMessage::default_instance_ = new PlayerDisconnectMessage();
+  PlayerMovedMessage::default_instance_ = new PlayerMovedMessage();
   BaseMessage::default_instance_->InitAsDefaultInstance();
   Vector2::default_instance_->InitAsDefaultInstance();
   Vector3::default_instance_->InitAsDefaultInstance();
-  JoinRequestMessage::default_instance_->InitAsDefaultInstance();
-  JoinResponseMessage::default_instance_->InitAsDefaultInstance();
-  JoinNotificationMessage::default_instance_->InitAsDefaultInstance();
-  DisconnectNotificationMessage::default_instance_->InitAsDefaultInstance();
-  MoveRequestMessage::default_instance_->InitAsDefaultInstance();
-  MoveNotificationMessage::default_instance_->InitAsDefaultInstance();
+  ConnectRequestMessage::default_instance_->InitAsDefaultInstance();
+  ConnectResponseMessage::default_instance_->InitAsDefaultInstance();
+  PlayerConnectMessage::default_instance_->InitAsDefaultInstance();
+  PlayerDisconnectMessage::default_instance_->InitAsDefaultInstance();
+  PlayerMovedMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_messages_2eproto);
 }
 
@@ -339,18 +311,17 @@ bool Type_IsValid(int value) {
     case 3:
     case 4:
     case 5:
-    case 6:
       return true;
     default:
       return false;
   }
 }
 
-const ::google::protobuf::EnumDescriptor* JOIN_REQUEST_ERROR_descriptor() {
+const ::google::protobuf::EnumDescriptor* CONNECT_REQUEST_ERROR_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return JOIN_REQUEST_ERROR_descriptor_;
+  return CONNECT_REQUEST_ERROR_descriptor_;
 }
-bool JOIN_REQUEST_ERROR_IsValid(int value) {
+bool CONNECT_REQUEST_ERROR_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
@@ -680,26 +651,26 @@ bool Vector2::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double x = 1;
+      // required float x = 1;
       case 1: {
-        if (tag == 9) {
+        if (tag == 13) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
           set_has_x();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(17)) goto parse_y;
+        if (input->ExpectTag(21)) goto parse_y;
         break;
       }
 
-      // required double y = 2;
+      // required float y = 2;
       case 2: {
-        if (tag == 17) {
+        if (tag == 21) {
          parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
           set_has_y();
         } else {
@@ -734,14 +705,14 @@ failure:
 void Vector2::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.Vector2)
-  // required double x = 1;
+  // required float x = 1;
   if (has_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
-  // required double y = 2;
+  // required float y = 2;
   if (has_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -754,14 +725,14 @@ void Vector2::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Vector2::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.Vector2)
-  // required double x = 1;
+  // required float x = 1;
   if (has_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
-  // required double y = 2;
+  // required float y = 2;
   if (has_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -776,14 +747,14 @@ int Vector2::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required double x = 1;
+    // required float x = 1;
     if (has_x()) {
-      total_size += 1 + 8;
+      total_size += 1 + 4;
     }
 
-    // required double y = 2;
+    // required float y = 2;
     if (has_y()) {
-      total_size += 1 + 8;
+      total_size += 1 + 4;
     }
 
   }
@@ -953,41 +924,41 @@ bool Vector3::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required double x = 1;
+      // required float x = 1;
       case 1: {
-        if (tag == 9) {
+        if (tag == 13) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
           set_has_x();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(17)) goto parse_y;
+        if (input->ExpectTag(21)) goto parse_y;
         break;
       }
 
-      // required double y = 2;
+      // required float y = 2;
       case 2: {
-        if (tag == 17) {
+        if (tag == 21) {
          parse_y:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
           set_has_y();
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(25)) goto parse_z;
+        if (input->ExpectTag(29)) goto parse_z;
         break;
       }
 
-      // required double z = 3;
+      // required float z = 3;
       case 3: {
-        if (tag == 25) {
+        if (tag == 29) {
          parse_z:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &z_)));
           set_has_z();
         } else {
@@ -1022,19 +993,19 @@ failure:
 void Vector3::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:mosp.Vector3)
-  // required double x = 1;
+  // required float x = 1;
   if (has_x()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(1, this->x(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
-  // required double y = 2;
+  // required float y = 2;
   if (has_y()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->y(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
-  // required double z = 3;
+  // required float z = 3;
   if (has_z()) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(3, this->z(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1047,19 +1018,19 @@ void Vector3::SerializeWithCachedSizes(
 ::google::protobuf::uint8* Vector3::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:mosp.Vector3)
-  // required double x = 1;
+  // required float x = 1;
   if (has_x()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(1, this->x(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
-  // required double y = 2;
+  // required float y = 2;
   if (has_y()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->y(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
-  // required double z = 3;
+  // required float z = 3;
   if (has_z()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(3, this->z(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1074,19 +1045,19 @@ int Vector3::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required double x = 1;
+    // required float x = 1;
     if (has_x()) {
-      total_size += 1 + 8;
+      total_size += 1 + 4;
     }
 
-    // required double y = 2;
+    // required float y = 2;
     if (has_y()) {
-      total_size += 1 + 8;
+      total_size += 1 + 4;
     }
 
-    // required double z = 3;
+    // required float z = 3;
     if (has_z()) {
-      total_size += 1 + 8;
+      total_size += 1 + 4;
     }
 
   }
@@ -1170,27 +1141,27 @@ void Vector3::Swap(Vector3* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int JoinRequestMessage::kTypeFieldNumber;
-const int JoinRequestMessage::kNameFieldNumber;
+const int ConnectRequestMessage::kTypeFieldNumber;
+const int ConnectRequestMessage::kNameFieldNumber;
 #endif  // !_MSC_VER
 
-JoinRequestMessage::JoinRequestMessage()
+ConnectRequestMessage::ConnectRequestMessage()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(constructor:mosp.ConnectRequestMessage)
 }
 
-void JoinRequestMessage::InitAsDefaultInstance() {
+void ConnectRequestMessage::InitAsDefaultInstance() {
 }
 
-JoinRequestMessage::JoinRequestMessage(const JoinRequestMessage& from)
+ConnectRequestMessage::ConnectRequestMessage(const ConnectRequestMessage& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(copy_constructor:mosp.ConnectRequestMessage)
 }
 
-void JoinRequestMessage::SharedCtor() {
+void ConnectRequestMessage::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   type_ = 1;
@@ -1198,12 +1169,12 @@ void JoinRequestMessage::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-JoinRequestMessage::~JoinRequestMessage() {
-  // @@protoc_insertion_point(destructor:mosp.JoinRequestMessage)
+ConnectRequestMessage::~ConnectRequestMessage() {
+  // @@protoc_insertion_point(destructor:mosp.ConnectRequestMessage)
   SharedDtor();
 }
 
-void JoinRequestMessage::SharedDtor() {
+void ConnectRequestMessage::SharedDtor() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete name_;
   }
@@ -1211,28 +1182,28 @@ void JoinRequestMessage::SharedDtor() {
   }
 }
 
-void JoinRequestMessage::SetCachedSize(int size) const {
+void ConnectRequestMessage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* JoinRequestMessage::descriptor() {
+const ::google::protobuf::Descriptor* ConnectRequestMessage::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return JoinRequestMessage_descriptor_;
+  return ConnectRequestMessage_descriptor_;
 }
 
-const JoinRequestMessage& JoinRequestMessage::default_instance() {
+const ConnectRequestMessage& ConnectRequestMessage::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
   return *default_instance_;
 }
 
-JoinRequestMessage* JoinRequestMessage::default_instance_ = NULL;
+ConnectRequestMessage* ConnectRequestMessage::default_instance_ = NULL;
 
-JoinRequestMessage* JoinRequestMessage::New() const {
-  return new JoinRequestMessage;
+ConnectRequestMessage* ConnectRequestMessage::New() const {
+  return new ConnectRequestMessage;
 }
 
-void JoinRequestMessage::Clear() {
+void ConnectRequestMessage::Clear() {
   if (_has_bits_[0 / 32] & 3) {
     type_ = 1;
     if (has_name()) {
@@ -1245,17 +1216,17 @@ void JoinRequestMessage::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool JoinRequestMessage::MergePartialFromCodedStream(
+bool ConnectRequestMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(parse_start:mosp.ConnectRequestMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = JoinRequest];
+      // optional .mosp.Type type = 1 [default = ConnectRequest];
       case 1: {
         if (tag == 8) {
           int value;
@@ -1305,18 +1276,18 @@ bool JoinRequestMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(parse_success:mosp.ConnectRequestMessage)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(parse_failure:mosp.ConnectRequestMessage)
   return false;
 #undef DO_
 }
 
-void JoinRequestMessage::SerializeWithCachedSizes(
+void ConnectRequestMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.JoinRequestMessage)
-  // optional .mosp.Type type = 1 [default = JoinRequest];
+  // @@protoc_insertion_point(serialize_start:mosp.ConnectRequestMessage)
+  // optional .mosp.Type type = 1 [default = ConnectRequest];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -1336,13 +1307,13 @@ void JoinRequestMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(serialize_end:mosp.ConnectRequestMessage)
 }
 
-::google::protobuf::uint8* JoinRequestMessage::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ConnectRequestMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinRequestMessage)
-  // optional .mosp.Type type = 1 [default = JoinRequest];
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.ConnectRequestMessage)
+  // optional .mosp.Type type = 1 [default = ConnectRequest];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -1363,15 +1334,15 @@ void JoinRequestMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.ConnectRequestMessage)
   return target;
 }
 
-int JoinRequestMessage::ByteSize() const {
+int ConnectRequestMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = JoinRequest];
+    // optional .mosp.Type type = 1 [default = ConnectRequest];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -1396,10 +1367,10 @@ int JoinRequestMessage::ByteSize() const {
   return total_size;
 }
 
-void JoinRequestMessage::MergeFrom(const ::google::protobuf::Message& from) {
+void ConnectRequestMessage::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const JoinRequestMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const JoinRequestMessage*>(
+  const ConnectRequestMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ConnectRequestMessage*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1408,7 +1379,7 @@ void JoinRequestMessage::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void JoinRequestMessage::MergeFrom(const JoinRequestMessage& from) {
+void ConnectRequestMessage::MergeFrom(const ConnectRequestMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -1421,25 +1392,25 @@ void JoinRequestMessage::MergeFrom(const JoinRequestMessage& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void JoinRequestMessage::CopyFrom(const ::google::protobuf::Message& from) {
+void ConnectRequestMessage::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void JoinRequestMessage::CopyFrom(const JoinRequestMessage& from) {
+void ConnectRequestMessage::CopyFrom(const ConnectRequestMessage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool JoinRequestMessage::IsInitialized() const {
+bool ConnectRequestMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   return true;
 }
 
-void JoinRequestMessage::Swap(JoinRequestMessage* other) {
+void ConnectRequestMessage::Swap(ConnectRequestMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(name_, other->name_);
@@ -1449,11 +1420,11 @@ void JoinRequestMessage::Swap(JoinRequestMessage* other) {
   }
 }
 
-::google::protobuf::Metadata JoinRequestMessage::GetMetadata() const {
+::google::protobuf::Metadata ConnectRequestMessage::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = JoinRequestMessage_descriptor_;
-  metadata.reflection = JoinRequestMessage_reflection_;
+  metadata.descriptor = ConnectRequestMessage_descriptor_;
+  metadata.reflection = ConnectRequestMessage_reflection_;
   return metadata;
 }
 
@@ -1461,31 +1432,31 @@ void JoinRequestMessage::Swap(JoinRequestMessage* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int JoinResponseMessage::kTypeFieldNumber;
-const int JoinResponseMessage::kSuccessFieldNumber;
-const int JoinResponseMessage::kPositionFieldNumber;
-const int JoinResponseMessage::kClientIdFieldNumber;
-const int JoinResponseMessage::kErrorFieldNumber;
+const int ConnectResponseMessage::kTypeFieldNumber;
+const int ConnectResponseMessage::kSuccessFieldNumber;
+const int ConnectResponseMessage::kPositionFieldNumber;
+const int ConnectResponseMessage::kClientIdFieldNumber;
+const int ConnectResponseMessage::kErrorFieldNumber;
 #endif  // !_MSC_VER
 
-JoinResponseMessage::JoinResponseMessage()
+ConnectResponseMessage::ConnectResponseMessage()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(constructor:mosp.ConnectResponseMessage)
 }
 
-void JoinResponseMessage::InitAsDefaultInstance() {
-  position_ = const_cast< ::mosp::Vector3*>(&::mosp::Vector3::default_instance());
+void ConnectResponseMessage::InitAsDefaultInstance() {
+  position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
-JoinResponseMessage::JoinResponseMessage(const JoinResponseMessage& from)
+ConnectResponseMessage::ConnectResponseMessage(const ConnectResponseMessage& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(copy_constructor:mosp.ConnectResponseMessage)
 }
 
-void JoinResponseMessage::SharedCtor() {
+void ConnectResponseMessage::SharedCtor() {
   _cached_size_ = 0;
   type_ = 2;
   success_ = false;
@@ -1495,44 +1466,44 @@ void JoinResponseMessage::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-JoinResponseMessage::~JoinResponseMessage() {
-  // @@protoc_insertion_point(destructor:mosp.JoinResponseMessage)
+ConnectResponseMessage::~ConnectResponseMessage() {
+  // @@protoc_insertion_point(destructor:mosp.ConnectResponseMessage)
   SharedDtor();
 }
 
-void JoinResponseMessage::SharedDtor() {
+void ConnectResponseMessage::SharedDtor() {
   if (this != default_instance_) {
     delete position_;
   }
 }
 
-void JoinResponseMessage::SetCachedSize(int size) const {
+void ConnectResponseMessage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* JoinResponseMessage::descriptor() {
+const ::google::protobuf::Descriptor* ConnectResponseMessage::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return JoinResponseMessage_descriptor_;
+  return ConnectResponseMessage_descriptor_;
 }
 
-const JoinResponseMessage& JoinResponseMessage::default_instance() {
+const ConnectResponseMessage& ConnectResponseMessage::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
   return *default_instance_;
 }
 
-JoinResponseMessage* JoinResponseMessage::default_instance_ = NULL;
+ConnectResponseMessage* ConnectResponseMessage::default_instance_ = NULL;
 
-JoinResponseMessage* JoinResponseMessage::New() const {
-  return new JoinResponseMessage;
+ConnectResponseMessage* ConnectResponseMessage::New() const {
+  return new ConnectResponseMessage;
 }
 
-void JoinResponseMessage::Clear() {
+void ConnectResponseMessage::Clear() {
   if (_has_bits_[0 / 32] & 31) {
     type_ = 2;
     success_ = false;
     if (has_position()) {
-      if (position_ != NULL) position_->::mosp::Vector3::Clear();
+      if (position_ != NULL) position_->::mosp::Vector2::Clear();
     }
     client_id_ = 0;
     error_ = 1;
@@ -1541,17 +1512,17 @@ void JoinResponseMessage::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool JoinResponseMessage::MergePartialFromCodedStream(
+bool ConnectResponseMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(parse_start:mosp.ConnectResponseMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = JoinResponse];
+      // optional .mosp.Type type = 1 [default = ConnectResponse];
       case 1: {
         if (tag == 8) {
           int value;
@@ -1585,7 +1556,7 @@ bool JoinResponseMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required .mosp.Vector3 position = 3;
+      // required .mosp.Vector2 position = 3;
       case 3: {
         if (tag == 26) {
          parse_position:
@@ -1613,7 +1584,7 @@ bool JoinResponseMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+      // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
       case 5: {
         if (tag == 40) {
          parse_error:
@@ -1621,8 +1592,8 @@ bool JoinResponseMessage::MergePartialFromCodedStream(
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
                  input, &value)));
-          if (::mosp::JOIN_REQUEST_ERROR_IsValid(value)) {
-            set_error(static_cast< ::mosp::JOIN_REQUEST_ERROR >(value));
+          if (::mosp::CONNECT_REQUEST_ERROR_IsValid(value)) {
+            set_error(static_cast< ::mosp::CONNECT_REQUEST_ERROR >(value));
           } else {
             mutable_unknown_fields()->AddVarint(5, value);
           }
@@ -1647,18 +1618,18 @@ bool JoinResponseMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(parse_success:mosp.ConnectResponseMessage)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(parse_failure:mosp.ConnectResponseMessage)
   return false;
 #undef DO_
 }
 
-void JoinResponseMessage::SerializeWithCachedSizes(
+void ConnectResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.JoinResponseMessage)
-  // optional .mosp.Type type = 1 [default = JoinResponse];
+  // @@protoc_insertion_point(serialize_start:mosp.ConnectResponseMessage)
+  // optional .mosp.Type type = 1 [default = ConnectResponse];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -1669,7 +1640,7 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->success(), output);
   }
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->position(), output);
@@ -1680,7 +1651,7 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->client_id(), output);
   }
 
-  // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
   if (has_error()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       5, this->error(), output);
@@ -1690,13 +1661,13 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(serialize_end:mosp.ConnectResponseMessage)
 }
 
-::google::protobuf::uint8* JoinResponseMessage::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* ConnectResponseMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinResponseMessage)
-  // optional .mosp.Type type = 1 [default = JoinResponse];
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.ConnectResponseMessage)
+  // optional .mosp.Type type = 1 [default = ConnectResponse];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -1707,7 +1678,7 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->success(), target);
   }
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1719,7 +1690,7 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->client_id(), target);
   }
 
-  // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
   if (has_error()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       5, this->error(), target);
@@ -1729,15 +1700,15 @@ void JoinResponseMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.ConnectResponseMessage)
   return target;
 }
 
-int JoinResponseMessage::ByteSize() const {
+int ConnectResponseMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = JoinResponse];
+    // optional .mosp.Type type = 1 [default = ConnectResponse];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -1748,7 +1719,7 @@ int JoinResponseMessage::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // required .mosp.Vector3 position = 3;
+    // required .mosp.Vector2 position = 3;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -1762,7 +1733,7 @@ int JoinResponseMessage::ByteSize() const {
           this->client_id());
     }
 
-    // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+    // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
     if (has_error()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->error());
@@ -1780,10 +1751,10 @@ int JoinResponseMessage::ByteSize() const {
   return total_size;
 }
 
-void JoinResponseMessage::MergeFrom(const ::google::protobuf::Message& from) {
+void ConnectResponseMessage::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const JoinResponseMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const JoinResponseMessage*>(
+  const ConnectResponseMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const ConnectResponseMessage*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1792,7 +1763,7 @@ void JoinResponseMessage::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void JoinResponseMessage::MergeFrom(const JoinResponseMessage& from) {
+void ConnectResponseMessage::MergeFrom(const ConnectResponseMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -1802,7 +1773,7 @@ void JoinResponseMessage::MergeFrom(const JoinResponseMessage& from) {
       set_success(from.success());
     }
     if (from.has_position()) {
-      mutable_position()->::mosp::Vector3::MergeFrom(from.position());
+      mutable_position()->::mosp::Vector2::MergeFrom(from.position());
     }
     if (from.has_client_id()) {
       set_client_id(from.client_id());
@@ -1814,19 +1785,19 @@ void JoinResponseMessage::MergeFrom(const JoinResponseMessage& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void JoinResponseMessage::CopyFrom(const ::google::protobuf::Message& from) {
+void ConnectResponseMessage::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void JoinResponseMessage::CopyFrom(const JoinResponseMessage& from) {
+void ConnectResponseMessage::CopyFrom(const ConnectResponseMessage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool JoinResponseMessage::IsInitialized() const {
+bool ConnectResponseMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
 
   if (has_position()) {
@@ -1835,7 +1806,7 @@ bool JoinResponseMessage::IsInitialized() const {
   return true;
 }
 
-void JoinResponseMessage::Swap(JoinResponseMessage* other) {
+void ConnectResponseMessage::Swap(ConnectResponseMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(success_, other->success_);
@@ -1848,11 +1819,11 @@ void JoinResponseMessage::Swap(JoinResponseMessage* other) {
   }
 }
 
-::google::protobuf::Metadata JoinResponseMessage::GetMetadata() const {
+::google::protobuf::Metadata ConnectResponseMessage::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = JoinResponseMessage_descriptor_;
-  metadata.reflection = JoinResponseMessage_reflection_;
+  metadata.descriptor = ConnectResponseMessage_descriptor_;
+  metadata.reflection = ConnectResponseMessage_reflection_;
   return metadata;
 }
 
@@ -1860,30 +1831,30 @@ void JoinResponseMessage::Swap(JoinResponseMessage* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int JoinNotificationMessage::kTypeFieldNumber;
-const int JoinNotificationMessage::kNameFieldNumber;
-const int JoinNotificationMessage::kClientIdFieldNumber;
-const int JoinNotificationMessage::kPositionFieldNumber;
+const int PlayerConnectMessage::kTypeFieldNumber;
+const int PlayerConnectMessage::kNameFieldNumber;
+const int PlayerConnectMessage::kClientIdFieldNumber;
+const int PlayerConnectMessage::kPositionFieldNumber;
 #endif  // !_MSC_VER
 
-JoinNotificationMessage::JoinNotificationMessage()
+PlayerConnectMessage::PlayerConnectMessage()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(constructor:mosp.PlayerConnectMessage)
 }
 
-void JoinNotificationMessage::InitAsDefaultInstance() {
+void PlayerConnectMessage::InitAsDefaultInstance() {
   position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
-JoinNotificationMessage::JoinNotificationMessage(const JoinNotificationMessage& from)
+PlayerConnectMessage::PlayerConnectMessage(const PlayerConnectMessage& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(copy_constructor:mosp.PlayerConnectMessage)
 }
 
-void JoinNotificationMessage::SharedCtor() {
+void PlayerConnectMessage::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   type_ = 3;
@@ -1893,12 +1864,12 @@ void JoinNotificationMessage::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-JoinNotificationMessage::~JoinNotificationMessage() {
-  // @@protoc_insertion_point(destructor:mosp.JoinNotificationMessage)
+PlayerConnectMessage::~PlayerConnectMessage() {
+  // @@protoc_insertion_point(destructor:mosp.PlayerConnectMessage)
   SharedDtor();
 }
 
-void JoinNotificationMessage::SharedDtor() {
+void PlayerConnectMessage::SharedDtor() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete name_;
   }
@@ -1907,28 +1878,28 @@ void JoinNotificationMessage::SharedDtor() {
   }
 }
 
-void JoinNotificationMessage::SetCachedSize(int size) const {
+void PlayerConnectMessage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* JoinNotificationMessage::descriptor() {
+const ::google::protobuf::Descriptor* PlayerConnectMessage::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return JoinNotificationMessage_descriptor_;
+  return PlayerConnectMessage_descriptor_;
 }
 
-const JoinNotificationMessage& JoinNotificationMessage::default_instance() {
+const PlayerConnectMessage& PlayerConnectMessage::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
   return *default_instance_;
 }
 
-JoinNotificationMessage* JoinNotificationMessage::default_instance_ = NULL;
+PlayerConnectMessage* PlayerConnectMessage::default_instance_ = NULL;
 
-JoinNotificationMessage* JoinNotificationMessage::New() const {
-  return new JoinNotificationMessage;
+PlayerConnectMessage* PlayerConnectMessage::New() const {
+  return new PlayerConnectMessage;
 }
 
-void JoinNotificationMessage::Clear() {
+void PlayerConnectMessage::Clear() {
   if (_has_bits_[0 / 32] & 15) {
     type_ = 3;
     if (has_name()) {
@@ -1945,17 +1916,17 @@ void JoinNotificationMessage::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool JoinNotificationMessage::MergePartialFromCodedStream(
+bool PlayerConnectMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(parse_start:mosp.PlayerConnectMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = JoinNotification];
+      // optional .mosp.Type type = 1 [default = PlayerConnect];
       case 1: {
         if (tag == 8) {
           int value;
@@ -2033,18 +2004,18 @@ bool JoinNotificationMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(parse_success:mosp.PlayerConnectMessage)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(parse_failure:mosp.PlayerConnectMessage)
   return false;
 #undef DO_
 }
 
-void JoinNotificationMessage::SerializeWithCachedSizes(
+void PlayerConnectMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.JoinNotificationMessage)
-  // optional .mosp.Type type = 1 [default = JoinNotification];
+  // @@protoc_insertion_point(serialize_start:mosp.PlayerConnectMessage)
+  // optional .mosp.Type type = 1 [default = PlayerConnect];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -2075,13 +2046,13 @@ void JoinNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(serialize_end:mosp.PlayerConnectMessage)
 }
 
-::google::protobuf::uint8* JoinNotificationMessage::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* PlayerConnectMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.JoinNotificationMessage)
-  // optional .mosp.Type type = 1 [default = JoinNotification];
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.PlayerConnectMessage)
+  // optional .mosp.Type type = 1 [default = PlayerConnect];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -2114,15 +2085,15 @@ void JoinNotificationMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.PlayerConnectMessage)
   return target;
 }
 
-int JoinNotificationMessage::ByteSize() const {
+int PlayerConnectMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = JoinNotification];
+    // optional .mosp.Type type = 1 [default = PlayerConnect];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -2161,10 +2132,10 @@ int JoinNotificationMessage::ByteSize() const {
   return total_size;
 }
 
-void JoinNotificationMessage::MergeFrom(const ::google::protobuf::Message& from) {
+void PlayerConnectMessage::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const JoinNotificationMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const JoinNotificationMessage*>(
+  const PlayerConnectMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PlayerConnectMessage*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2173,7 +2144,7 @@ void JoinNotificationMessage::MergeFrom(const ::google::protobuf::Message& from)
   }
 }
 
-void JoinNotificationMessage::MergeFrom(const JoinNotificationMessage& from) {
+void PlayerConnectMessage::MergeFrom(const PlayerConnectMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -2192,19 +2163,19 @@ void JoinNotificationMessage::MergeFrom(const JoinNotificationMessage& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void JoinNotificationMessage::CopyFrom(const ::google::protobuf::Message& from) {
+void PlayerConnectMessage::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void JoinNotificationMessage::CopyFrom(const JoinNotificationMessage& from) {
+void PlayerConnectMessage::CopyFrom(const PlayerConnectMessage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool JoinNotificationMessage::IsInitialized() const {
+bool PlayerConnectMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x0000000e) != 0x0000000e) return false;
 
   if (has_position()) {
@@ -2213,7 +2184,7 @@ bool JoinNotificationMessage::IsInitialized() const {
   return true;
 }
 
-void JoinNotificationMessage::Swap(JoinNotificationMessage* other) {
+void PlayerConnectMessage::Swap(PlayerConnectMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(name_, other->name_);
@@ -2225,11 +2196,11 @@ void JoinNotificationMessage::Swap(JoinNotificationMessage* other) {
   }
 }
 
-::google::protobuf::Metadata JoinNotificationMessage::GetMetadata() const {
+::google::protobuf::Metadata PlayerConnectMessage::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = JoinNotificationMessage_descriptor_;
-  metadata.reflection = JoinNotificationMessage_reflection_;
+  metadata.descriptor = PlayerConnectMessage_descriptor_;
+  metadata.reflection = PlayerConnectMessage_reflection_;
   return metadata;
 }
 
@@ -2237,84 +2208,84 @@ void JoinNotificationMessage::Swap(JoinNotificationMessage* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int DisconnectNotificationMessage::kTypeFieldNumber;
-const int DisconnectNotificationMessage::kClientIdFieldNumber;
+const int PlayerDisconnectMessage::kTypeFieldNumber;
+const int PlayerDisconnectMessage::kClientIdFieldNumber;
 #endif  // !_MSC_VER
 
-DisconnectNotificationMessage::DisconnectNotificationMessage()
+PlayerDisconnectMessage::PlayerDisconnectMessage()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(constructor:mosp.PlayerDisconnectMessage)
 }
 
-void DisconnectNotificationMessage::InitAsDefaultInstance() {
+void PlayerDisconnectMessage::InitAsDefaultInstance() {
 }
 
-DisconnectNotificationMessage::DisconnectNotificationMessage(const DisconnectNotificationMessage& from)
+PlayerDisconnectMessage::PlayerDisconnectMessage(const PlayerDisconnectMessage& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(copy_constructor:mosp.PlayerDisconnectMessage)
 }
 
-void DisconnectNotificationMessage::SharedCtor() {
+void PlayerDisconnectMessage::SharedCtor() {
   _cached_size_ = 0;
-  type_ = 6;
+  type_ = 4;
   client_id_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-DisconnectNotificationMessage::~DisconnectNotificationMessage() {
-  // @@protoc_insertion_point(destructor:mosp.DisconnectNotificationMessage)
+PlayerDisconnectMessage::~PlayerDisconnectMessage() {
+  // @@protoc_insertion_point(destructor:mosp.PlayerDisconnectMessage)
   SharedDtor();
 }
 
-void DisconnectNotificationMessage::SharedDtor() {
+void PlayerDisconnectMessage::SharedDtor() {
   if (this != default_instance_) {
   }
 }
 
-void DisconnectNotificationMessage::SetCachedSize(int size) const {
+void PlayerDisconnectMessage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* DisconnectNotificationMessage::descriptor() {
+const ::google::protobuf::Descriptor* PlayerDisconnectMessage::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return DisconnectNotificationMessage_descriptor_;
+  return PlayerDisconnectMessage_descriptor_;
 }
 
-const DisconnectNotificationMessage& DisconnectNotificationMessage::default_instance() {
+const PlayerDisconnectMessage& PlayerDisconnectMessage::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
   return *default_instance_;
 }
 
-DisconnectNotificationMessage* DisconnectNotificationMessage::default_instance_ = NULL;
+PlayerDisconnectMessage* PlayerDisconnectMessage::default_instance_ = NULL;
 
-DisconnectNotificationMessage* DisconnectNotificationMessage::New() const {
-  return new DisconnectNotificationMessage;
+PlayerDisconnectMessage* PlayerDisconnectMessage::New() const {
+  return new PlayerDisconnectMessage;
 }
 
-void DisconnectNotificationMessage::Clear() {
+void PlayerDisconnectMessage::Clear() {
   if (_has_bits_[0 / 32] & 3) {
-    type_ = 6;
+    type_ = 4;
     client_id_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
 }
 
-bool DisconnectNotificationMessage::MergePartialFromCodedStream(
+bool PlayerDisconnectMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(parse_start:mosp.PlayerDisconnectMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = DisconnectNotification];
+      // optional .mosp.Type type = 1 [default = PlayerDisconnect];
       case 1: {
         if (tag == 8) {
           int value;
@@ -2362,18 +2333,18 @@ bool DisconnectNotificationMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(parse_success:mosp.PlayerDisconnectMessage)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(parse_failure:mosp.PlayerDisconnectMessage)
   return false;
 #undef DO_
 }
 
-void DisconnectNotificationMessage::SerializeWithCachedSizes(
+void PlayerDisconnectMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.DisconnectNotificationMessage)
-  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  // @@protoc_insertion_point(serialize_start:mosp.PlayerDisconnectMessage)
+  // optional .mosp.Type type = 1 [default = PlayerDisconnect];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -2388,13 +2359,13 @@ void DisconnectNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(serialize_end:mosp.PlayerDisconnectMessage)
 }
 
-::google::protobuf::uint8* DisconnectNotificationMessage::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* PlayerDisconnectMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.DisconnectNotificationMessage)
-  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.PlayerDisconnectMessage)
+  // optional .mosp.Type type = 1 [default = PlayerDisconnect];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -2409,15 +2380,15 @@ void DisconnectNotificationMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.PlayerDisconnectMessage)
   return target;
 }
 
-int DisconnectNotificationMessage::ByteSize() const {
+int PlayerDisconnectMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = DisconnectNotification];
+    // optional .mosp.Type type = 1 [default = PlayerDisconnect];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -2442,10 +2413,10 @@ int DisconnectNotificationMessage::ByteSize() const {
   return total_size;
 }
 
-void DisconnectNotificationMessage::MergeFrom(const ::google::protobuf::Message& from) {
+void PlayerDisconnectMessage::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const DisconnectNotificationMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const DisconnectNotificationMessage*>(
+  const PlayerDisconnectMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PlayerDisconnectMessage*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2454,7 +2425,7 @@ void DisconnectNotificationMessage::MergeFrom(const ::google::protobuf::Message&
   }
 }
 
-void DisconnectNotificationMessage::MergeFrom(const DisconnectNotificationMessage& from) {
+void PlayerDisconnectMessage::MergeFrom(const PlayerDisconnectMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -2467,25 +2438,25 @@ void DisconnectNotificationMessage::MergeFrom(const DisconnectNotificationMessag
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void DisconnectNotificationMessage::CopyFrom(const ::google::protobuf::Message& from) {
+void PlayerDisconnectMessage::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void DisconnectNotificationMessage::CopyFrom(const DisconnectNotificationMessage& from) {
+void PlayerDisconnectMessage::CopyFrom(const PlayerDisconnectMessage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool DisconnectNotificationMessage::IsInitialized() const {
+bool PlayerDisconnectMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   return true;
 }
 
-void DisconnectNotificationMessage::Swap(DisconnectNotificationMessage* other) {
+void PlayerDisconnectMessage::Swap(PlayerDisconnectMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(client_id_, other->client_id_);
@@ -2495,11 +2466,11 @@ void DisconnectNotificationMessage::Swap(DisconnectNotificationMessage* other) {
   }
 }
 
-::google::protobuf::Metadata DisconnectNotificationMessage::GetMetadata() const {
+::google::protobuf::Metadata PlayerDisconnectMessage::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = DisconnectNotificationMessage_descriptor_;
-  metadata.reflection = DisconnectNotificationMessage_reflection_;
+  metadata.descriptor = PlayerDisconnectMessage_descriptor_;
+  metadata.reflection = PlayerDisconnectMessage_reflection_;
   return metadata;
 }
 
@@ -2507,307 +2478,29 @@ void DisconnectNotificationMessage::Swap(DisconnectNotificationMessage* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int MoveRequestMessage::kTypeFieldNumber;
-const int MoveRequestMessage::kPositionFieldNumber;
+const int PlayerMovedMessage::kTypeFieldNumber;
+const int PlayerMovedMessage::kClientIdFieldNumber;
+const int PlayerMovedMessage::kPositionFieldNumber;
 #endif  // !_MSC_VER
 
-MoveRequestMessage::MoveRequestMessage()
+PlayerMovedMessage::PlayerMovedMessage()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.MoveRequestMessage)
+  // @@protoc_insertion_point(constructor:mosp.PlayerMovedMessage)
 }
 
-void MoveRequestMessage::InitAsDefaultInstance() {
+void PlayerMovedMessage::InitAsDefaultInstance() {
   position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
 }
 
-MoveRequestMessage::MoveRequestMessage(const MoveRequestMessage& from)
+PlayerMovedMessage::PlayerMovedMessage(const PlayerMovedMessage& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.MoveRequestMessage)
+  // @@protoc_insertion_point(copy_constructor:mosp.PlayerMovedMessage)
 }
 
-void MoveRequestMessage::SharedCtor() {
-  _cached_size_ = 0;
-  type_ = 4;
-  position_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-MoveRequestMessage::~MoveRequestMessage() {
-  // @@protoc_insertion_point(destructor:mosp.MoveRequestMessage)
-  SharedDtor();
-}
-
-void MoveRequestMessage::SharedDtor() {
-  if (this != default_instance_) {
-    delete position_;
-  }
-}
-
-void MoveRequestMessage::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* MoveRequestMessage::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return MoveRequestMessage_descriptor_;
-}
-
-const MoveRequestMessage& MoveRequestMessage::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
-  return *default_instance_;
-}
-
-MoveRequestMessage* MoveRequestMessage::default_instance_ = NULL;
-
-MoveRequestMessage* MoveRequestMessage::New() const {
-  return new MoveRequestMessage;
-}
-
-void MoveRequestMessage::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
-    type_ = 4;
-    if (has_position()) {
-      if (position_ != NULL) position_->::mosp::Vector2::Clear();
-    }
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool MoveRequestMessage::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.MoveRequestMessage)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = MoveRequest];
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          if (::mosp::Type_IsValid(value)) {
-            set_type(static_cast< ::mosp::Type >(value));
-          } else {
-            mutable_unknown_fields()->AddVarint(1, value);
-          }
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_position;
-        break;
-      }
-
-      // required .mosp.Vector2 position = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_position:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_position()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:mosp.MoveRequestMessage)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:mosp.MoveRequestMessage)
-  return false;
-#undef DO_
-}
-
-void MoveRequestMessage::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.MoveRequestMessage)
-  // optional .mosp.Type type = 1 [default = MoveRequest];
-  if (has_type()) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->type(), output);
-  }
-
-  // required .mosp.Vector2 position = 2;
-  if (has_position()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->position(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:mosp.MoveRequestMessage)
-}
-
-::google::protobuf::uint8* MoveRequestMessage::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.MoveRequestMessage)
-  // optional .mosp.Type type = 1 [default = MoveRequest];
-  if (has_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->type(), target);
-  }
-
-  // required .mosp.Vector2 position = 2;
-  if (has_position()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        2, this->position(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.MoveRequestMessage)
-  return target;
-}
-
-int MoveRequestMessage::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = MoveRequest];
-    if (has_type()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
-    }
-
-    // required .mosp.Vector2 position = 2;
-    if (has_position()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->position());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void MoveRequestMessage::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const MoveRequestMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MoveRequestMessage*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void MoveRequestMessage::MergeFrom(const MoveRequestMessage& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_type()) {
-      set_type(from.type());
-    }
-    if (from.has_position()) {
-      mutable_position()->::mosp::Vector2::MergeFrom(from.position());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void MoveRequestMessage::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void MoveRequestMessage::CopyFrom(const MoveRequestMessage& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool MoveRequestMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
-
-  if (has_position()) {
-    if (!this->position().IsInitialized()) return false;
-  }
-  return true;
-}
-
-void MoveRequestMessage::Swap(MoveRequestMessage* other) {
-  if (other != this) {
-    std::swap(type_, other->type_);
-    std::swap(position_, other->position_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata MoveRequestMessage::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MoveRequestMessage_descriptor_;
-  metadata.reflection = MoveRequestMessage_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int MoveNotificationMessage::kTypeFieldNumber;
-const int MoveNotificationMessage::kClientIdFieldNumber;
-const int MoveNotificationMessage::kPositionFieldNumber;
-#endif  // !_MSC_VER
-
-MoveNotificationMessage::MoveNotificationMessage()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:mosp.MoveNotificationMessage)
-}
-
-void MoveNotificationMessage::InitAsDefaultInstance() {
-  position_ = const_cast< ::mosp::Vector2*>(&::mosp::Vector2::default_instance());
-}
-
-MoveNotificationMessage::MoveNotificationMessage(const MoveNotificationMessage& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:mosp.MoveNotificationMessage)
-}
-
-void MoveNotificationMessage::SharedCtor() {
+void PlayerMovedMessage::SharedCtor() {
   _cached_size_ = 0;
   type_ = 5;
   client_id_ = 0;
@@ -2815,39 +2508,39 @@ void MoveNotificationMessage::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-MoveNotificationMessage::~MoveNotificationMessage() {
-  // @@protoc_insertion_point(destructor:mosp.MoveNotificationMessage)
+PlayerMovedMessage::~PlayerMovedMessage() {
+  // @@protoc_insertion_point(destructor:mosp.PlayerMovedMessage)
   SharedDtor();
 }
 
-void MoveNotificationMessage::SharedDtor() {
+void PlayerMovedMessage::SharedDtor() {
   if (this != default_instance_) {
     delete position_;
   }
 }
 
-void MoveNotificationMessage::SetCachedSize(int size) const {
+void PlayerMovedMessage::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* MoveNotificationMessage::descriptor() {
+const ::google::protobuf::Descriptor* PlayerMovedMessage::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return MoveNotificationMessage_descriptor_;
+  return PlayerMovedMessage_descriptor_;
 }
 
-const MoveNotificationMessage& MoveNotificationMessage::default_instance() {
+const PlayerMovedMessage& PlayerMovedMessage::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
   return *default_instance_;
 }
 
-MoveNotificationMessage* MoveNotificationMessage::default_instance_ = NULL;
+PlayerMovedMessage* PlayerMovedMessage::default_instance_ = NULL;
 
-MoveNotificationMessage* MoveNotificationMessage::New() const {
-  return new MoveNotificationMessage;
+PlayerMovedMessage* PlayerMovedMessage::New() const {
+  return new PlayerMovedMessage;
 }
 
-void MoveNotificationMessage::Clear() {
+void PlayerMovedMessage::Clear() {
   if (_has_bits_[0 / 32] & 7) {
     type_ = 5;
     client_id_ = 0;
@@ -2859,17 +2552,17 @@ void MoveNotificationMessage::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool MoveNotificationMessage::MergePartialFromCodedStream(
+bool PlayerMovedMessage::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(parse_start:mosp.PlayerMovedMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .mosp.Type type = 1 [default = MoveNotification];
+      // optional .mosp.Type type = 1 [default = PlayerMoved];
       case 1: {
         if (tag == 8) {
           int value;
@@ -2930,18 +2623,18 @@ bool MoveNotificationMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(parse_success:mosp.PlayerMovedMessage)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(parse_failure:mosp.PlayerMovedMessage)
   return false;
 #undef DO_
 }
 
-void MoveNotificationMessage::SerializeWithCachedSizes(
+void PlayerMovedMessage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:mosp.MoveNotificationMessage)
-  // optional .mosp.Type type = 1 [default = MoveNotification];
+  // @@protoc_insertion_point(serialize_start:mosp.PlayerMovedMessage)
+  // optional .mosp.Type type = 1 [default = PlayerMoved];
   if (has_type()) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->type(), output);
@@ -2962,13 +2655,13 @@ void MoveNotificationMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(serialize_end:mosp.PlayerMovedMessage)
 }
 
-::google::protobuf::uint8* MoveNotificationMessage::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* PlayerMovedMessage::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:mosp.MoveNotificationMessage)
-  // optional .mosp.Type type = 1 [default = MoveNotification];
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.PlayerMovedMessage)
+  // optional .mosp.Type type = 1 [default = PlayerMoved];
   if (has_type()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->type(), target);
@@ -2990,15 +2683,15 @@ void MoveNotificationMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.PlayerMovedMessage)
   return target;
 }
 
-int MoveNotificationMessage::ByteSize() const {
+int PlayerMovedMessage::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional .mosp.Type type = 1 [default = MoveNotification];
+    // optional .mosp.Type type = 1 [default = PlayerMoved];
     if (has_type()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
@@ -3030,10 +2723,10 @@ int MoveNotificationMessage::ByteSize() const {
   return total_size;
 }
 
-void MoveNotificationMessage::MergeFrom(const ::google::protobuf::Message& from) {
+void PlayerMovedMessage::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const MoveNotificationMessage* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const MoveNotificationMessage*>(
+  const PlayerMovedMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const PlayerMovedMessage*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3042,7 +2735,7 @@ void MoveNotificationMessage::MergeFrom(const ::google::protobuf::Message& from)
   }
 }
 
-void MoveNotificationMessage::MergeFrom(const MoveNotificationMessage& from) {
+void PlayerMovedMessage::MergeFrom(const PlayerMovedMessage& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_type()) {
@@ -3058,19 +2751,19 @@ void MoveNotificationMessage::MergeFrom(const MoveNotificationMessage& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void MoveNotificationMessage::CopyFrom(const ::google::protobuf::Message& from) {
+void PlayerMovedMessage::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void MoveNotificationMessage::CopyFrom(const MoveNotificationMessage& from) {
+void PlayerMovedMessage::CopyFrom(const PlayerMovedMessage& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool MoveNotificationMessage::IsInitialized() const {
+bool PlayerMovedMessage::IsInitialized() const {
   if ((_has_bits_[0] & 0x00000006) != 0x00000006) return false;
 
   if (has_position()) {
@@ -3079,7 +2772,7 @@ bool MoveNotificationMessage::IsInitialized() const {
   return true;
 }
 
-void MoveNotificationMessage::Swap(MoveNotificationMessage* other) {
+void PlayerMovedMessage::Swap(PlayerMovedMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
     std::swap(client_id_, other->client_id_);
@@ -3090,11 +2783,11 @@ void MoveNotificationMessage::Swap(MoveNotificationMessage* other) {
   }
 }
 
-::google::protobuf::Metadata MoveNotificationMessage::GetMetadata() const {
+::google::protobuf::Metadata PlayerMovedMessage::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = MoveNotificationMessage_descriptor_;
-  metadata.reflection = MoveNotificationMessage_reflection_;
+  metadata.descriptor = PlayerMovedMessage_descriptor_;
+  metadata.reflection = PlayerMovedMessage_reflection_;
   return metadata;
 }
 

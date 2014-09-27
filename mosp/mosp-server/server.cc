@@ -1,5 +1,5 @@
 #include "server.h"
-#include "proto/messages.pb.h"
+#include "logger.h"
 
 Server::Server(int port)
 {
@@ -14,35 +14,30 @@ Server::Server(int port)
 		0);		  // assume any amount of outgoing bandwidth
 
 	if (server == NULL)
-	{
-		printf("error");
-	}
-
+		Logger::Error("Enet failed to create a host.");
+	
 	ticker = new Ticker(this);
 }
 
 Server::~Server()
-{
+{ 
 	delete ticker;
-
 	enet_host_destroy(server);
-	atexit(enet_deinitialize);
 }
 
 void Server::Run()
 {
 	isRunning = true;
-	tickThread = std::thread(&Ticker::Run, ticker);
+	tickerThread = std::thread(&Ticker::Run, ticker);
 
 	Listen();
 
-	tickThread.join();
-	isRunning = false;
+	tickerThread.join();
 }
 
 void Server::Listen()
 {
-	printf("Server is now online and listening to incoming traffic\n");
+	Logger::Info("Server is now online and listening to incoming traffic\n");
 
 	ENetEvent event;
 
@@ -52,59 +47,52 @@ void Server::Listen()
 		{
 			switch (event.type)
 			{
-				case ENET_EVENT_TYPE_CONNECT:
-					OnConnect(event);
-					break;
+			case ENET_EVENT_TYPE_CONNECT:
+				OnConnect(event);
+				break;
 
-				case ENET_EVENT_TYPE_RECEIVE:
-					OnReceive(event);
-					break;
+			case ENET_EVENT_TYPE_RECEIVE:
+				OnReceive(event);
+				break;
 
-				case ENET_EVENT_TYPE_DISCONNECT:
-					OnDisconnect(event);
-					break;
+			case ENET_EVENT_TYPE_DISCONNECT:
+				OnDisconnect(event);
+				break;
 			}
 		}
-	}	
+	}
 }
 
-void Server::OnConnect(const ENetEvent &event)
+void Server::OnConnect(const ENetEvent &evt)
 {
 	// Create a new client and push it to the client list
-	Client *client = new Client(this, event.peer, nextAvailableId);
+	Client* client = new Client(evt.peer, nextAvailableId);
 	clients.push_back(client);
 
 	// Assign the client object to the peer
-	event.peer->data = client;
+	evt.peer->data = client;
 	nextAvailableId++;
 
-	printf("A new client connected from %x:%u assigned with id %d\n", event.peer->address.host, event.peer->address.port, nextAvailableId);
+	Logger::Info("A new client connected from %x:%u assigned with id %d\n", evt.peer->address.host, evt.peer->address.port, nextAvailableId);
 }
 
-void Server::OnReceive(const ENetEvent &event)
+void Server::OnReceive(const ENetEvent &evt)
 {
-	Client* client = static_cast<Client*>(event.peer->data);
-	event.packet->userData = client;
-
-	client->QueuePacket(event.packet);
+	Client* client = static_cast<Client*>(evt.peer->data);
+	evt.packet->userData = client;
+	client->QueuePacket(evt.packet);
 }
 
-void Server::OnDisconnect(const ENetEvent &event)
+void Server::OnDisconnect(const ENetEvent &evt)
 {
 	// Find the client using the peer object
-	Client *client = static_cast<Client*>(event.peer->data);
+	Client *client = static_cast<Client*>(evt.peer->data);
 
 	// Remove the client from the clients vector
 	clients.erase(std::remove(clients.begin(), clients.end(), client), clients.end());
 
-	printf("Client %d has disconnected\n", client->GetId());
-
-	
-	mosp::DisconnectNotificationMessage message;
-	message.set_type(mosp::Type::DisconnectNotification);
-	message.set_client_id(client->GetId());
-	Broadcast(message);
+	Logger::Info("Client %d has disconnected", client->GetId());
 
 	delete client;
-	event.peer->data = nullptr;
+	evt.peer->data = nullptr;
 }

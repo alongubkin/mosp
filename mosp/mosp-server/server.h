@@ -1,12 +1,9 @@
-#ifndef _SERVER_H
-#define _SERVER_H
+#ifndef _H_SERVER
+#define _H_SERVER
 
-#include <string>
-#include <vector>
 #include <thread>
 #include "enet/enet.h"
-#include "client.h"
-#include "ticker.h"
+#include "Ticker.h"
 
 class Server
 {
@@ -15,31 +12,31 @@ public:
 	~Server();
 
 	void Run();
-	
-	bool IsRunning() const { return isRunning; }
 
+	bool IsRunning() { return isRunning; }
 	const std::vector<Client*>& GetClients() const { return clients; }
 
 	template <typename T>
 	void Broadcast(const T& message);
 
-private:
-	bool isRunning = false;
-	int nextAvailableId = 0;
+	template <typename T>
+	void Broadcast(const T& message, const Client* excludedClient);
 
-	ENetHost *server;
-	Ticker *ticker;
+private:
+	ENetHost* server;
+	bool isRunning;
+
+	Ticker* ticker;
+	std::thread tickerThread;
+
+	unsigned int nextAvailableId = 0;
 
 	std::vector<Client*> clients;
-	std::thread tickThread;
 
 	void Listen();
-
-	void OnConnect(const ENetEvent &event);
-	void OnReceive(const ENetEvent &event);
-	void OnDisconnect(const ENetEvent &event);
-
-	void ProcessPacket(const ENetPacket* packet, const ENetPeer* peer);
+	void OnConnect(const ENetEvent &evt);
+	void OnReceive(const ENetEvent &evt);
+	void OnDisconnect(const ENetEvent &evt);
 };
 
 template <typename T>
@@ -49,11 +46,23 @@ void Server::Broadcast(const T& message)
 	message.SerializeToArray(data, message.ByteSize());
 
 	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
-
-
 	enet_host_broadcast(server, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
 
 	delete data;
 }
+
+template <typename T>
+void Server::Broadcast(const T& message, const Client* excludedClient)
+{
+	for (auto it = clients.begin(); it != clients.end(); it++)
+	{
+		Client* client = *it;
+		if (client != excludedClient)
+		{
+			client->Send(message);
+		}
+	}
+}
+
 
 #endif

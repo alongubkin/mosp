@@ -7,17 +7,14 @@
 package mosp;
 
 enum Type {
-	JoinRequest = 1;
-	JoinResponse = 2;
-	JoinNotification = 3;
-	
-	MoveRequest = 4;
-	MoveNotification = 5;
-
-	DisconnectNotification = 6;
+	ConnectRequest = 1;
+	ConnectResponse = 2;
+	PlayerConnect = 3;
+	PlayerDisconnect = 4;
+	PlayerMoved = 5;
 }
 
-enum JOIN_REQUEST_ERROR {
+enum CONNECT_REQUEST_ERROR {
 	NAME_EXISTS = 1;
 	SERVER_FULL = 2;
 }
@@ -29,29 +26,29 @@ message BaseMessage {
 // A vector message with 2 components
 message Vector2 {
 	// x-component
-	required double x = 1;
+	required float x = 1;
 
 	// y-component
-	required double y = 2;
+	required float y = 2;
 }
 
 // A vector message with 3 components
 message Vector3 {
 	// x-component
-	required double x = 1;
+	required float x = 1;
 
 	// y-component
-	required double y = 2;
+	required float y = 2;
 
 	// z-component
-	required double z = 3;
+	required float z = 3;
 }
 
 // This message is sent by the client immediately after connecting
 // to the server. It is required.
-message JoinRequestMessage {
+message ConnectRequestMessage {
 	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = JoinRequest];
+	optional Type type = 1 [default = ConnectRequest];
 
 	// This field describes the name of the player. It should be unique.
 	required string name = 2;
@@ -59,28 +56,28 @@ message JoinRequestMessage {
 
 // This message is sent by the server to a client when he requests 
 // to join the game.
-message JoinResponseMessage {
+message ConnectResponseMessage {
 	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = JoinResponse];
+	optional Type type = 1 [default = ConnectResponse];
 
 	// Whether or not the join request passed. 
 	required bool success = 2;
 
 	// The position of the player.
-	required Vector3 position = 3;
+	required Vector2 position = 3;
 
 	// The client ID of the player.
 	required int32 client_id = 4;
 
 	// This field describes the error if there is one.
-	optional JOIN_REQUEST_ERROR error = 5;
+	optional CONNECT_REQUEST_ERROR error = 5;
 }
 
 // This message is sent by the server when a player joins the game
 // to the players around him.
-message JoinNotificationMessage {
+message PlayerConnectMessage {
 	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = JoinNotification];
+	optional Type type = 1 [default = PlayerConnect];
 
 	// This field describes the name of the player.
 	required string name = 2;
@@ -94,9 +91,9 @@ message JoinNotificationMessage {
 
 // This message is sent by the server when a player disconnects
 // to the players around him.
-message DisconnectNotificationMessage {
+message PlayerDisconnectMessage {
 	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = DisconnectNotification];
+	optional Type type = 1 [default = PlayerDisconnect];
 
 	// The client ID of the player who disconnected.
 	required int32 client_id = 2;
@@ -104,20 +101,9 @@ message DisconnectNotificationMessage {
 
 // This message is sent by the client when he wants to move to
 // a specific position.
-message MoveRequestMessage {
+message PlayerMovedMessage {
 	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = MoveRequest];
-
-	// This field describes the position that the client wants to
-	// move to.
-	required Vector2 position = 2;
-}
-
-// This message is sent by the server when a player moves
-// to the players around him.
-message MoveNotificationMessage {
-	// The type of this message. Do not change this field.
-	optional Type type = 1 [default = MoveNotification];
+	optional Type type = 1 [default = PlayerMoved];
 
 	// The client ID of the player who joined.
 	required int32 client_id = 2;

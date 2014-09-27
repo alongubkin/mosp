@@ -1,48 +1,37 @@
-#ifndef _CLIENT_H
-#define _CLIENT_H
+#ifndef _H_CLIENT
+#define _H_CLIENT
 
 #include <queue>
 #include <mutex>
+#include <string>
 #include "enet/enet.h"
 #include "proto/messages.pb.h"
-
-class Server;
 
 class Client
 {
 public:
-	Client(Server *server, ENetPeer* peer, int id) :
-		server(server),
-		peer(peer),
-		id(id) {}
-
+	Client(ENetPeer* peer, unsigned int clientId);
 	~Client();
 	
-	int GetId() const { return id; }
-	ENetPeer* GetPeer() const { return peer; }
+	unsigned int GetId() { return clientId; }
+	void SetTargetPosition(mosp::Vector2 targetPosition) { this->targetPosition = targetPosition; }
+	mosp::Vector2 GetTargetPosition() { return this->targetPosition; }
+	void SetName(std::string name) { this->name = name; }
+	std::string GetName() { return this->name; }
 
-	std::queue<ENetPacket*> CopyQueue();
 	void QueuePacket(ENetPacket* packet);
-
-	void HandleJoinRequestMessage(const mosp::JoinRequestMessage& message);
-	void HandleMoveRequestMessage(const mosp::MoveRequestMessage& message);
-
-private:
-	int id = 0;
-	ENetPeer* peer;
-	Server* server;
-	std::string name;
-
-	std::mutex incomingPacketsMutex;
-	std::queue<ENetPacket*> incomingPackets;
-
-	mosp::Vector2* targetPosition;
+	std::queue<ENetPacket*> CopyQueue();
 
 	template <typename T>
 	void Send(const T& message);
 
-	template <typename T>
-	void Broadcast(const T& message);
+private:
+	ENetPeer* peer;
+	unsigned int clientId;
+	std::queue<ENetPacket*> incomingPackets;
+	std::mutex incomingPacketsMutex;
+	std::string name;
+	mosp::Vector2 targetPosition;
 };
 
 template <typename T>
@@ -52,23 +41,12 @@ void Client::Send(const T& message)
 	message.SerializeToArray(data, message.ByteSize());
 
 	ENetPacket* packet = enet_packet_create(data, message.ByteSize(), ENET_PACKET_FLAG_RELIABLE);
-	enet_peer_send(peer, 0, packet); // Handles the deallocation of the packet as well so we won't need to call enet_packet_destroy()
+
+	// Handles the deallocation of the packet as well 
+	// so we won't need to call enet_packet_destroy()
+	enet_peer_send(peer, 0, packet); 
 
 	delete data;
-}
-
-template <typename T>
-void Client::Broadcast(const T& message)
-{
-	auto clients = server->GetClients();
-	for (auto it = clients.begin(); it != clients.end(); it++)
-	{
-		Client* client = *it;
-		if (client != this)
-		{
-			client->Send(message);
-		}
-	}
 }
 
 #endif

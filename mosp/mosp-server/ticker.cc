@@ -1,7 +1,17 @@
 #include "ticker.h"
+#include "logger.h"
 #include "server.h"
-#include "client.h"
-#include "proto/messages.pb.h"
+
+Ticker::Ticker(Server* server)
+{
+	this->server = server;
+	eventHandler = new EventHandler();
+}
+
+Ticker::~Ticker()
+{
+	delete eventHandler;
+}
 
 void Ticker::Run()
 {
@@ -12,29 +22,16 @@ void Ticker::Run()
 		for (auto it = clients.begin(); it != clients.end(); ++it)
 		{
 			auto queue = (*it)->CopyQueue();
-			
+
 			while (!queue.empty())
 			{
 				ENetPacket* packet = queue.front();
 				queue.pop();
 
-				HandlePacket(packet); //Handles deallocation of packet as well...
+				HandlePacket(packet); // Deallocates packet as well...
 			}
 		}
 	}
-}
-
-template<typename T>
-T Ticker::PacketToMessage(ENetPacket* packet)
-{
-	T message;
-	if (!message.ParseFromArray(packet->data, packet->dataLength))
-	{
-		// TODO: throw exception
-		assert("packet parsing error");
-	}
-
-	return message;
 }
 
 void Ticker::HandlePacket(ENetPacket* packet)
@@ -44,17 +41,17 @@ void Ticker::HandlePacket(ENetPacket* packet)
 
 	switch (baseMessage.type())
 	{
-		case mosp::Type::JoinRequest:
-			client->HandleJoinRequestMessage(PacketToMessage<mosp::JoinRequestMessage>(packet));
-			break;
+	case mosp::Type::ConnectRequest:
+		eventHandler->OnConnectRequest(server, client, PacketToMessage<mosp::ConnectRequestMessage>(packet));
+		break;
 
-		case mosp::Type::MoveRequest:
-			client->HandleMoveRequestMessage(PacketToMessage<mosp::MoveRequestMessage>(packet));
-			break;
+	case mosp::Type::PlayerMoved:
+		eventHandler->OnPlayerMoved(server, client, PacketToMessage<mosp::PlayerMovedMessage>(packet));
+		break;
 
-		default:
-			printf("unhandled message");
-			break;
+	default:
+		Logger::Info("Unknown message received!");
+		break;
 	}
 
 	enet_packet_destroy(packet);

@@ -85,12 +85,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
+    <ClCompile Include="event_handler.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="server.cc" />
     <ClCompile Include="ticker.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="client.h" />
+    <ClInclude Include="event_handler.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="ticker.h" />
   </ItemGroup>

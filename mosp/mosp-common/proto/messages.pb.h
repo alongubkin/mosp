@@ -37,24 +37,22 @@ void protobuf_ShutdownFile_messages_2eproto();
 class BaseMessage;
 class Vector2;
 class Vector3;
-class JoinRequestMessage;
-class JoinResponseMessage;
-class JoinNotificationMessage;
-class DisconnectNotificationMessage;
-class MoveRequestMessage;
-class MoveNotificationMessage;
+class ConnectRequestMessage;
+class ConnectResponseMessage;
+class PlayerConnectMessage;
+class PlayerDisconnectMessage;
+class PlayerMovedMessage;
 
 enum Type {
-  JoinRequest = 1,
-  JoinResponse = 2,
-  JoinNotification = 3,
-  MoveRequest = 4,
-  MoveNotification = 5,
-  DisconnectNotification = 6
+  ConnectRequest = 1,
+  ConnectResponse = 2,
+  PlayerConnect = 3,
+  PlayerDisconnect = 4,
+  PlayerMoved = 5
 };
 bool Type_IsValid(int value);
-const Type Type_MIN = JoinRequest;
-const Type Type_MAX = DisconnectNotification;
+const Type Type_MIN = ConnectRequest;
+const Type Type_MAX = PlayerMoved;
 const int Type_ARRAYSIZE = Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Type_descriptor();
@@ -67,24 +65,24 @@ inline bool Type_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<Type>(
     Type_descriptor(), name, value);
 }
-enum JOIN_REQUEST_ERROR {
+enum CONNECT_REQUEST_ERROR {
   NAME_EXISTS = 1,
   SERVER_FULL = 2
 };
-bool JOIN_REQUEST_ERROR_IsValid(int value);
-const JOIN_REQUEST_ERROR JOIN_REQUEST_ERROR_MIN = NAME_EXISTS;
-const JOIN_REQUEST_ERROR JOIN_REQUEST_ERROR_MAX = SERVER_FULL;
-const int JOIN_REQUEST_ERROR_ARRAYSIZE = JOIN_REQUEST_ERROR_MAX + 1;
+bool CONNECT_REQUEST_ERROR_IsValid(int value);
+const CONNECT_REQUEST_ERROR CONNECT_REQUEST_ERROR_MIN = NAME_EXISTS;
+const CONNECT_REQUEST_ERROR CONNECT_REQUEST_ERROR_MAX = SERVER_FULL;
+const int CONNECT_REQUEST_ERROR_ARRAYSIZE = CONNECT_REQUEST_ERROR_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* JOIN_REQUEST_ERROR_descriptor();
-inline const ::std::string& JOIN_REQUEST_ERROR_Name(JOIN_REQUEST_ERROR value) {
+const ::google::protobuf::EnumDescriptor* CONNECT_REQUEST_ERROR_descriptor();
+inline const ::std::string& CONNECT_REQUEST_ERROR_Name(CONNECT_REQUEST_ERROR value) {
   return ::google::protobuf::internal::NameOfEnum(
-    JOIN_REQUEST_ERROR_descriptor(), value);
+    CONNECT_REQUEST_ERROR_descriptor(), value);
 }
-inline bool JOIN_REQUEST_ERROR_Parse(
-    const ::std::string& name, JOIN_REQUEST_ERROR* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<JOIN_REQUEST_ERROR>(
-    JOIN_REQUEST_ERROR_descriptor(), name, value);
+inline bool CONNECT_REQUEST_ERROR_Parse(
+    const ::std::string& name, CONNECT_REQUEST_ERROR* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<CONNECT_REQUEST_ERROR>(
+    CONNECT_REQUEST_ERROR_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -220,19 +218,19 @@ class Vector2 : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required double x = 1;
+  // required float x = 1;
   inline bool has_x() const;
   inline void clear_x();
   static const int kXFieldNumber = 1;
-  inline double x() const;
-  inline void set_x(double value);
+  inline float x() const;
+  inline void set_x(float value);
 
-  // required double y = 2;
+  // required float y = 2;
   inline bool has_y() const;
   inline void clear_y();
   static const int kYFieldNumber = 2;
-  inline double y() const;
-  inline void set_y(double value);
+  inline float y() const;
+  inline void set_y(float value);
 
   // @@protoc_insertion_point(class_scope:mosp.Vector2)
  private:
@@ -245,8 +243,8 @@ class Vector2 : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  double x_;
-  double y_;
+  float x_;
+  float y_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
   friend void protobuf_ShutdownFile_messages_2eproto();
@@ -309,26 +307,26 @@ class Vector3 : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required double x = 1;
+  // required float x = 1;
   inline bool has_x() const;
   inline void clear_x();
   static const int kXFieldNumber = 1;
-  inline double x() const;
-  inline void set_x(double value);
+  inline float x() const;
+  inline void set_x(float value);
 
-  // required double y = 2;
+  // required float y = 2;
   inline bool has_y() const;
   inline void clear_y();
   static const int kYFieldNumber = 2;
-  inline double y() const;
-  inline void set_y(double value);
+  inline float y() const;
+  inline void set_y(float value);
 
-  // required double z = 3;
+  // required float z = 3;
   inline bool has_z() const;
   inline void clear_z();
   static const int kZFieldNumber = 3;
-  inline double z() const;
-  inline void set_z(double value);
+  inline float z() const;
+  inline void set_z(float value);
 
   // @@protoc_insertion_point(class_scope:mosp.Vector3)
  private:
@@ -343,9 +341,9 @@ class Vector3 : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  double x_;
-  double y_;
-  double z_;
+  float x_;
+  float y_;
+  float z_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
   friend void protobuf_ShutdownFile_messages_2eproto();
@@ -355,14 +353,14 @@ class Vector3 : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class JoinRequestMessage : public ::google::protobuf::Message {
+class ConnectRequestMessage : public ::google::protobuf::Message {
  public:
-  JoinRequestMessage();
-  virtual ~JoinRequestMessage();
+  ConnectRequestMessage();
+  virtual ~ConnectRequestMessage();
 
-  JoinRequestMessage(const JoinRequestMessage& from);
+  ConnectRequestMessage(const ConnectRequestMessage& from);
 
-  inline JoinRequestMessage& operator=(const JoinRequestMessage& from) {
+  inline ConnectRequestMessage& operator=(const ConnectRequestMessage& from) {
     CopyFrom(from);
     return *this;
   }
@@ -376,17 +374,17 @@ class JoinRequestMessage : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinRequestMessage& default_instance();
+  static const ConnectRequestMessage& default_instance();
 
-  void Swap(JoinRequestMessage* other);
+  void Swap(ConnectRequestMessage* other);
 
   // implements Message ----------------------------------------------
 
-  JoinRequestMessage* New() const;
+  ConnectRequestMessage* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinRequestMessage& from);
-  void MergeFrom(const JoinRequestMessage& from);
+  void CopyFrom(const ConnectRequestMessage& from);
+  void MergeFrom(const ConnectRequestMessage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -408,7 +406,7 @@ class JoinRequestMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = JoinRequest];
+  // optional .mosp.Type type = 1 [default = ConnectRequest];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -427,7 +425,7 @@ class JoinRequestMessage : public ::google::protobuf::Message {
   inline ::std::string* release_name();
   inline void set_allocated_name(::std::string* name);
 
-  // @@protoc_insertion_point(class_scope:mosp.JoinRequestMessage)
+  // @@protoc_insertion_point(class_scope:mosp.ConnectRequestMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -445,18 +443,18 @@ class JoinRequestMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static JoinRequestMessage* default_instance_;
+  static ConnectRequestMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class JoinResponseMessage : public ::google::protobuf::Message {
+class ConnectResponseMessage : public ::google::protobuf::Message {
  public:
-  JoinResponseMessage();
-  virtual ~JoinResponseMessage();
+  ConnectResponseMessage();
+  virtual ~ConnectResponseMessage();
 
-  JoinResponseMessage(const JoinResponseMessage& from);
+  ConnectResponseMessage(const ConnectResponseMessage& from);
 
-  inline JoinResponseMessage& operator=(const JoinResponseMessage& from) {
+  inline ConnectResponseMessage& operator=(const ConnectResponseMessage& from) {
     CopyFrom(from);
     return *this;
   }
@@ -470,17 +468,17 @@ class JoinResponseMessage : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinResponseMessage& default_instance();
+  static const ConnectResponseMessage& default_instance();
 
-  void Swap(JoinResponseMessage* other);
+  void Swap(ConnectResponseMessage* other);
 
   // implements Message ----------------------------------------------
 
-  JoinResponseMessage* New() const;
+  ConnectResponseMessage* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinResponseMessage& from);
-  void MergeFrom(const JoinResponseMessage& from);
+  void CopyFrom(const ConnectResponseMessage& from);
+  void MergeFrom(const ConnectResponseMessage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -502,7 +500,7 @@ class JoinResponseMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = JoinResponse];
+  // optional .mosp.Type type = 1 [default = ConnectResponse];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -516,14 +514,14 @@ class JoinResponseMessage : public ::google::protobuf::Message {
   inline bool success() const;
   inline void set_success(bool value);
 
-  // required .mosp.Vector3 position = 3;
+  // required .mosp.Vector2 position = 3;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 3;
-  inline const ::mosp::Vector3& position() const;
-  inline ::mosp::Vector3* mutable_position();
-  inline ::mosp::Vector3* release_position();
-  inline void set_allocated_position(::mosp::Vector3* position);
+  inline const ::mosp::Vector2& position() const;
+  inline ::mosp::Vector2* mutable_position();
+  inline ::mosp::Vector2* release_position();
+  inline void set_allocated_position(::mosp::Vector2* position);
 
   // required int32 client_id = 4;
   inline bool has_client_id() const;
@@ -532,14 +530,14 @@ class JoinResponseMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // optional .mosp.JOIN_REQUEST_ERROR error = 5;
+  // optional .mosp.CONNECT_REQUEST_ERROR error = 5;
   inline bool has_error() const;
   inline void clear_error();
   static const int kErrorFieldNumber = 5;
-  inline ::mosp::JOIN_REQUEST_ERROR error() const;
-  inline void set_error(::mosp::JOIN_REQUEST_ERROR value);
+  inline ::mosp::CONNECT_REQUEST_ERROR error() const;
+  inline void set_error(::mosp::CONNECT_REQUEST_ERROR value);
 
-  // @@protoc_insertion_point(class_scope:mosp.JoinResponseMessage)
+  // @@protoc_insertion_point(class_scope:mosp.ConnectResponseMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -558,7 +556,7 @@ class JoinResponseMessage : public ::google::protobuf::Message {
   mutable int _cached_size_;
   int type_;
   bool success_;
-  ::mosp::Vector3* position_;
+  ::mosp::Vector2* position_;
   ::google::protobuf::int32 client_id_;
   int error_;
   friend void  protobuf_AddDesc_messages_2eproto();
@@ -566,18 +564,18 @@ class JoinResponseMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static JoinResponseMessage* default_instance_;
+  static ConnectResponseMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class JoinNotificationMessage : public ::google::protobuf::Message {
+class PlayerConnectMessage : public ::google::protobuf::Message {
  public:
-  JoinNotificationMessage();
-  virtual ~JoinNotificationMessage();
+  PlayerConnectMessage();
+  virtual ~PlayerConnectMessage();
 
-  JoinNotificationMessage(const JoinNotificationMessage& from);
+  PlayerConnectMessage(const PlayerConnectMessage& from);
 
-  inline JoinNotificationMessage& operator=(const JoinNotificationMessage& from) {
+  inline PlayerConnectMessage& operator=(const PlayerConnectMessage& from) {
     CopyFrom(from);
     return *this;
   }
@@ -591,17 +589,17 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const JoinNotificationMessage& default_instance();
+  static const PlayerConnectMessage& default_instance();
 
-  void Swap(JoinNotificationMessage* other);
+  void Swap(PlayerConnectMessage* other);
 
   // implements Message ----------------------------------------------
 
-  JoinNotificationMessage* New() const;
+  PlayerConnectMessage* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const JoinNotificationMessage& from);
-  void MergeFrom(const JoinNotificationMessage& from);
+  void CopyFrom(const PlayerConnectMessage& from);
+  void MergeFrom(const PlayerConnectMessage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -623,7 +621,7 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = JoinNotification];
+  // optional .mosp.Type type = 1 [default = PlayerConnect];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -658,7 +656,7 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
   inline ::mosp::Vector2* release_position();
   inline void set_allocated_position(::mosp::Vector2* position);
 
-  // @@protoc_insertion_point(class_scope:mosp.JoinNotificationMessage)
+  // @@protoc_insertion_point(class_scope:mosp.PlayerConnectMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -682,18 +680,18 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static JoinNotificationMessage* default_instance_;
+  static PlayerConnectMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class DisconnectNotificationMessage : public ::google::protobuf::Message {
+class PlayerDisconnectMessage : public ::google::protobuf::Message {
  public:
-  DisconnectNotificationMessage();
-  virtual ~DisconnectNotificationMessage();
+  PlayerDisconnectMessage();
+  virtual ~PlayerDisconnectMessage();
 
-  DisconnectNotificationMessage(const DisconnectNotificationMessage& from);
+  PlayerDisconnectMessage(const PlayerDisconnectMessage& from);
 
-  inline DisconnectNotificationMessage& operator=(const DisconnectNotificationMessage& from) {
+  inline PlayerDisconnectMessage& operator=(const PlayerDisconnectMessage& from) {
     CopyFrom(from);
     return *this;
   }
@@ -707,17 +705,17 @@ class DisconnectNotificationMessage : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const DisconnectNotificationMessage& default_instance();
+  static const PlayerDisconnectMessage& default_instance();
 
-  void Swap(DisconnectNotificationMessage* other);
+  void Swap(PlayerDisconnectMessage* other);
 
   // implements Message ----------------------------------------------
 
-  DisconnectNotificationMessage* New() const;
+  PlayerDisconnectMessage* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const DisconnectNotificationMessage& from);
-  void MergeFrom(const DisconnectNotificationMessage& from);
+  void CopyFrom(const PlayerDisconnectMessage& from);
+  void MergeFrom(const PlayerDisconnectMessage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -739,7 +737,7 @@ class DisconnectNotificationMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  // optional .mosp.Type type = 1 [default = PlayerDisconnect];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -753,7 +751,7 @@ class DisconnectNotificationMessage : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:mosp.DisconnectNotificationMessage)
+  // @@protoc_insertion_point(class_scope:mosp.PlayerDisconnectMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -771,18 +769,18 @@ class DisconnectNotificationMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static DisconnectNotificationMessage* default_instance_;
+  static PlayerDisconnectMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
-class MoveRequestMessage : public ::google::protobuf::Message {
+class PlayerMovedMessage : public ::google::protobuf::Message {
  public:
-  MoveRequestMessage();
-  virtual ~MoveRequestMessage();
+  PlayerMovedMessage();
+  virtual ~PlayerMovedMessage();
 
-  MoveRequestMessage(const MoveRequestMessage& from);
+  PlayerMovedMessage(const PlayerMovedMessage& from);
 
-  inline MoveRequestMessage& operator=(const MoveRequestMessage& from) {
+  inline PlayerMovedMessage& operator=(const PlayerMovedMessage& from) {
     CopyFrom(from);
     return *this;
   }
@@ -796,17 +794,17 @@ class MoveRequestMessage : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const MoveRequestMessage& default_instance();
+  static const PlayerMovedMessage& default_instance();
 
-  void Swap(MoveRequestMessage* other);
+  void Swap(PlayerMovedMessage* other);
 
   // implements Message ----------------------------------------------
 
-  MoveRequestMessage* New() const;
+  PlayerMovedMessage* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MoveRequestMessage& from);
-  void MergeFrom(const MoveRequestMessage& from);
+  void CopyFrom(const PlayerMovedMessage& from);
+  void MergeFrom(const PlayerMovedMessage& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -828,98 +826,7 @@ class MoveRequestMessage : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // optional .mosp.Type type = 1 [default = MoveRequest];
-  inline bool has_type() const;
-  inline void clear_type();
-  static const int kTypeFieldNumber = 1;
-  inline ::mosp::Type type() const;
-  inline void set_type(::mosp::Type value);
-
-  // required .mosp.Vector2 position = 2;
-  inline bool has_position() const;
-  inline void clear_position();
-  static const int kPositionFieldNumber = 2;
-  inline const ::mosp::Vector2& position() const;
-  inline ::mosp::Vector2* mutable_position();
-  inline ::mosp::Vector2* release_position();
-  inline void set_allocated_position(::mosp::Vector2* position);
-
-  // @@protoc_insertion_point(class_scope:mosp.MoveRequestMessage)
- private:
-  inline void set_has_type();
-  inline void clear_has_type();
-  inline void set_has_position();
-  inline void clear_has_position();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::uint32 _has_bits_[1];
-  mutable int _cached_size_;
-  ::mosp::Vector2* position_;
-  int type_;
-  friend void  protobuf_AddDesc_messages_2eproto();
-  friend void protobuf_AssignDesc_messages_2eproto();
-  friend void protobuf_ShutdownFile_messages_2eproto();
-
-  void InitAsDefaultInstance();
-  static MoveRequestMessage* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class MoveNotificationMessage : public ::google::protobuf::Message {
- public:
-  MoveNotificationMessage();
-  virtual ~MoveNotificationMessage();
-
-  MoveNotificationMessage(const MoveNotificationMessage& from);
-
-  inline MoveNotificationMessage& operator=(const MoveNotificationMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const MoveNotificationMessage& default_instance();
-
-  void Swap(MoveNotificationMessage* other);
-
-  // implements Message ----------------------------------------------
-
-  MoveNotificationMessage* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const MoveNotificationMessage& from);
-  void MergeFrom(const MoveNotificationMessage& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional .mosp.Type type = 1 [default = MoveNotification];
+  // optional .mosp.Type type = 1 [default = PlayerMoved];
   inline bool has_type() const;
   inline void clear_type();
   static const int kTypeFieldNumber = 1;
@@ -942,7 +849,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
   inline ::mosp::Vector2* release_position();
   inline void set_allocated_position(::mosp::Vector2* position);
 
-  // @@protoc_insertion_point(class_scope:mosp.MoveNotificationMessage)
+  // @@protoc_insertion_point(class_scope:mosp.PlayerMovedMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
@@ -963,7 +870,7 @@ class MoveNotificationMessage : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_messages_2eproto();
 
   void InitAsDefaultInstance();
-  static MoveNotificationMessage* default_instance_;
+  static PlayerMovedMessage* default_instance_;
 };
 // ===================================================================
 
@@ -1001,7 +908,7 @@ inline void BaseMessage::set_type(::mosp::Type value) {
 
 // Vector2
 
-// required double x = 1;
+// required float x = 1;
 inline bool Vector2::has_x() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1015,17 +922,17 @@ inline void Vector2::clear_x() {
   x_ = 0;
   clear_has_x();
 }
-inline double Vector2::x() const {
+inline float Vector2::x() const {
   // @@protoc_insertion_point(field_get:mosp.Vector2.x)
   return x_;
 }
-inline void Vector2::set_x(double value) {
+inline void Vector2::set_x(float value) {
   set_has_x();
   x_ = value;
   // @@protoc_insertion_point(field_set:mosp.Vector2.x)
 }
 
-// required double y = 2;
+// required float y = 2;
 inline bool Vector2::has_y() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1039,11 +946,11 @@ inline void Vector2::clear_y() {
   y_ = 0;
   clear_has_y();
 }
-inline double Vector2::y() const {
+inline float Vector2::y() const {
   // @@protoc_insertion_point(field_get:mosp.Vector2.y)
   return y_;
 }
-inline void Vector2::set_y(double value) {
+inline void Vector2::set_y(float value) {
   set_has_y();
   y_ = value;
   // @@protoc_insertion_point(field_set:mosp.Vector2.y)
@@ -1053,7 +960,7 @@ inline void Vector2::set_y(double value) {
 
 // Vector3
 
-// required double x = 1;
+// required float x = 1;
 inline bool Vector3::has_x() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1067,17 +974,17 @@ inline void Vector3::clear_x() {
   x_ = 0;
   clear_has_x();
 }
-inline double Vector3::x() const {
+inline float Vector3::x() const {
   // @@protoc_insertion_point(field_get:mosp.Vector3.x)
   return x_;
 }
-inline void Vector3::set_x(double value) {
+inline void Vector3::set_x(float value) {
   set_has_x();
   x_ = value;
   // @@protoc_insertion_point(field_set:mosp.Vector3.x)
 }
 
-// required double y = 2;
+// required float y = 2;
 inline bool Vector3::has_y() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -1091,17 +998,17 @@ inline void Vector3::clear_y() {
   y_ = 0;
   clear_has_y();
 }
-inline double Vector3::y() const {
+inline float Vector3::y() const {
   // @@protoc_insertion_point(field_get:mosp.Vector3.y)
   return y_;
 }
-inline void Vector3::set_y(double value) {
+inline void Vector3::set_y(float value) {
   set_has_y();
   y_ = value;
   // @@protoc_insertion_point(field_set:mosp.Vector3.y)
 }
 
-// required double z = 3;
+// required float z = 3;
 inline bool Vector3::has_z() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1115,11 +1022,11 @@ inline void Vector3::clear_z() {
   z_ = 0;
   clear_has_z();
 }
-inline double Vector3::z() const {
+inline float Vector3::z() const {
   // @@protoc_insertion_point(field_get:mosp.Vector3.z)
   return z_;
 }
-inline void Vector3::set_z(double value) {
+inline void Vector3::set_z(float value) {
   set_has_z();
   z_ = value;
   // @@protoc_insertion_point(field_set:mosp.Vector3.z)
@@ -1127,86 +1034,86 @@ inline void Vector3::set_z(double value) {
 
 // -------------------------------------------------------------------
 
-// JoinRequestMessage
+// ConnectRequestMessage
 
-// optional .mosp.Type type = 1 [default = JoinRequest];
-inline bool JoinRequestMessage::has_type() const {
+// optional .mosp.Type type = 1 [default = ConnectRequest];
+inline bool ConnectRequestMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinRequestMessage::set_has_type() {
+inline void ConnectRequestMessage::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinRequestMessage::clear_has_type() {
+inline void ConnectRequestMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinRequestMessage::clear_type() {
+inline void ConnectRequestMessage::clear_type() {
   type_ = 1;
   clear_has_type();
 }
-inline ::mosp::Type JoinRequestMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinRequestMessage.type)
+inline ::mosp::Type ConnectRequestMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectRequestMessage.type)
   return static_cast< ::mosp::Type >(type_);
 }
-inline void JoinRequestMessage::set_type(::mosp::Type value) {
+inline void ConnectRequestMessage::set_type(::mosp::Type value) {
   assert(::mosp::Type_IsValid(value));
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinRequestMessage.type)
+  // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.type)
 }
 
 // required string name = 2;
-inline bool JoinRequestMessage::has_name() const {
+inline bool ConnectRequestMessage::has_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void JoinRequestMessage::set_has_name() {
+inline void ConnectRequestMessage::set_has_name() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void JoinRequestMessage::clear_has_name() {
+inline void ConnectRequestMessage::clear_has_name() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void JoinRequestMessage::clear_name() {
+inline void ConnectRequestMessage::clear_name() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_->clear();
   }
   clear_has_name();
 }
-inline const ::std::string& JoinRequestMessage::name() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinRequestMessage.name)
+inline const ::std::string& ConnectRequestMessage::name() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectRequestMessage.name)
   return *name_;
 }
-inline void JoinRequestMessage::set_name(const ::std::string& value) {
+inline void ConnectRequestMessage::set_name(const ::std::string& value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set:mosp.JoinRequestMessage.name)
+  // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.name)
 }
-inline void JoinRequestMessage::set_name(const char* value) {
+inline void ConnectRequestMessage::set_name(const char* value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:mosp.JoinRequestMessage.name)
+  // @@protoc_insertion_point(field_set_char:mosp.ConnectRequestMessage.name)
 }
-inline void JoinRequestMessage::set_name(const char* value, size_t size) {
+inline void ConnectRequestMessage::set_name(const char* value, size_t size) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:mosp.JoinRequestMessage.name)
+  // @@protoc_insertion_point(field_set_pointer:mosp.ConnectRequestMessage.name)
 }
-inline ::std::string* JoinRequestMessage::mutable_name() {
+inline ::std::string* ConnectRequestMessage::mutable_name() {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:mosp.JoinRequestMessage.name)
+  // @@protoc_insertion_point(field_mutable:mosp.ConnectRequestMessage.name)
   return name_;
 }
-inline ::std::string* JoinRequestMessage::release_name() {
+inline ::std::string* ConnectRequestMessage::release_name() {
   clear_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -1216,7 +1123,7 @@ inline ::std::string* JoinRequestMessage::release_name() {
     return temp;
   }
 }
-inline void JoinRequestMessage::set_allocated_name(::std::string* name) {
+inline void ConnectRequestMessage::set_allocated_name(::std::string* name) {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete name_;
   }
@@ -1227,93 +1134,93 @@ inline void JoinRequestMessage::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.JoinRequestMessage.name)
+  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectRequestMessage.name)
 }
 
 // -------------------------------------------------------------------
 
-// JoinResponseMessage
+// ConnectResponseMessage
 
-// optional .mosp.Type type = 1 [default = JoinResponse];
-inline bool JoinResponseMessage::has_type() const {
+// optional .mosp.Type type = 1 [default = ConnectResponse];
+inline bool ConnectResponseMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinResponseMessage::set_has_type() {
+inline void ConnectResponseMessage::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinResponseMessage::clear_has_type() {
+inline void ConnectResponseMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinResponseMessage::clear_type() {
+inline void ConnectResponseMessage::clear_type() {
   type_ = 2;
   clear_has_type();
 }
-inline ::mosp::Type JoinResponseMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.type)
+inline ::mosp::Type ConnectResponseMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.type)
   return static_cast< ::mosp::Type >(type_);
 }
-inline void JoinResponseMessage::set_type(::mosp::Type value) {
+inline void ConnectResponseMessage::set_type(::mosp::Type value) {
   assert(::mosp::Type_IsValid(value));
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.type)
+  // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.type)
 }
 
 // required bool success = 2;
-inline bool JoinResponseMessage::has_success() const {
+inline bool ConnectResponseMessage::has_success() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void JoinResponseMessage::set_has_success() {
+inline void ConnectResponseMessage::set_has_success() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void JoinResponseMessage::clear_has_success() {
+inline void ConnectResponseMessage::clear_has_success() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void JoinResponseMessage::clear_success() {
+inline void ConnectResponseMessage::clear_success() {
   success_ = false;
   clear_has_success();
 }
-inline bool JoinResponseMessage::success() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.success)
+inline bool ConnectResponseMessage::success() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.success)
   return success_;
 }
-inline void JoinResponseMessage::set_success(bool value) {
+inline void ConnectResponseMessage::set_success(bool value) {
   set_has_success();
   success_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.success)
+  // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.success)
 }
 
-// required .mosp.Vector3 position = 3;
-inline bool JoinResponseMessage::has_position() const {
+// required .mosp.Vector2 position = 3;
+inline bool ConnectResponseMessage::has_position() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void JoinResponseMessage::set_has_position() {
+inline void ConnectResponseMessage::set_has_position() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void JoinResponseMessage::clear_has_position() {
+inline void ConnectResponseMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void JoinResponseMessage::clear_position() {
-  if (position_ != NULL) position_->::mosp::Vector3::Clear();
+inline void ConnectResponseMessage::clear_position() {
+  if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector3& JoinResponseMessage::position() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.position)
+inline const ::mosp::Vector2& ConnectResponseMessage::position() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector3* JoinResponseMessage::mutable_position() {
+inline ::mosp::Vector2* ConnectResponseMessage::mutable_position() {
   set_has_position();
-  if (position_ == NULL) position_ = new ::mosp::Vector3;
-  // @@protoc_insertion_point(field_mutable:mosp.JoinResponseMessage.position)
+  if (position_ == NULL) position_ = new ::mosp::Vector2;
+  // @@protoc_insertion_point(field_mutable:mosp.ConnectResponseMessage.position)
   return position_;
 }
-inline ::mosp::Vector3* JoinResponseMessage::release_position() {
+inline ::mosp::Vector2* ConnectResponseMessage::release_position() {
   clear_has_position();
-  ::mosp::Vector3* temp = position_;
+  ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void JoinResponseMessage::set_allocated_position(::mosp::Vector3* position) {
+inline void ConnectResponseMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -1321,140 +1228,140 @@ inline void JoinResponseMessage::set_allocated_position(::mosp::Vector3* positio
   } else {
     clear_has_position();
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.JoinResponseMessage.position)
+  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectResponseMessage.position)
 }
 
 // required int32 client_id = 4;
-inline bool JoinResponseMessage::has_client_id() const {
+inline bool ConnectResponseMessage::has_client_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void JoinResponseMessage::set_has_client_id() {
+inline void ConnectResponseMessage::set_has_client_id() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void JoinResponseMessage::clear_has_client_id() {
+inline void ConnectResponseMessage::clear_has_client_id() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void JoinResponseMessage::clear_client_id() {
+inline void ConnectResponseMessage::clear_client_id() {
   client_id_ = 0;
   clear_has_client_id();
 }
-inline ::google::protobuf::int32 JoinResponseMessage::client_id() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.client_id)
+inline ::google::protobuf::int32 ConnectResponseMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.client_id)
   return client_id_;
 }
-inline void JoinResponseMessage::set_client_id(::google::protobuf::int32 value) {
+inline void ConnectResponseMessage::set_client_id(::google::protobuf::int32 value) {
   set_has_client_id();
   client_id_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.client_id)
+  // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.client_id)
 }
 
-// optional .mosp.JOIN_REQUEST_ERROR error = 5;
-inline bool JoinResponseMessage::has_error() const {
+// optional .mosp.CONNECT_REQUEST_ERROR error = 5;
+inline bool ConnectResponseMessage::has_error() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void JoinResponseMessage::set_has_error() {
+inline void ConnectResponseMessage::set_has_error() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void JoinResponseMessage::clear_has_error() {
+inline void ConnectResponseMessage::clear_has_error() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void JoinResponseMessage::clear_error() {
+inline void ConnectResponseMessage::clear_error() {
   error_ = 1;
   clear_has_error();
 }
-inline ::mosp::JOIN_REQUEST_ERROR JoinResponseMessage::error() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinResponseMessage.error)
-  return static_cast< ::mosp::JOIN_REQUEST_ERROR >(error_);
+inline ::mosp::CONNECT_REQUEST_ERROR ConnectResponseMessage::error() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectResponseMessage.error)
+  return static_cast< ::mosp::CONNECT_REQUEST_ERROR >(error_);
 }
-inline void JoinResponseMessage::set_error(::mosp::JOIN_REQUEST_ERROR value) {
-  assert(::mosp::JOIN_REQUEST_ERROR_IsValid(value));
+inline void ConnectResponseMessage::set_error(::mosp::CONNECT_REQUEST_ERROR value) {
+  assert(::mosp::CONNECT_REQUEST_ERROR_IsValid(value));
   set_has_error();
   error_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinResponseMessage.error)
+  // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.error)
 }
 
 // -------------------------------------------------------------------
 
-// JoinNotificationMessage
+// PlayerConnectMessage
 
-// optional .mosp.Type type = 1 [default = JoinNotification];
-inline bool JoinNotificationMessage::has_type() const {
+// optional .mosp.Type type = 1 [default = PlayerConnect];
+inline bool PlayerConnectMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void JoinNotificationMessage::set_has_type() {
+inline void PlayerConnectMessage::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void JoinNotificationMessage::clear_has_type() {
+inline void PlayerConnectMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void JoinNotificationMessage::clear_type() {
+inline void PlayerConnectMessage::clear_type() {
   type_ = 3;
   clear_has_type();
 }
-inline ::mosp::Type JoinNotificationMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinNotificationMessage.type)
+inline ::mosp::Type PlayerConnectMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerConnectMessage.type)
   return static_cast< ::mosp::Type >(type_);
 }
-inline void JoinNotificationMessage::set_type(::mosp::Type value) {
+inline void PlayerConnectMessage::set_type(::mosp::Type value) {
   assert(::mosp::Type_IsValid(value));
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinNotificationMessage.type)
+  // @@protoc_insertion_point(field_set:mosp.PlayerConnectMessage.type)
 }
 
 // required string name = 2;
-inline bool JoinNotificationMessage::has_name() const {
+inline bool PlayerConnectMessage::has_name() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void JoinNotificationMessage::set_has_name() {
+inline void PlayerConnectMessage::set_has_name() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void JoinNotificationMessage::clear_has_name() {
+inline void PlayerConnectMessage::clear_has_name() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void JoinNotificationMessage::clear_name() {
+inline void PlayerConnectMessage::clear_name() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_->clear();
   }
   clear_has_name();
 }
-inline const ::std::string& JoinNotificationMessage::name() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinNotificationMessage.name)
+inline const ::std::string& PlayerConnectMessage::name() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerConnectMessage.name)
   return *name_;
 }
-inline void JoinNotificationMessage::set_name(const ::std::string& value) {
+inline void PlayerConnectMessage::set_name(const ::std::string& value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set:mosp.JoinNotificationMessage.name)
+  // @@protoc_insertion_point(field_set:mosp.PlayerConnectMessage.name)
 }
-inline void JoinNotificationMessage::set_name(const char* value) {
+inline void PlayerConnectMessage::set_name(const char* value) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:mosp.JoinNotificationMessage.name)
+  // @@protoc_insertion_point(field_set_char:mosp.PlayerConnectMessage.name)
 }
-inline void JoinNotificationMessage::set_name(const char* value, size_t size) {
+inline void PlayerConnectMessage::set_name(const char* value, size_t size) {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
   name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:mosp.JoinNotificationMessage.name)
+  // @@protoc_insertion_point(field_set_pointer:mosp.PlayerConnectMessage.name)
 }
-inline ::std::string* JoinNotificationMessage::mutable_name() {
+inline ::std::string* PlayerConnectMessage::mutable_name() {
   set_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     name_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:mosp.JoinNotificationMessage.name)
+  // @@protoc_insertion_point(field_mutable:mosp.PlayerConnectMessage.name)
   return name_;
 }
-inline ::std::string* JoinNotificationMessage::release_name() {
+inline ::std::string* PlayerConnectMessage::release_name() {
   clear_has_name();
   if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -1464,7 +1371,7 @@ inline ::std::string* JoinNotificationMessage::release_name() {
     return temp;
   }
 }
-inline void JoinNotificationMessage::set_allocated_name(::std::string* name) {
+inline void PlayerConnectMessage::set_allocated_name(::std::string* name) {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete name_;
   }
@@ -1475,64 +1382,64 @@ inline void JoinNotificationMessage::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.JoinNotificationMessage.name)
+  // @@protoc_insertion_point(field_set_allocated:mosp.PlayerConnectMessage.name)
 }
 
 // required int32 client_id = 3;
-inline bool JoinNotificationMessage::has_client_id() const {
+inline bool PlayerConnectMessage::has_client_id() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void JoinNotificationMessage::set_has_client_id() {
+inline void PlayerConnectMessage::set_has_client_id() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void JoinNotificationMessage::clear_has_client_id() {
+inline void PlayerConnectMessage::clear_has_client_id() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void JoinNotificationMessage::clear_client_id() {
+inline void PlayerConnectMessage::clear_client_id() {
   client_id_ = 0;
   clear_has_client_id();
 }
-inline ::google::protobuf::int32 JoinNotificationMessage::client_id() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinNotificationMessage.client_id)
+inline ::google::protobuf::int32 PlayerConnectMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerConnectMessage.client_id)
   return client_id_;
 }
-inline void JoinNotificationMessage::set_client_id(::google::protobuf::int32 value) {
+inline void PlayerConnectMessage::set_client_id(::google::protobuf::int32 value) {
   set_has_client_id();
   client_id_ = value;
-  // @@protoc_insertion_point(field_set:mosp.JoinNotificationMessage.client_id)
+  // @@protoc_insertion_point(field_set:mosp.PlayerConnectMessage.client_id)
 }
 
 // required .mosp.Vector2 position = 4;
-inline bool JoinNotificationMessage::has_position() const {
+inline bool PlayerConnectMessage::has_position() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void JoinNotificationMessage::set_has_position() {
+inline void PlayerConnectMessage::set_has_position() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void JoinNotificationMessage::clear_has_position() {
+inline void PlayerConnectMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void JoinNotificationMessage::clear_position() {
+inline void PlayerConnectMessage::clear_position() {
   if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector2& JoinNotificationMessage::position() const {
-  // @@protoc_insertion_point(field_get:mosp.JoinNotificationMessage.position)
+inline const ::mosp::Vector2& PlayerConnectMessage::position() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerConnectMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector2* JoinNotificationMessage::mutable_position() {
+inline ::mosp::Vector2* PlayerConnectMessage::mutable_position() {
   set_has_position();
   if (position_ == NULL) position_ = new ::mosp::Vector2;
-  // @@protoc_insertion_point(field_mutable:mosp.JoinNotificationMessage.position)
+  // @@protoc_insertion_point(field_mutable:mosp.PlayerConnectMessage.position)
   return position_;
 }
-inline ::mosp::Vector2* JoinNotificationMessage::release_position() {
+inline ::mosp::Vector2* PlayerConnectMessage::release_position() {
   clear_has_position();
   ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector2* position) {
+inline void PlayerConnectMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -1540,216 +1447,146 @@ inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector2* pos
   } else {
     clear_has_position();
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.JoinNotificationMessage.position)
+  // @@protoc_insertion_point(field_set_allocated:mosp.PlayerConnectMessage.position)
 }
 
 // -------------------------------------------------------------------
 
-// DisconnectNotificationMessage
+// PlayerDisconnectMessage
 
-// optional .mosp.Type type = 1 [default = DisconnectNotification];
-inline bool DisconnectNotificationMessage::has_type() const {
+// optional .mosp.Type type = 1 [default = PlayerDisconnect];
+inline bool PlayerDisconnectMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void DisconnectNotificationMessage::set_has_type() {
+inline void PlayerDisconnectMessage::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void DisconnectNotificationMessage::clear_has_type() {
+inline void PlayerDisconnectMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void DisconnectNotificationMessage::clear_type() {
-  type_ = 6;
-  clear_has_type();
-}
-inline ::mosp::Type DisconnectNotificationMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.DisconnectNotificationMessage.type)
-  return static_cast< ::mosp::Type >(type_);
-}
-inline void DisconnectNotificationMessage::set_type(::mosp::Type value) {
-  assert(::mosp::Type_IsValid(value));
-  set_has_type();
-  type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.DisconnectNotificationMessage.type)
-}
-
-// required int32 client_id = 2;
-inline bool DisconnectNotificationMessage::has_client_id() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void DisconnectNotificationMessage::set_has_client_id() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void DisconnectNotificationMessage::clear_has_client_id() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void DisconnectNotificationMessage::clear_client_id() {
-  client_id_ = 0;
-  clear_has_client_id();
-}
-inline ::google::protobuf::int32 DisconnectNotificationMessage::client_id() const {
-  // @@protoc_insertion_point(field_get:mosp.DisconnectNotificationMessage.client_id)
-  return client_id_;
-}
-inline void DisconnectNotificationMessage::set_client_id(::google::protobuf::int32 value) {
-  set_has_client_id();
-  client_id_ = value;
-  // @@protoc_insertion_point(field_set:mosp.DisconnectNotificationMessage.client_id)
-}
-
-// -------------------------------------------------------------------
-
-// MoveRequestMessage
-
-// optional .mosp.Type type = 1 [default = MoveRequest];
-inline bool MoveRequestMessage::has_type() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void MoveRequestMessage::set_has_type() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void MoveRequestMessage::clear_has_type() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void MoveRequestMessage::clear_type() {
+inline void PlayerDisconnectMessage::clear_type() {
   type_ = 4;
   clear_has_type();
 }
-inline ::mosp::Type MoveRequestMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.MoveRequestMessage.type)
+inline ::mosp::Type PlayerDisconnectMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerDisconnectMessage.type)
   return static_cast< ::mosp::Type >(type_);
 }
-inline void MoveRequestMessage::set_type(::mosp::Type value) {
+inline void PlayerDisconnectMessage::set_type(::mosp::Type value) {
   assert(::mosp::Type_IsValid(value));
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.MoveRequestMessage.type)
+  // @@protoc_insertion_point(field_set:mosp.PlayerDisconnectMessage.type)
 }
 
-// required .mosp.Vector2 position = 2;
-inline bool MoveRequestMessage::has_position() const {
+// required int32 client_id = 2;
+inline bool PlayerDisconnectMessage::has_client_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MoveRequestMessage::set_has_position() {
+inline void PlayerDisconnectMessage::set_has_client_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MoveRequestMessage::clear_has_position() {
+inline void PlayerDisconnectMessage::clear_has_client_id() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MoveRequestMessage::clear_position() {
-  if (position_ != NULL) position_->::mosp::Vector2::Clear();
-  clear_has_position();
+inline void PlayerDisconnectMessage::clear_client_id() {
+  client_id_ = 0;
+  clear_has_client_id();
 }
-inline const ::mosp::Vector2& MoveRequestMessage::position() const {
-  // @@protoc_insertion_point(field_get:mosp.MoveRequestMessage.position)
-  return position_ != NULL ? *position_ : *default_instance_->position_;
+inline ::google::protobuf::int32 PlayerDisconnectMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerDisconnectMessage.client_id)
+  return client_id_;
 }
-inline ::mosp::Vector2* MoveRequestMessage::mutable_position() {
-  set_has_position();
-  if (position_ == NULL) position_ = new ::mosp::Vector2;
-  // @@protoc_insertion_point(field_mutable:mosp.MoveRequestMessage.position)
-  return position_;
-}
-inline ::mosp::Vector2* MoveRequestMessage::release_position() {
-  clear_has_position();
-  ::mosp::Vector2* temp = position_;
-  position_ = NULL;
-  return temp;
-}
-inline void MoveRequestMessage::set_allocated_position(::mosp::Vector2* position) {
-  delete position_;
-  position_ = position;
-  if (position) {
-    set_has_position();
-  } else {
-    clear_has_position();
-  }
-  // @@protoc_insertion_point(field_set_allocated:mosp.MoveRequestMessage.position)
+inline void PlayerDisconnectMessage::set_client_id(::google::protobuf::int32 value) {
+  set_has_client_id();
+  client_id_ = value;
+  // @@protoc_insertion_point(field_set:mosp.PlayerDisconnectMessage.client_id)
 }
 
 // -------------------------------------------------------------------
 
-// MoveNotificationMessage
+// PlayerMovedMessage
 
-// optional .mosp.Type type = 1 [default = MoveNotification];
-inline bool MoveNotificationMessage::has_type() const {
+// optional .mosp.Type type = 1 [default = PlayerMoved];
+inline bool PlayerMovedMessage::has_type() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void MoveNotificationMessage::set_has_type() {
+inline void PlayerMovedMessage::set_has_type() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void MoveNotificationMessage::clear_has_type() {
+inline void PlayerMovedMessage::clear_has_type() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void MoveNotificationMessage::clear_type() {
+inline void PlayerMovedMessage::clear_type() {
   type_ = 5;
   clear_has_type();
 }
-inline ::mosp::Type MoveNotificationMessage::type() const {
-  // @@protoc_insertion_point(field_get:mosp.MoveNotificationMessage.type)
+inline ::mosp::Type PlayerMovedMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerMovedMessage.type)
   return static_cast< ::mosp::Type >(type_);
 }
-inline void MoveNotificationMessage::set_type(::mosp::Type value) {
+inline void PlayerMovedMessage::set_type(::mosp::Type value) {
   assert(::mosp::Type_IsValid(value));
   set_has_type();
   type_ = value;
-  // @@protoc_insertion_point(field_set:mosp.MoveNotificationMessage.type)
+  // @@protoc_insertion_point(field_set:mosp.PlayerMovedMessage.type)
 }
 
 // required int32 client_id = 2;
-inline bool MoveNotificationMessage::has_client_id() const {
+inline bool PlayerMovedMessage::has_client_id() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void MoveNotificationMessage::set_has_client_id() {
+inline void PlayerMovedMessage::set_has_client_id() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void MoveNotificationMessage::clear_has_client_id() {
+inline void PlayerMovedMessage::clear_has_client_id() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void MoveNotificationMessage::clear_client_id() {
+inline void PlayerMovedMessage::clear_client_id() {
   client_id_ = 0;
   clear_has_client_id();
 }
-inline ::google::protobuf::int32 MoveNotificationMessage::client_id() const {
-  // @@protoc_insertion_point(field_get:mosp.MoveNotificationMessage.client_id)
+inline ::google::protobuf::int32 PlayerMovedMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerMovedMessage.client_id)
   return client_id_;
 }
-inline void MoveNotificationMessage::set_client_id(::google::protobuf::int32 value) {
+inline void PlayerMovedMessage::set_client_id(::google::protobuf::int32 value) {
   set_has_client_id();
   client_id_ = value;
-  // @@protoc_insertion_point(field_set:mosp.MoveNotificationMessage.client_id)
+  // @@protoc_insertion_point(field_set:mosp.PlayerMovedMessage.client_id)
 }
 
 // required .mosp.Vector2 position = 3;
-inline bool MoveNotificationMessage::has_position() const {
+inline bool PlayerMovedMessage::has_position() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void MoveNotificationMessage::set_has_position() {
+inline void PlayerMovedMessage::set_has_position() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void MoveNotificationMessage::clear_has_position() {
+inline void PlayerMovedMessage::clear_has_position() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void MoveNotificationMessage::clear_position() {
+inline void PlayerMovedMessage::clear_position() {
   if (position_ != NULL) position_->::mosp::Vector2::Clear();
   clear_has_position();
 }
-inline const ::mosp::Vector2& MoveNotificationMessage::position() const {
-  // @@protoc_insertion_point(field_get:mosp.MoveNotificationMessage.position)
+inline const ::mosp::Vector2& PlayerMovedMessage::position() const {
+  // @@protoc_insertion_point(field_get:mosp.PlayerMovedMessage.position)
   return position_ != NULL ? *position_ : *default_instance_->position_;
 }
-inline ::mosp::Vector2* MoveNotificationMessage::mutable_position() {
+inline ::mosp::Vector2* PlayerMovedMessage::mutable_position() {
   set_has_position();
   if (position_ == NULL) position_ = new ::mosp::Vector2;
-  // @@protoc_insertion_point(field_mutable:mosp.MoveNotificationMessage.position)
+  // @@protoc_insertion_point(field_mutable:mosp.PlayerMovedMessage.position)
   return position_;
 }
-inline ::mosp::Vector2* MoveNotificationMessage::release_position() {
+inline ::mosp::Vector2* PlayerMovedMessage::release_position() {
   clear_has_position();
   ::mosp::Vector2* temp = position_;
   position_ = NULL;
   return temp;
 }
-inline void MoveNotificationMessage::set_allocated_position(::mosp::Vector2* position) {
+inline void PlayerMovedMessage::set_allocated_position(::mosp::Vector2* position) {
   delete position_;
   position_ = position;
   if (position) {
@@ -1757,7 +1594,7 @@ inline void MoveNotificationMessage::set_allocated_position(::mosp::Vector2* pos
   } else {
     clear_has_position();
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.MoveNotificationMessage.position)
+  // @@protoc_insertion_point(field_set_allocated:mosp.PlayerMovedMessage.position)
 }
 
 
@@ -1774,10 +1611,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::mosp::Type>() {
   return ::mosp::Type_descriptor();
 }
-template <> struct is_proto_enum< ::mosp::JOIN_REQUEST_ERROR> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::mosp::CONNECT_REQUEST_ERROR> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::mosp::JOIN_REQUEST_ERROR>() {
-  return ::mosp::JOIN_REQUEST_ERROR_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::mosp::CONNECT_REQUEST_ERROR>() {
+  return ::mosp::CONNECT_REQUEST_ERROR_descriptor();
 }
 
 }  // namespace google
