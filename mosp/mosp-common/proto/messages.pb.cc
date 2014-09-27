@@ -38,6 +38,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* JoinNotificationMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   JoinNotificationMessage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* DisconnectNotificationMessage_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  DisconnectNotificationMessage_reflection_ = NULL;
 const ::google::protobuf::Descriptor* MoveRequestMessage_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MoveRequestMessage_reflection_ = NULL;
@@ -157,7 +160,23 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(JoinNotificationMessage));
-  MoveRequestMessage_descriptor_ = file->message_type(6);
+  DisconnectNotificationMessage_descriptor_ = file->message_type(6);
+  static const int DisconnectNotificationMessage_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, client_id_),
+  };
+  DisconnectNotificationMessage_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      DisconnectNotificationMessage_descriptor_,
+      DisconnectNotificationMessage::default_instance_,
+      DisconnectNotificationMessage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(DisconnectNotificationMessage, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(DisconnectNotificationMessage));
+  MoveRequestMessage_descriptor_ = file->message_type(7);
   static const int MoveRequestMessage_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveRequestMessage, position_),
@@ -173,7 +192,7 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MoveRequestMessage));
-  MoveNotificationMessage_descriptor_ = file->message_type(7);
+  MoveNotificationMessage_descriptor_ = file->message_type(8);
   static const int MoveNotificationMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MoveNotificationMessage, client_id_),
@@ -217,6 +236,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     JoinNotificationMessage_descriptor_, &JoinNotificationMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    DisconnectNotificationMessage_descriptor_, &DisconnectNotificationMessage::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MoveRequestMessage_descriptor_, &MoveRequestMessage::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MoveNotificationMessage_descriptor_, &MoveNotificationMessage::default_instance());
@@ -237,6 +258,8 @@ void protobuf_ShutdownFile_messages_2eproto() {
   delete JoinResponseMessage_reflection_;
   delete JoinNotificationMessage::default_instance_;
   delete JoinNotificationMessage_reflection_;
+  delete DisconnectNotificationMessage::default_instance_;
+  delete DisconnectNotificationMessage_reflection_;
   delete MoveRequestMessage::default_instance_;
   delete MoveRequestMessage_reflection_;
   delete MoveNotificationMessage::default_instance_;
@@ -263,16 +286,19 @@ void protobuf_AddDesc_messages_2eproto() {
     "tificationMessage\022*\n\004type\030\001 \001(\0162\n.mosp.T"
     "ype:\020JoinNotification\022\014\n\004name\030\002 \002(\t\022\021\n\tc"
     "lient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132\r.mosp."
-    "Vector2\"\\\n\022MoveRequestMessage\022%\n\004type\030\001 "
-    "\001(\0162\n.mosp.Type:\013MoveRequest\022\037\n\010position"
-    "\030\002 \002(\0132\r.mosp.Vector2\"y\n\027MoveNotificatio"
-    "nMessage\022*\n\004type\030\001 \001(\0162\n.mosp.Type:\020Move"
-    "Notification\022\021\n\tclient_id\030\002 \002(\005\022\037\n\010posit"
-    "ion\030\003 \002(\0132\r.mosp.Vector2*f\n\004Type\022\017\n\013Join"
-    "Request\020\001\022\020\n\014JoinResponse\020\002\022\024\n\020JoinNotif"
-    "ication\020\003\022\017\n\013MoveRequest\020\004\022\024\n\020MoveNotifi"
-    "cation\020\005*6\n\022JOIN_REQUEST_ERROR\022\017\n\013NAME_E"
-    "XISTS\020\001\022\017\n\013SERVER_FULL\020\002", 904);
+    "Vector2\"d\n\035DisconnectNotificationMessage"
+    "\0220\n\004type\030\001 \001(\0162\n.mosp.Type:\026DisconnectNo"
+    "tification\022\021\n\tclient_id\030\002 \002(\005\"\\\n\022MoveReq"
+    "uestMessage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013M"
+    "oveRequest\022\037\n\010position\030\002 \002(\0132\r.mosp.Vect"
+    "or2\"y\n\027MoveNotificationMessage\022*\n\004type\030\001"
+    " \001(\0162\n.mosp.Type:\020MoveNotification\022\021\n\tcl"
+    "ient_id\030\002 \002(\005\022\037\n\010position\030\003 \002(\0132\r.mosp.V"
+    "ector2*\202\001\n\004Type\022\017\n\013JoinRequest\020\001\022\020\n\014Join"
+    "Response\020\002\022\024\n\020JoinNotification\020\003\022\017\n\013Move"
+    "Request\020\004\022\024\n\020MoveNotification\020\005\022\032\n\026Disco"
+    "nnectNotification\020\006*6\n\022JOIN_REQUEST_ERRO"
+    "R\022\017\n\013NAME_EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 1035);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "messages.proto", &protobuf_RegisterTypes);
   BaseMessage::default_instance_ = new BaseMessage();
@@ -281,6 +307,7 @@ void protobuf_AddDesc_messages_2eproto() {
   JoinRequestMessage::default_instance_ = new JoinRequestMessage();
   JoinResponseMessage::default_instance_ = new JoinResponseMessage();
   JoinNotificationMessage::default_instance_ = new JoinNotificationMessage();
+  DisconnectNotificationMessage::default_instance_ = new DisconnectNotificationMessage();
   MoveRequestMessage::default_instance_ = new MoveRequestMessage();
   MoveNotificationMessage::default_instance_ = new MoveNotificationMessage();
   BaseMessage::default_instance_->InitAsDefaultInstance();
@@ -289,6 +316,7 @@ void protobuf_AddDesc_messages_2eproto() {
   JoinRequestMessage::default_instance_->InitAsDefaultInstance();
   JoinResponseMessage::default_instance_->InitAsDefaultInstance();
   JoinNotificationMessage::default_instance_->InitAsDefaultInstance();
+  DisconnectNotificationMessage::default_instance_->InitAsDefaultInstance();
   MoveRequestMessage::default_instance_->InitAsDefaultInstance();
   MoveNotificationMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_messages_2eproto);
@@ -311,6 +339,7 @@ bool Type_IsValid(int value) {
     case 3:
     case 4:
     case 5:
+    case 6:
       return true;
     default:
       return false;
@@ -2201,6 +2230,276 @@ void JoinNotificationMessage::Swap(JoinNotificationMessage* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = JoinNotificationMessage_descriptor_;
   metadata.reflection = JoinNotificationMessage_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int DisconnectNotificationMessage::kTypeFieldNumber;
+const int DisconnectNotificationMessage::kClientIdFieldNumber;
+#endif  // !_MSC_VER
+
+DisconnectNotificationMessage::DisconnectNotificationMessage()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:mosp.DisconnectNotificationMessage)
+}
+
+void DisconnectNotificationMessage::InitAsDefaultInstance() {
+}
+
+DisconnectNotificationMessage::DisconnectNotificationMessage(const DisconnectNotificationMessage& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:mosp.DisconnectNotificationMessage)
+}
+
+void DisconnectNotificationMessage::SharedCtor() {
+  _cached_size_ = 0;
+  type_ = 6;
+  client_id_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+DisconnectNotificationMessage::~DisconnectNotificationMessage() {
+  // @@protoc_insertion_point(destructor:mosp.DisconnectNotificationMessage)
+  SharedDtor();
+}
+
+void DisconnectNotificationMessage::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void DisconnectNotificationMessage::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* DisconnectNotificationMessage::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return DisconnectNotificationMessage_descriptor_;
+}
+
+const DisconnectNotificationMessage& DisconnectNotificationMessage::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_messages_2eproto();
+  return *default_instance_;
+}
+
+DisconnectNotificationMessage* DisconnectNotificationMessage::default_instance_ = NULL;
+
+DisconnectNotificationMessage* DisconnectNotificationMessage::New() const {
+  return new DisconnectNotificationMessage;
+}
+
+void DisconnectNotificationMessage::Clear() {
+  if (_has_bits_[0 / 32] & 3) {
+    type_ = 6;
+    client_id_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool DisconnectNotificationMessage::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:mosp.DisconnectNotificationMessage)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .mosp.Type type = 1 [default = DisconnectNotification];
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::mosp::Type_IsValid(value)) {
+            set_type(static_cast< ::mosp::Type >(value));
+          } else {
+            mutable_unknown_fields()->AddVarint(1, value);
+          }
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_client_id;
+        break;
+      }
+
+      // required int32 client_id = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_client_id:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &client_id_)));
+          set_has_client_id();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:mosp.DisconnectNotificationMessage)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:mosp.DisconnectNotificationMessage)
+  return false;
+#undef DO_
+}
+
+void DisconnectNotificationMessage::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:mosp.DisconnectNotificationMessage)
+  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  if (has_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      1, this->type(), output);
+  }
+
+  // required int32 client_id = 2;
+  if (has_client_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->client_id(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:mosp.DisconnectNotificationMessage)
+}
+
+::google::protobuf::uint8* DisconnectNotificationMessage::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:mosp.DisconnectNotificationMessage)
+  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  if (has_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
+      1, this->type(), target);
+  }
+
+  // required int32 client_id = 2;
+  if (has_client_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->client_id(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:mosp.DisconnectNotificationMessage)
+  return target;
+}
+
+int DisconnectNotificationMessage::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional .mosp.Type type = 1 [default = DisconnectNotification];
+    if (has_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
+    }
+
+    // required int32 client_id = 2;
+    if (has_client_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->client_id());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void DisconnectNotificationMessage::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const DisconnectNotificationMessage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const DisconnectNotificationMessage*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void DisconnectNotificationMessage::MergeFrom(const DisconnectNotificationMessage& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_type()) {
+      set_type(from.type());
+    }
+    if (from.has_client_id()) {
+      set_client_id(from.client_id());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void DisconnectNotificationMessage::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void DisconnectNotificationMessage::CopyFrom(const DisconnectNotificationMessage& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool DisconnectNotificationMessage::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
+
+  return true;
+}
+
+void DisconnectNotificationMessage::Swap(DisconnectNotificationMessage* other) {
+  if (other != this) {
+    std::swap(type_, other->type_);
+    std::swap(client_id_, other->client_id_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata DisconnectNotificationMessage::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = DisconnectNotificationMessage_descriptor_;
+  metadata.reflection = DisconnectNotificationMessage_reflection_;
   return metadata;
 }
 

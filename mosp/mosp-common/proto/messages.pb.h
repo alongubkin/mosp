@@ -40,6 +40,7 @@ class Vector3;
 class JoinRequestMessage;
 class JoinResponseMessage;
 class JoinNotificationMessage;
+class DisconnectNotificationMessage;
 class MoveRequestMessage;
 class MoveNotificationMessage;
 
@@ -48,11 +49,12 @@ enum Type {
   JoinResponse = 2,
   JoinNotification = 3,
   MoveRequest = 4,
-  MoveNotification = 5
+  MoveNotification = 5,
+  DisconnectNotification = 6
 };
 bool Type_IsValid(int value);
 const Type Type_MIN = JoinRequest;
-const Type Type_MAX = MoveNotification;
+const Type Type_MAX = DisconnectNotification;
 const int Type_ARRAYSIZE = Type_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* Type_descriptor();
@@ -681,6 +683,95 @@ class JoinNotificationMessage : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static JoinNotificationMessage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class DisconnectNotificationMessage : public ::google::protobuf::Message {
+ public:
+  DisconnectNotificationMessage();
+  virtual ~DisconnectNotificationMessage();
+
+  DisconnectNotificationMessage(const DisconnectNotificationMessage& from);
+
+  inline DisconnectNotificationMessage& operator=(const DisconnectNotificationMessage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const DisconnectNotificationMessage& default_instance();
+
+  void Swap(DisconnectNotificationMessage* other);
+
+  // implements Message ----------------------------------------------
+
+  DisconnectNotificationMessage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const DisconnectNotificationMessage& from);
+  void MergeFrom(const DisconnectNotificationMessage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional .mosp.Type type = 1 [default = DisconnectNotification];
+  inline bool has_type() const;
+  inline void clear_type();
+  static const int kTypeFieldNumber = 1;
+  inline ::mosp::Type type() const;
+  inline void set_type(::mosp::Type value);
+
+  // required int32 client_id = 2;
+  inline bool has_client_id() const;
+  inline void clear_client_id();
+  static const int kClientIdFieldNumber = 2;
+  inline ::google::protobuf::int32 client_id() const;
+  inline void set_client_id(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:mosp.DisconnectNotificationMessage)
+ private:
+  inline void set_has_type();
+  inline void clear_has_type();
+  inline void set_has_client_id();
+  inline void clear_has_client_id();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  int type_;
+  ::google::protobuf::int32 client_id_;
+  friend void  protobuf_AddDesc_messages_2eproto();
+  friend void protobuf_AssignDesc_messages_2eproto();
+  friend void protobuf_ShutdownFile_messages_2eproto();
+
+  void InitAsDefaultInstance();
+  static DisconnectNotificationMessage* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1450,6 +1541,59 @@ inline void JoinNotificationMessage::set_allocated_position(::mosp::Vector2* pos
     clear_has_position();
   }
   // @@protoc_insertion_point(field_set_allocated:mosp.JoinNotificationMessage.position)
+}
+
+// -------------------------------------------------------------------
+
+// DisconnectNotificationMessage
+
+// optional .mosp.Type type = 1 [default = DisconnectNotification];
+inline bool DisconnectNotificationMessage::has_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void DisconnectNotificationMessage::set_has_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void DisconnectNotificationMessage::clear_has_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void DisconnectNotificationMessage::clear_type() {
+  type_ = 6;
+  clear_has_type();
+}
+inline ::mosp::Type DisconnectNotificationMessage::type() const {
+  // @@protoc_insertion_point(field_get:mosp.DisconnectNotificationMessage.type)
+  return static_cast< ::mosp::Type >(type_);
+}
+inline void DisconnectNotificationMessage::set_type(::mosp::Type value) {
+  assert(::mosp::Type_IsValid(value));
+  set_has_type();
+  type_ = value;
+  // @@protoc_insertion_point(field_set:mosp.DisconnectNotificationMessage.type)
+}
+
+// required int32 client_id = 2;
+inline bool DisconnectNotificationMessage::has_client_id() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void DisconnectNotificationMessage::set_has_client_id() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void DisconnectNotificationMessage::clear_has_client_id() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void DisconnectNotificationMessage::clear_client_id() {
+  client_id_ = 0;
+  clear_has_client_id();
+}
+inline ::google::protobuf::int32 DisconnectNotificationMessage::client_id() const {
+  // @@protoc_insertion_point(field_get:mosp.DisconnectNotificationMessage.client_id)
+  return client_id_;
+}
+inline void DisconnectNotificationMessage::set_client_id(::google::protobuf::int32 value) {
+  set_has_client_id();
+  client_id_ = value;
+  // @@protoc_insertion_point(field_set:mosp.DisconnectNotificationMessage.client_id)
 }
 
 // -------------------------------------------------------------------

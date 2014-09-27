@@ -99,6 +99,12 @@ void Server::OnDisconnect(const ENetEvent &event)
 
 	printf("Client %d has disconnected\n", client->GetId());
 
+	
+	mosp::DisconnectNotificationMessage message;
+	message.set_type(mosp::Type::DisconnectNotification);
+	message.set_client_id(client->GetId());
+	Broadcast(message);
+
 	delete client;
 	event.peer->data = nullptr;
 }
