@@ -188,7 +188,7 @@ void Game::HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message)
 {
 	printf("New player joined with id %d\n", message.client_id());
 
-	entities[message.client_id()] = new MPPlayer(this, sceneManager, message.name());
+	entities[message.client_id()] = new Player(this, sceneManager, message.name());
 	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 

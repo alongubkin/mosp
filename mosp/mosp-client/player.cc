@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "mpplayer.h"
+#include "player.h"
 #include "OGRE/OgreSkeleton.h"
 #include "game.h"
 #include "proto/messages.pb.h"
 #include "movable_text.h"
 
-MPPlayer::MPPlayer(Game* game, Ogre::SceneManager* sceneManager, const std::string& name)
+Player::Player(Game* game, Ogre::SceneManager* sceneManager, const std::string& name)
 : Entity(game, sceneManager, "Sinbad.mesh")
 {
 	this->name = name;
@@ -22,25 +22,25 @@ MPPlayer::MPPlayer(Game* game, Ogre::SceneManager* sceneManager, const std::stri
 }
 
 
-MPPlayer::~MPPlayer()
+Player::~Player()
 {
 	Entity::~Entity();
 }
 
-void MPPlayer::SetTarget(float x, float y)
+void Player::SetTarget(float x, float y)
 {
 	Entity::SetTarget(x, y);
 	animationManager->SetAnimation("RunBase", "IdleBase");
 	animationManager->SetAnimation("RunTop", "IdleTop");
 }
 
-void MPPlayer::Update(float delta)
+void Player::Update(float delta)
 {
 	Entity::Update(delta);
 	animationManager->Update(delta);
 }
 
-void MPPlayer::OnReachingTarget()
+void Player::OnReachingTarget()
 {
 	Entity::OnReachingTarget();
 	animationManager->SetAnimation("IdleBase", "RunBase");

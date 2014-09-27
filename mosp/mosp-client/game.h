@@ -7,7 +7,7 @@
 #include "entity.h"
 #include "controller_player.h"
 #include "client.h"
-#include "mpplayer.h"
+#include "player.h"
 #include "proto/messages.pb.h"
 
 class Game
