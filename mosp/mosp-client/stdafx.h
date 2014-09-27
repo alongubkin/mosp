@@ -15,6 +15,11 @@
 #include "OGRE/OgreViewport.h"
 #include "OGRE/OgreTimer.h"
 #include "OGRE/OgreCamera.h"
+#include "OGRE/OgreMovableObject.h"
+#include "OGRE/Overlay/OgreOverlaySystem.h"
+#include "OGRE/Overlay/OgreFont.h"
+#include "OGRE/Overlay/OgreFontManager.h"
+#include "OGRE/OgreMaterialManager.h"
 
 // any other header can be included, as usual
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

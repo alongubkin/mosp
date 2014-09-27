@@ -19,6 +19,9 @@ Game::Game()
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);
 
+	Ogre::OverlaySystem* pOverlaySystem = new Ogre::OverlaySystem();
+	sceneManager->addRenderQueueListener(pOverlaySystem);
+
 	LocateResources();
 
 	SetupViewport();
@@ -172,7 +175,7 @@ void Game::HandleJoinNotificationMessage(const mosp::JoinNotificationMessage& me
 {
 	printf("New player joined with id %d\n", message.client_id());
 
-	players[message.client_id()] = new MPPlayer(this, sceneManager);
+	players[message.client_id()] = new MPPlayer(this, sceneManager, message.name());
 	players[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 

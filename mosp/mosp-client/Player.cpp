@@ -3,6 +3,7 @@
 #include "OGRE/OgreSkeleton.h"
 #include "Game.h"
 #include "proto/messages.pb.h"
+#include "MovableText.h"
 
 Player::Player(Game* game, Ogre::SceneManager* sceneManager) 
 	: Entity(game, sceneManager, "Sinbad.mesh")
