@@ -5,7 +5,7 @@
 class ControllerPlayer : public Player
 {
 public:
-	ControllerPlayer(Game* game, Ogre::SceneManager* sceneManager, std::string name);
+	ControllerPlayer(Game* game, std::string name);
 	void SetTarget(float x, float y);
 };
 

@@ -41,8 +41,7 @@ Game::Game()
 	camera_distance = 40.0f;
 	wasMouseDown = false;
 
-	client = new Client();
-	client->Connect("127.0.0.1", 1234);
+	networkManager = new NetworkManager(this);
 }
 
 
@@ -58,11 +57,13 @@ Game::~Game()
 	sceneManager->destroyAllEntities();
 	sceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
 	Ogre::LogManager::getSingleton().logMessage("end of the program");
+
+	delete networkManager;
 }
 
 void Game::Run()
 {
-	clientThread = std::thread(&Client::Run, client);
+	networkManager->Initialize();
 
 	Ogre::Timer* timer = ogreRoot->getTimer();
 	timer->reset();
@@ -83,15 +84,17 @@ void Game::Run()
 		Ogre::WindowEventUtilities::messagePump();
 	}
 
-	clientThread.join();
+	networkManager->Close();
 }
+
 
 void Game::Update(float delta)
 {
-	if (currentPlayerId != -1)
+	Entity* player = GetEntity(networkManager->GetCurrentClientId());
+	if (player != nullptr)
 	{
-		camera->setPosition(entities[currentPlayerId]->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
-		camera->lookAt(entities[currentPlayerId]->getPos());
+		camera->setPosition(player->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
+		camera->lookAt(player->getPos());
 	}
 
 
@@ -115,7 +118,7 @@ void Game::Update(float delta)
 	movement.normalise();
 	
 	if (movement != Ogre::Vector3::ZERO)
-		entities[currentPlayerId]->SetTarget(entities[currentPlayerId]->getPos().x + movement.x, entities[currentPlayerId]->getPos().z + movement.z);
+		player->SetTarget(player->getPos().x + movement.x, player->getPos().z + movement.z);
 
 	OIS::MouseState mouseState = mouse->getMouseState();
 	if (mouseState.Z.rel)
@@ -127,22 +130,13 @@ void Game::Update(float delta)
 		std::pair<bool, Ogre::Real> floorPoint = mouseRay.intersects(Ogre::Plane(Ogre::Vector3::UNIT_Y, 0));
 		if (floorPoint.first) {
 			Ogre::Vector3 point = mouseRay.getPoint(floorPoint.second);
-			entities[currentPlayerId]->SetTarget(point.x, point.z);
+			player->SetTarget(point.x, point.z);
 		}
 	}
 
-	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
-	
-	/* Multiplayer sync */
-	
-	auto incomingPacketsQueue = client->CopyQueue();
+	networkManager->Update();
 
-	while (!incomingPacketsQueue.empty())
-	{
-		ENetPacket* packet = incomingPacketsQueue.front();
-		incomingPacketsQueue.pop();
-		HandlePacket(packet);
-	}
+	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
 
 	for (auto it = entities.begin(); it != entities.end(); it++)
 	{
@@ -150,67 +144,17 @@ void Game::Update(float delta)
 	}
 }
 
-void Game::HandlePacket(ENetPacket* packet)
+void Game::SetEntity(int id, Entity* entity)
 {
-	mosp::BaseMessage baseMessage = PacketToMessage<mosp::BaseMessage>(packet);
-
-	switch (baseMessage.type())
-	{
-	case mosp::Type::ConnectResponse:
-		HandleConnectResponseMessage(PacketToMessage<mosp::ConnectResponseMessage>(packet));
-		break;
-
-	case mosp::Type::PlayerConnect:
-		HandlePlayerConnectMessage(PacketToMessage<mosp::PlayerConnectMessage>(packet));
-		break;
-
-	case mosp::Type::PlayerMoved:
-		HandlePlayerMovedMessage(PacketToMessage<mosp::PlayerMovedMessage>(packet));
-		break;
-
-	default:
-		printf("unhandled message\n");
-		break;
-	}
-
-	enet_packet_destroy(packet);
+	entities[id] = entity;
 }
 
-void Game::HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message)
+Entity* Game::GetEntity(int id)
 {
-	currentPlayerId = message.client_id();
+	if (!entities.count(id))
+		return nullptr;
 
-	entities[message.client_id()] = new ControllerPlayer(this, sceneManager, message.name());
-	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
-}
-
-void Game::HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message)
-{
-	printf("New player joined with id %d\n", message.client_id());
-
-	entities[message.client_id()] = new Player(this, sceneManager, message.name());
-	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
-}
-
-void Game::HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message)
-{
-	if (entities.count(message.client_id()))
-	{
-		entities[message.client_id()]->SetTarget(message.position().x(), message.position().y());
-	}
-}
-
-template<typename T>
-T Game::PacketToMessage(ENetPacket* packet)
-{
-	T message;
-	if (!message.ParseFromArray(packet->data, packet->dataLength))
-	{
-		// TODO: throw exception
-		assert("packet parsing error");
-	}
-
-	return message;
+	return entities[id];
 }
 
 void Game::LocateResources()

@@ -10,7 +10,7 @@ private:
 public:
 	AnimationManager* animationManager;
 
-	Player(Game* game, Ogre::SceneManager* sceneManager, const std::string& name);
+	Player(Game* game, const std::string& name);
 	~Player();
 
 	void SetTarget(float x, float y);

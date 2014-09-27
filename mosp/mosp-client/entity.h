@@ -13,7 +13,7 @@ protected:
 	float MOVE_SPEED;
 
 public:
-	Entity(Game *game, Ogre::SceneManager* sceneManager, Ogre::String meshName);
+	Entity(Game *game, Ogre::String meshName);
 	~Entity();
 	virtual void SetTarget(float x, float y);
 	virtual void Update(float delta);

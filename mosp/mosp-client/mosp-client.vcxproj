@@ -88,6 +88,7 @@
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="movable_text.h" />
+    <ClInclude Include="network_manager.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="controller_player.h" />
     <ClInclude Include="stdafx.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="game.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="movable_text.cc" />
+    <ClCompile Include="network_manager.cc" />
     <ClCompile Include="player.cc" />
     <ClCompile Include="controller_player.cc" />
     <ClCompile Include="stdafx.cpp" />

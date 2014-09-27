@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "entity.h"
+#include "game.h"
 
-
-Entity::Entity(Game* game, Ogre::SceneManager* sceneManager, Ogre::String meshName)
+Entity::Entity(Game* game, Ogre::String meshName)
 {
 	this->game = game;
-	node = sceneManager->getRootSceneNode()->createChildSceneNode(Ogre::Vector3::UNIT_Y * 5.0f);
+	node = game->GetSceneManager()->getRootSceneNode()->createChildSceneNode(Ogre::Vector3::UNIT_Y * 5.0f);
 
-	entity = sceneManager->createEntity(meshName);
+	entity = game->GetSceneManager()->createEntity(meshName);
 	node->attachObject(entity);
 	target = Ogre::Vector2::ZERO;
 	MOVE_SPEED = 15.0f;

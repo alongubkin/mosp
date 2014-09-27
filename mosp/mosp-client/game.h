@@ -5,10 +5,7 @@
 #include "enet/enet.h"
 #include "terrain.h"
 #include "entity.h"
-#include "controller_player.h"
-#include "client.h"
-#include "player.h"
-#include "proto/messages.pb.h"
+#include "network_manager.h"
 
 class Game
 {
@@ -18,7 +15,13 @@ public:
 	~Game();
 
 	void Run();
-	Client* GetClient() const { return client; }
+	
+	Ogre::SceneManager* GetSceneManager() const { return sceneManager; }
+
+	NetworkManager* GetNetworkManager() const { return networkManager; }
+
+	void SetEntity(int id, Entity* entity);
+	Entity* GetEntity(int id);
 
 private:
 	Ogre::Root* ogreRoot;
@@ -30,22 +33,13 @@ private:
 	OIS::Keyboard* keyboard;
 	OIS::Mouse* mouse;
 
-	int currentPlayerId = -1;
-
 	Terrain* terrain;
 	float camera_distance;
 	bool wasMouseDown;
 
-	Client* client;
-	std::thread clientThread;
-
 	std::hash_map<int, Entity*> entities;
 
 	void Update(float delta);
-	void HandlePacket(ENetPacket* packet);
-
-	template<typename T>
-	T PacketToMessage(ENetPacket* packet);
 
 	/* Initiliaztion */
 	void LocateResources();
@@ -55,10 +49,6 @@ private:
 	void SetupViewport();
 	void SetupInput();
 
-
-	/* Events */
-	void HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message);
-	void HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message);
-	void HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message);
+	NetworkManager* networkManager;
 };
 

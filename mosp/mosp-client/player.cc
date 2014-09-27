@@ -5,8 +5,8 @@
 #include "proto/messages.pb.h"
 #include "movable_text.h"
 
-Player::Player(Game* game, Ogre::SceneManager* sceneManager, const std::string& name)
-: Entity(game, sceneManager, "Sinbad.mesh")
+Player::Player(Game* game, const std::string& name)
+: Entity(game, "Sinbad.mesh")
 {
 	this->name = name;
 
