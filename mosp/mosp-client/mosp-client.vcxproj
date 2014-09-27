@@ -55,7 +55,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>../../third_party/ogre3d/lib/$(Configuration);../../third_party/ogre3d/boost/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;ws2_32.lib;winmm.lib;../../third_party/protobuf/vsprojects/Debug/libprotobuf.lib;../../third_party/enet/Debug/enet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>OgreMain_d.lib;OgreOverlay_d.lib;OIS_d.lib;ws2_32.lib;winmm.lib;../../third_party/protobuf/vsprojects/Debug/libprotobuf.lib;../../third_party/enet/Debug/enet.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -77,6 +77,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovableText.cpp" />
     <ClCompile Include="MPPlayer.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -89,6 +90,7 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="MovableText.h" />
     <ClInclude Include="MPPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="stdafx.h" />
