@@ -73,36 +73,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Client.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MovableText.cpp" />
-    <ClCompile Include="MPPlayer.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="stdafx.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AnimationManager.h" />
-    <ClInclude Include="Client.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="MovableText.h" />
-    <ClInclude Include="MPPlayer.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="Terrain.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="resources.cfg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mosp-common\mosp-common.vcxproj">
       <Project>{23cb0853-0d7f-4687-904a-f51157498914}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="animation_manager.h" />
+    <ClInclude Include="client.h" />
+    <ClInclude Include="entity.h" />
+    <ClInclude Include="game.h" />
+    <ClInclude Include="movable_text.h" />
+    <ClInclude Include="mpplayer.h" />
+    <ClInclude Include="player.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="terrain.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="client.cc" />
+    <ClCompile Include="entity.cc" />
+    <ClCompile Include="game.cc" />
+    <ClCompile Include="main.cc" />
+    <ClCompile Include="movable_text.cc" />
+    <ClCompile Include="mpplayer.cc" />
+    <ClCompile Include="player.cc" />
+    <ClCompile Include="stdafx.cc" />
+    <ClCompile Include="terrain.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
