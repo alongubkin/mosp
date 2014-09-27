@@ -266,7 +266,7 @@ void Game::SetupRenderer()
 
 void Game::SetupWindow()
 {
-	window = ogreRoot->createRenderWindow("Ogre Test", 1280, 720, false);
+	window = ogreRoot->createRenderWindow("Ogre Test", 640, 480, false);
 	window->setVSyncEnabled(true);
 	window->setActive(true);
 	window->setAutoUpdated(false);
