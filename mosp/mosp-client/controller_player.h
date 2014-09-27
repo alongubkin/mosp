@@ -1,16 +1,11 @@
 #pragma once
 #include "animation_manager.h"
-#include "entity.h"
+#include "player.h"
 
-class ControllerPlayer : public Entity
+class ControllerPlayer : public Player
 {
 public:
-	AnimationManager* animationManager;
-
-	ControllerPlayer(Game* game, Ogre::SceneManager* sceneManager);
-	~ControllerPlayer();
+	ControllerPlayer(Game* game, Ogre::SceneManager* sceneManager, std::string name);
 	void SetTarget(float x, float y);
-	void Update(float delta);
-	void OnReachingTarget();
 };
 

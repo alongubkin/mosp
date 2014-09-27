@@ -180,7 +180,7 @@ void Game::HandleConnectResponseMessage(const mosp::ConnectResponseMessage& mess
 {
 	currentPlayerId = message.client_id();
 
-	entities[message.client_id()] = new ControllerPlayer(this, sceneManager);
+	entities[message.client_id()] = new ControllerPlayer(this, sceneManager, message.name());
 	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 
