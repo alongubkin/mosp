@@ -9,7 +9,7 @@
 
 #include "network_manager.h"
 #include "viewport_manager.h"
-
+#include "input_manager.h"
 
 class Game
 {
@@ -34,14 +34,8 @@ private:
 	Ogre::Root* ogreRoot;
 	Ogre::RenderWindow* window;
 	Ogre::SceneManager* sceneManager;
-	
-	OIS::InputManager* inputManager;
-	OIS::Keyboard* keyboard;
-	OIS::Mouse* mouse;
 
-	Terrain* terrain;
-	
-	bool wasMouseDown;
+	Terrain* terrain;	
 
 	std::hash_map<int, Entity*> entities;
 
@@ -52,9 +46,9 @@ private:
 	void SetupPlugins();
 	void SetupRenderer();
 	void SetupWindow();
-	void SetupInput();
 
 	NetworkManager* networkManager;
 	ViewportManager* viewportManager;
+	InputManager* inputManager;
 };
 

@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "game.h"
 
-
 Game::Game()
 {
 	/* OGRE3D Engine initiliaztion */
@@ -23,61 +22,52 @@ Game::Game()
 	sceneManager->addRenderQueueListener(pOverlaySystem);
 
 	LocateResources();
-
 	
 	networkManager = new NetworkManager(this);
 	viewportManager = new ViewportManager(this);
-	
+	inputManager = new InputManager(this);
 }
 
 
 Game::~Game()
 {
-	inputManager->destroyInputObject(keyboard);
-	keyboard = nullptr;
-	OIS::InputManager::destroyInputSystem(inputManager);
-	inputManager = nullptr;
 	
-	viewportManager->Close();
-	networkManager->Close();
-
 	sceneManager->destroyAllManualObjects();
 	sceneManager->destroyAllEntities();
 	sceneManager->getRootSceneNode()->removeAndDestroyAllChildren();
 	Ogre::LogManager::getSingleton().logMessage("end of the program");
 
-	delete viewportManager;
-	delete networkManager;	
+	delete inputManager; 
+	inputManager = nullptr;
+
+	delete viewportManager; 
+	viewportManager = nullptr;
+
+	delete networkManager;
+	networkManager = nullptr;
 }
 
 void Game::Run()
 {
 	networkManager->Initialize();
 	viewportManager->Initialize();
-
-	SetupInput();
+	inputManager->Initialize();
 
 	Ogre::Light* light = sceneManager->createLight("MainLight");
 	light->setType(Ogre::Light::LightTypes::LT_DIRECTIONAL);
 	light->setDirection(1.0f, -5.0f, 3.0f);
 
-
-
 	/* Game engine intiliaztion */
 	terrain = new Terrain(sceneManager);
-	wasMouseDown = false;
 
 	Ogre::Timer* timer = ogreRoot->getTimer();
 	timer->reset();
 	unsigned long lastFrame = timer->getMilliseconds();
 
-	while (!window->isClosed() && !keyboard->isKeyDown(OIS::KC_ESCAPE))
+	while (!window->isClosed()) // && !keyboard->isKeyDown(OIS::KC_ESCAPE))
 	{
 		float delta = 0.001f * (timer->getMilliseconds() - lastFrame);
 		lastFrame = timer->getMilliseconds();
-
-		mouse->capture();
-		keyboard->capture();
 
 		Update(delta);
 
@@ -86,54 +76,17 @@ void Game::Run()
 		Ogre::WindowEventUtilities::messagePump();
 	}
 
+	inputManager->Close();
+	viewportManager->Close();
 	networkManager->Close();
 }
 
 
 void Game::Update(float delta)
 {
-	ControllerPlayer* player = GetControllerPlayer();
-
-	Ogre::Vector3 movement = Ogre::Vector3::ZERO;
-	if (keyboard->isKeyDown(OIS::KC_W))
-	{
-		movement.z += -1;
-	}
-	if (keyboard->isKeyDown(OIS::KC_S))
-	{
-		movement.z += 1;
-	}
-	if (keyboard->isKeyDown(OIS::KC_A))
-	{
-		movement.x += -1;
-	}
-	if (keyboard->isKeyDown(OIS::KC_D))
-	{
-		movement.x += 1;
-	}
-	movement.normalise();
-	
-	if (movement != Ogre::Vector3::ZERO)
-		player->SetTarget(player->getPos().x + movement.x, player->getPos().z + movement.z);
-
-	OIS::MouseState mouseState = mouse->getMouseState();
-	if (mouseState.Z.rel)
-		viewportManager->SetCameraDistance(mouseState.Z.rel / 20.0f);
-
-	if (!wasMouseDown && mouseState.buttonDown(OIS::MouseButtonID::MB_Left))
-	{
-		Ogre::Ray mouseRay = viewportManager->GetCamera()->getCameraToViewportRay(mouseState.X.abs / (Ogre::Real) mouseState.width, mouseState.Y.abs / (Ogre::Real) mouseState.height);
-		std::pair<bool, Ogre::Real> floorPoint = mouseRay.intersects(Ogre::Plane(Ogre::Vector3::UNIT_Y, 0));
-		if (floorPoint.first) {
-			Ogre::Vector3 point = mouseRay.getPoint(floorPoint.second);
-			player->SetTarget(point.x, point.z);
-		}
-	}
-
 	viewportManager->Update();
 	networkManager->Update();
-
-	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
+	inputManager->Update();	
 
 	for (auto it = entities.begin(); it != entities.end(); it++)
 	{
@@ -222,39 +175,4 @@ void Game::SetupWindow()
 	window->setActive(true);
 	window->setAutoUpdated(false);
 	ogreRoot->clearEventTimes();
-}
-
-
-void Game::SetupInput()
-{
-	size_t windowHandle = 0;
-	window->getCustomAttribute("WINDOW", &windowHandle);
-
-	std::string windowsHandleAsString = "";
-	{
-		std::ostringstream windowHndStr;
-		windowHndStr << windowHandle;
-		windowsHandleAsString = windowHndStr.str();
-	}
-
-	OIS::ParamList specialParameters;
-	specialParameters.insert(std::make_pair(std::string("WINDOW"), windowsHandleAsString));
-#if defined OIS_WIN32_PLATFORM
-	specialParameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_FOREGROUND")));
-	specialParameters.insert(std::make_pair(std::string("w32_mouse"), std::string("DISCL_NONEXCLUSIVE")));
-	specialParameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_FOREGROUND")));
-	specialParameters.insert(std::make_pair(std::string("w32_keyboard"), std::string("DISCL_NONEXCLUSIVE")));
-#elif defined OIS_LINUX_PLATFORM
-	specialParameters.insert(std::make_pair(std::string("x11_mouse_grab"), std::string("false")));
-	specialParameters.insert(std::make_pair(std::string("x11_mouse_hide"), std::string("false")));
-	specialParameters.insert(std::make_pair(std::string("x11_keyboard_grab"), std::string("false")));
-	specialParameters.insert(std::make_pair(std::string("XAutoRepeatOn"), std::string("true")));
-#endif
-
-	inputManager = OIS::InputManager::createInputSystem(specialParameters);
-
-	mouse = static_cast<OIS::Mouse*>(inputManager->createInputObject(OIS::OISMouse, true));
-	keyboard = static_cast<OIS::Keyboard*>(inputManager->createInputObject(OIS::OISKeyboard, false));
-	mouse->getMouseState().width = viewportManager->GetActualWidth();
-	mouse->getMouseState().height = viewportManager->GetActualHeight();
 }

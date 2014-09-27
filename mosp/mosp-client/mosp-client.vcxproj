@@ -87,6 +87,7 @@
     <ClInclude Include="client.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
+    <ClInclude Include="input_manager.h" />
     <ClInclude Include="movable_text.h" />
     <ClInclude Include="network_manager.h" />
     <ClInclude Include="player.h" />
@@ -99,6 +100,7 @@
     <ClCompile Include="client.cc" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="game.cc" />
+    <ClCompile Include="input_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="movable_text.cc" />
     <ClCompile Include="network_manager.cc" />
