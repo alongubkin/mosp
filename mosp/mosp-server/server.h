@@ -1,6 +1,13 @@
 #ifndef _H_SERVER
 #define _H_SERVER
 
+#if defined(_WIN32)
+#include <winsock2.h>
+#include <windows.h>
+#endif
+
+#include "mongo/client/dbclient.h"
+
 #include <thread>
 #include "enet/enet.h"
 #include "Ticker.h"
@@ -28,6 +35,8 @@ private:
 
 	Ticker* ticker;
 	std::thread tickerThread;
+
+	mongo::DBClientConnection* db;
 
 	unsigned int nextAvailableId = 0;
 

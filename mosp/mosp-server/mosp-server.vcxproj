@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;$(IncludePath)</IncludePath>
+    <IncludePath>../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;../../third_party/mongo/include;../../third_party/boost;$(IncludePath)</IncludePath>
     <LibraryPath>../../third_party/boost/lib32-msvc-12.0;../../third_party/mongo/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

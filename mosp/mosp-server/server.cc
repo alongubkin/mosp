@@ -17,6 +17,8 @@ Server::Server(int port)
 		Logger::Error("Enet failed to create a host.");
 	
 	ticker = new Ticker(this);
+
+	mongo::client::initialize();
 }
 
 Server::~Server()
@@ -27,6 +29,18 @@ Server::~Server()
 
 void Server::Run()
 {
+	try
+	{
+		db = new mongo::DBClientConnection();
+		db->connect("localhost");
+
+		std::cout << "Database Connection OK" << std::endl;
+	}
+	catch (const mongo::DBException &e)
+	{
+		std::cout << "Database connection failed: " << e.what() << std::endl;
+	}
+
 	isRunning = true;
 	tickerThread = std::thread(&Ticker::Run, ticker);
 
