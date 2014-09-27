@@ -3,10 +3,10 @@
 #include <thread>
 #include <hash_map>
 #include "enet/enet.h"
-#include "Terrain.h"
-#include "Player.h"
-#include "Client.h"
-#include "MPPlayer.h"
+#include "terrain.h"
+#include "player.h"
+#include "client.h"
+#include "mpplayer.h"
 #include "proto/messages.pb.h"
 
 class Game
