@@ -43,7 +43,7 @@ void Server::Listen()
 
 	while (isRunning)
 	{
-		while (enet_host_service(server, &event, 1000) > 0)
+		while (enet_host_service(server, &event, 16) > 0)
 		{
 			switch (event.type)
 			{

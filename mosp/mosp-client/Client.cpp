@@ -42,7 +42,7 @@ void Client::Run()
 
 	while (isRunning)
 	{
-		while (enet_host_service(client, &event, 1000) > 0)
+		while (enet_host_service(client, &event, 100) > 0)
 		{
 			switch (event.type)
 			{
