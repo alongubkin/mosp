@@ -38,7 +38,6 @@ Game::Game()
 
 	/* Game engine intiliaztion */
 	terrain = new Terrain(sceneManager);
-	player = new ControllerPlayer(this, sceneManager);
 	camera_distance = 40.0f;
 	wasMouseDown = false;
 
@@ -89,8 +88,12 @@ void Game::Run()
 
 void Game::Update(float delta)
 {
-	camera->setPosition(player->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
-	camera->lookAt(player->getPos());
+	if (currentPlayerId != -1)
+	{
+		camera->setPosition(entities[currentPlayerId]->getPos() + Ogre::Vector3(0, camera_distance, camera_distance));
+		camera->lookAt(entities[currentPlayerId]->getPos());
+	}
+
 
 	Ogre::Vector3 movement = Ogre::Vector3::ZERO;
 	if (keyboard->isKeyDown(OIS::KC_W))
@@ -112,7 +115,7 @@ void Game::Update(float delta)
 	movement.normalise();
 	
 	if (movement != Ogre::Vector3::ZERO)
-		player->SetTarget(player->getPos().x + movement.x, player->getPos().z + movement.z);
+		entities[currentPlayerId]->SetTarget(entities[currentPlayerId]->getPos().x + movement.x, entities[currentPlayerId]->getPos().z + movement.z);
 
 	OIS::MouseState mouseState = mouse->getMouseState();
 	if (mouseState.Z.rel)
@@ -124,12 +127,11 @@ void Game::Update(float delta)
 		std::pair<bool, Ogre::Real> floorPoint = mouseRay.intersects(Ogre::Plane(Ogre::Vector3::UNIT_Y, 0));
 		if (floorPoint.first) {
 			Ogre::Vector3 point = mouseRay.getPoint(floorPoint.second);
-			player->SetTarget(point.x, point.z);
+			entities[currentPlayerId]->SetTarget(point.x, point.z);
 		}
 	}
-	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
 
-	player->Update(delta);
+	wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
 	
 	/* Multiplayer sync */
 	
@@ -142,7 +144,7 @@ void Game::Update(float delta)
 		HandlePacket(packet);
 	}
 
-	for (auto it = players.begin(); it != players.end(); it++)
+	for (auto it = entities.begin(); it != entities.end(); it++)
 	{
 		(*it).second->Update(delta);
 	}
@@ -176,22 +178,25 @@ void Game::HandlePacket(ENetPacket* packet)
 
 void Game::HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message)
 {
-	// TODO: Verify response
+	currentPlayerId = message.client_id();
+
+	entities[message.client_id()] = new ControllerPlayer(this, sceneManager);
+	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 
 void Game::HandlePlayerConnectMessage(const mosp::PlayerConnectMessage& message)
 {
 	printf("New player joined with id %d\n", message.client_id());
 
-	players[message.client_id()] = new MPPlayer(this, sceneManager, message.name());
-	players[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
+	entities[message.client_id()] = new MPPlayer(this, sceneManager, message.name());
+	entities[message.client_id()]->SetPosition(message.position().x(), 5, message.position().y());
 }
 
 void Game::HandlePlayerMovedMessage(const mosp::PlayerMovedMessage& message)
 {
-	if (players.count(message.client_id()))
+	if (entities.count(message.client_id()))
 	{
-		players[message.client_id()]->SetTarget(message.position().x(), message.position().y());
+		entities[message.client_id()]->SetTarget(message.position().x(), message.position().y());
 	}
 }
 

@@ -4,6 +4,7 @@
 #include <hash_map>
 #include "enet/enet.h"
 #include "terrain.h"
+#include "entity.h"
 #include "controller_player.h"
 #include "client.h"
 #include "mpplayer.h"
@@ -29,15 +30,16 @@ private:
 	OIS::Keyboard* keyboard;
 	OIS::Mouse* mouse;
 
+	int currentPlayerId = -1;
+
 	Terrain* terrain;
-	ControllerPlayer* player;
 	float camera_distance;
 	bool wasMouseDown;
 
 	Client* client;
 	std::thread clientThread;
 
-	std::hash_map<int, MPPlayer*> players;
+	std::hash_map<int, Entity*> entities;
 
 	void Update(float delta);
 	void HandlePacket(ENetPacket* packet);
