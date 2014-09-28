@@ -1,6 +1,9 @@
 #include <iostream>
 #include <ostream>
 #include <curl/curl.h>
+#include <openssl/md5.h>
+
+#define STRING "test"
 
 using namespace std;
 
@@ -17,7 +20,22 @@ int main()
 
 	curl_easy_cleanup(curl);
 
+	MD5_CTX ctx;
+	unsigned char digest[16];
+	int i;
+
+	MD5_Init(&ctx);
+	MD5_Update(&ctx, STRING, strlen(STRING));
+	MD5_Final(digest, &ctx);
+
+	for (i = 0; i<16; i++) {
+		printf("%0.2x", digest[i]);
+	}
+	putchar('\n');
+
 	getchar();
+
+	
 
 	return 0;
 }
