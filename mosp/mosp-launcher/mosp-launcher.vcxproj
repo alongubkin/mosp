@@ -20,7 +20,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -79,11 +79,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="coordinator.cc" />
+    <ClCompile Include="downloader.cc" />
+    <ClCompile Include="file_manager.cc" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="md5_manager.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="coordinator.h" />
+    <ClInclude Include="downloader.h" />
+    <ClInclude Include="file_manager.h" />
+    <ClInclude Include="manifest.h" />
     <ClInclude Include="md5_manager.h" />
+    <ClInclude Include="tinydir.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

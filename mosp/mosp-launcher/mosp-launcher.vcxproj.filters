@@ -21,9 +21,33 @@
     <ClCompile Include="md5_manager.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="downloader.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="coordinator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="file_manager.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="md5_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="file_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coordinator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="downloader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="manifest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tinydir.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
