@@ -187,3 +187,5 @@ FakesAssemblies/
 !third_party/ogre3d/lib/debug/
 !third_party/ogre3d/bin/
 !third_party/ogre3d/bin/debug/
+
+!third_party/libcurl/bin
