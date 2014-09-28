@@ -8,8 +8,8 @@
 class FileManager
 {
 public:
-	std::vector<std::string> GetFileList();
-	Manifest GenerateLocalManifest();
+	static std::vector<std::string> GetFileList();
+	static Manifest GenerateLocalManifest();
 	
 };
 
