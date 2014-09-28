@@ -87,7 +87,7 @@ void Server::OnConnect(const ENetEvent &evt)
 	evt.peer->data = client;
 	nextAvailableId++;
 
-	Logger::Info("A new client connected from %x:%u assigned with id %d\n", evt.peer->address.host, evt.peer->address.port, nextAvailableId);
+	Logger::Info("A new client connected from %x:%u assigned with id %d", evt.peer->address.host, evt.peer->address.port, nextAvailableId);
 }
 
 void Server::OnReceive(const ENetEvent &evt)
