@@ -41,8 +41,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;../../third_party/mongo/include;../../third_party/boost;$(IncludePath)</IncludePath>
-    <LibraryPath>../../third_party/boost/lib32-msvc-12.0;../../third_party/mongo/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>../../third_party/openssl/include;../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;../../third_party/mongo/include;../../third_party/boost;$(IncludePath)</IncludePath>
+    <LibraryPath>../../third_party/boost/lib32-msvc-12.0;../../third_party/mongo/lib;../../third_party/openssl/bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -58,7 +58,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ws2_32.lib;winmm.lib;../../third_party/protobuf/vsprojects/Debug/libprotobuf.lib;../../third_party/enet/Debug/enet.lib;mongoclient-gd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;winmm.lib;../../third_party/protobuf/vsprojects/Debug/libprotobuf.lib;../../third_party/enet/Debug/enet.lib;mongoclient-gd.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -94,6 +94,7 @@
     <ClInclude Include="client.h" />
     <ClInclude Include="event_handler.h" />
     <ClInclude Include="logger.h" />
+    <ClInclude Include="password_utils.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="ticker.h" />
   </ItemGroup>
