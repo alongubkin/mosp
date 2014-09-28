@@ -14,13 +14,18 @@ public:
 	~Client();
 	
 	unsigned int GetId() { return clientId; }
+
 	void SetTargetPosition(mosp::Vector2 targetPosition) { this->targetPosition = targetPosition; }
 	mosp::Vector2 GetTargetPosition() { return this->targetPosition; }
+
 	void SetName(std::string name) { this->name = name; }
 	std::string GetName() { return this->name; }
 
 	void QueuePacket(ENetPacket* packet);
 	std::queue<ENetPacket*> CopyQueue();
+
+	void SetUserId(std::string userId) { this->userId = userId; }
+	std::string GetUserId() { return this->userId; }
 
 	template <typename T>
 	void Send(const T& message);
@@ -32,6 +37,7 @@ private:
 	std::mutex incomingPacketsMutex;
 	std::string name;
 	mosp::Vector2 targetPosition;
+	std::string userId;
 };
 
 template <typename T>
