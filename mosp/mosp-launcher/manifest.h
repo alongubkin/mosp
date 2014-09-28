@@ -16,7 +16,7 @@ public:
 
 private:
 	int version;
-	std::hash_map<std::string, std::string> fileList;
+	std::hash_map<std::string, std::string> fileList; //<Hash, FilePath>
 };
 
 #endif
