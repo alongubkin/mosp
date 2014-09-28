@@ -192,3 +192,4 @@ FakesAssemblies/
 !third_party/openssl/bin
 
 !third_party/boost/boost/preprocessor/debug/
+!third_party/boost/boost/predef/architecture/x86/
