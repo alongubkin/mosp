@@ -3,6 +3,8 @@
 #include "client.h"
 #include "player.h"
 #include "controller_player.h"
+#include "config.h"
+
 
 NetworkManager::NetworkManager(Game* game)
 	: _game(game)
@@ -17,7 +19,7 @@ NetworkManager::~NetworkManager()
 
 void NetworkManager::Initialize()
 {
-	_client->Connect("127.0.0.1", 1234);
+	_client->Connect(Config::GetProperty("host"), std::stoi(Config::GetProperty("port")));
 	_clientThread = std::thread(&Client::Run, _client);
 }
 

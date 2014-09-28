@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>../mosp-common;../../third_party/protobuf/src;../../third_party/enet/include;$(IncludePath)</IncludePath>
+    <IncludePath>../mosp-common;../../third_party/protobuf/src;../../third_party/boost;../../third_party/enet/include;$(IncludePath)</IncludePath>
     <ExecutablePath>$(ExecutablePath)</ExecutablePath>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="animation_manager.h" />
     <ClInclude Include="client.h" />
+    <ClInclude Include="config.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input_manager.h" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
+    <ClCompile Include="config.cc" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="game.cc" />
     <ClCompile Include="input_manager.cc" />
