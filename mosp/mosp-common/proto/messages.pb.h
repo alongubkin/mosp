@@ -67,11 +67,12 @@ inline bool Type_Parse(
 }
 enum CONNECT_REQUEST_ERROR {
   NAME_EXISTS = 1,
-  SERVER_FULL = 2
+  SERVER_FULL = 2,
+  INVALID_LOGIN = 3
 };
 bool CONNECT_REQUEST_ERROR_IsValid(int value);
 const CONNECT_REQUEST_ERROR CONNECT_REQUEST_ERROR_MIN = NAME_EXISTS;
-const CONNECT_REQUEST_ERROR CONNECT_REQUEST_ERROR_MAX = SERVER_FULL;
+const CONNECT_REQUEST_ERROR CONNECT_REQUEST_ERROR_MAX = INVALID_LOGIN;
 const int CONNECT_REQUEST_ERROR_ARRAYSIZE = CONNECT_REQUEST_ERROR_MAX + 1;
 
 const ::google::protobuf::EnumDescriptor* CONNECT_REQUEST_ERROR_descriptor();
@@ -413,30 +414,45 @@ class ConnectRequestMessage : public ::google::protobuf::Message {
   inline ::mosp::Type type() const;
   inline void set_type(::mosp::Type value);
 
-  // required string name = 2;
-  inline bool has_name() const;
-  inline void clear_name();
-  static const int kNameFieldNumber = 2;
-  inline const ::std::string& name() const;
-  inline void set_name(const ::std::string& value);
-  inline void set_name(const char* value);
-  inline void set_name(const char* value, size_t size);
-  inline ::std::string* mutable_name();
-  inline ::std::string* release_name();
-  inline void set_allocated_name(::std::string* name);
+  // required string username = 2;
+  inline bool has_username() const;
+  inline void clear_username();
+  static const int kUsernameFieldNumber = 2;
+  inline const ::std::string& username() const;
+  inline void set_username(const ::std::string& value);
+  inline void set_username(const char* value);
+  inline void set_username(const char* value, size_t size);
+  inline ::std::string* mutable_username();
+  inline ::std::string* release_username();
+  inline void set_allocated_username(::std::string* username);
+
+  // required string password = 3;
+  inline bool has_password() const;
+  inline void clear_password();
+  static const int kPasswordFieldNumber = 3;
+  inline const ::std::string& password() const;
+  inline void set_password(const ::std::string& value);
+  inline void set_password(const char* value);
+  inline void set_password(const char* value, size_t size);
+  inline ::std::string* mutable_password();
+  inline ::std::string* release_password();
+  inline void set_allocated_password(::std::string* password);
 
   // @@protoc_insertion_point(class_scope:mosp.ConnectRequestMessage)
  private:
   inline void set_has_type();
   inline void clear_has_type();
-  inline void set_has_name();
-  inline void clear_has_name();
+  inline void set_has_username();
+  inline void clear_has_username();
+  inline void set_has_password();
+  inline void clear_has_password();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::std::string* name_;
+  ::std::string* username_;
+  ::std::string* password_;
   int type_;
   friend void  protobuf_AddDesc_messages_2eproto();
   friend void protobuf_AssignDesc_messages_2eproto();
@@ -514,7 +530,7 @@ class ConnectResponseMessage : public ::google::protobuf::Message {
   inline bool success() const;
   inline void set_success(bool value);
 
-  // required .mosp.Vector2 position = 3;
+  // optional .mosp.Vector2 position = 3;
   inline bool has_position() const;
   inline void clear_position();
   static const int kPositionFieldNumber = 3;
@@ -523,14 +539,14 @@ class ConnectResponseMessage : public ::google::protobuf::Message {
   inline ::mosp::Vector2* release_position();
   inline void set_allocated_position(::mosp::Vector2* position);
 
-  // required int32 client_id = 4;
+  // optional int32 client_id = 4;
   inline bool has_client_id() const;
   inline void clear_client_id();
   static const int kClientIdFieldNumber = 4;
   inline ::google::protobuf::int32 client_id() const;
   inline void set_client_id(::google::protobuf::int32 value);
 
-  // required string name = 5;
+  // optional string name = 5;
   inline bool has_name() const;
   inline void clear_name();
   static const int kNameFieldNumber = 5;
@@ -1076,80 +1092,156 @@ inline void ConnectRequestMessage::set_type(::mosp::Type value) {
   // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.type)
 }
 
-// required string name = 2;
-inline bool ConnectRequestMessage::has_name() const {
+// required string username = 2;
+inline bool ConnectRequestMessage::has_username() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ConnectRequestMessage::set_has_name() {
+inline void ConnectRequestMessage::set_has_username() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ConnectRequestMessage::clear_has_name() {
+inline void ConnectRequestMessage::clear_has_username() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ConnectRequestMessage::clear_name() {
-  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    name_->clear();
+inline void ConnectRequestMessage::clear_username() {
+  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_->clear();
   }
-  clear_has_name();
+  clear_has_username();
 }
-inline const ::std::string& ConnectRequestMessage::name() const {
-  // @@protoc_insertion_point(field_get:mosp.ConnectRequestMessage.name)
-  return *name_;
+inline const ::std::string& ConnectRequestMessage::username() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectRequestMessage.username)
+  return *username_;
 }
-inline void ConnectRequestMessage::set_name(const ::std::string& value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    name_ = new ::std::string;
+inline void ConnectRequestMessage::set_username(const ::std::string& value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
   }
-  name_->assign(value);
-  // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.name)
+  username_->assign(value);
+  // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.username)
 }
-inline void ConnectRequestMessage::set_name(const char* value) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    name_ = new ::std::string;
+inline void ConnectRequestMessage::set_username(const char* value) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
   }
-  name_->assign(value);
-  // @@protoc_insertion_point(field_set_char:mosp.ConnectRequestMessage.name)
+  username_->assign(value);
+  // @@protoc_insertion_point(field_set_char:mosp.ConnectRequestMessage.username)
 }
-inline void ConnectRequestMessage::set_name(const char* value, size_t size) {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    name_ = new ::std::string;
+inline void ConnectRequestMessage::set_username(const char* value, size_t size) {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
   }
-  name_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:mosp.ConnectRequestMessage.name)
+  username_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:mosp.ConnectRequestMessage.username)
 }
-inline ::std::string* ConnectRequestMessage::mutable_name() {
-  set_has_name();
-  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    name_ = new ::std::string;
+inline ::std::string* ConnectRequestMessage::mutable_username() {
+  set_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    username_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:mosp.ConnectRequestMessage.name)
-  return name_;
+  // @@protoc_insertion_point(field_mutable:mosp.ConnectRequestMessage.username)
+  return username_;
 }
-inline ::std::string* ConnectRequestMessage::release_name() {
-  clear_has_name();
-  if (name_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+inline ::std::string* ConnectRequestMessage::release_username() {
+  clear_has_username();
+  if (username_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
   } else {
-    ::std::string* temp = name_;
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    ::std::string* temp = username_;
+    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     return temp;
   }
 }
-inline void ConnectRequestMessage::set_allocated_name(::std::string* name) {
-  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete name_;
+inline void ConnectRequestMessage::set_allocated_username(::std::string* username) {
+  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete username_;
   }
-  if (name) {
-    set_has_name();
-    name_ = name;
+  if (username) {
+    set_has_username();
+    username_ = username;
   } else {
-    clear_has_name();
-    name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    clear_has_username();
+    username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectRequestMessage.name)
+  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectRequestMessage.username)
+}
+
+// required string password = 3;
+inline bool ConnectRequestMessage::has_password() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void ConnectRequestMessage::set_has_password() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void ConnectRequestMessage::clear_has_password() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void ConnectRequestMessage::clear_password() {
+  if (password_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    password_->clear();
+  }
+  clear_has_password();
+}
+inline const ::std::string& ConnectRequestMessage::password() const {
+  // @@protoc_insertion_point(field_get:mosp.ConnectRequestMessage.password)
+  return *password_;
+}
+inline void ConnectRequestMessage::set_password(const ::std::string& value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+  // @@protoc_insertion_point(field_set:mosp.ConnectRequestMessage.password)
+}
+inline void ConnectRequestMessage::set_password(const char* value) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    password_ = new ::std::string;
+  }
+  password_->assign(value);
+  // @@protoc_insertion_point(field_set_char:mosp.ConnectRequestMessage.password)
+}
+inline void ConnectRequestMessage::set_password(const char* value, size_t size) {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    password_ = new ::std::string;
+  }
+  password_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:mosp.ConnectRequestMessage.password)
+}
+inline ::std::string* ConnectRequestMessage::mutable_password() {
+  set_has_password();
+  if (password_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    password_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:mosp.ConnectRequestMessage.password)
+  return password_;
+}
+inline ::std::string* ConnectRequestMessage::release_password() {
+  clear_has_password();
+  if (password_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = password_;
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void ConnectRequestMessage::set_allocated_password(::std::string* password) {
+  if (password_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete password_;
+  }
+  if (password) {
+    set_has_password();
+    password_ = password;
+  } else {
+    clear_has_password();
+    password_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:mosp.ConnectRequestMessage.password)
 }
 
 // -------------------------------------------------------------------
@@ -1205,7 +1297,7 @@ inline void ConnectResponseMessage::set_success(bool value) {
   // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.success)
 }
 
-// required .mosp.Vector2 position = 3;
+// optional .mosp.Vector2 position = 3;
 inline bool ConnectResponseMessage::has_position() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1246,7 +1338,7 @@ inline void ConnectResponseMessage::set_allocated_position(::mosp::Vector2* posi
   // @@protoc_insertion_point(field_set_allocated:mosp.ConnectResponseMessage.position)
 }
 
-// required int32 client_id = 4;
+// optional int32 client_id = 4;
 inline bool ConnectResponseMessage::has_client_id() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
@@ -1270,7 +1362,7 @@ inline void ConnectResponseMessage::set_client_id(::google::protobuf::int32 valu
   // @@protoc_insertion_point(field_set:mosp.ConnectResponseMessage.client_id)
 }
 
-// required string name = 5;
+// optional string name = 5;
 inline bool ConnectResponseMessage::has_name() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }

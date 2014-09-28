@@ -1,5 +1,6 @@
 #include "server.h"
 #include "logger.h"
+#include "password_utils.h"
 
 Server::Server(int port)
 {
@@ -34,11 +35,15 @@ void Server::Run()
 		db = new mongo::DBClientConnection();
 		db->connect("localhost");
 
-		std::cout << "Database Connection OK" << std::endl;
+		Logger::Info("Database Connection OK");
+		CreateFakeUsers();
 	}
 	catch (const mongo::DBException &e)
 	{
-		std::cout << "Database connection failed: " << e.what() << std::endl;
+		std::cout << "Database connection failed: " << e.what() << std::endl << "exiting...";
+
+		getchar();
+		return;
 	}
 
 	isRunning = true;
@@ -109,4 +114,38 @@ void Server::OnDisconnect(const ENetEvent &evt)
 
 	delete client;
 	evt.peer->data = nullptr;
+}
+
+void Server::CreateFakeUsers()
+{
+	if (db->count("mosp.users") > 0)
+		return;
+
+	std::cout << "It looks like there are no users in the database." << std::endl
+			  << "Would you like to add one [Y/n]? ";
+
+	char input;
+	std::cin >> input;
+
+	if (input != 'Y' && input != 'y')
+		return;
+
+	std::string username;
+	std::cout << "Username: ";
+	std::cin >> username;
+
+	std::string password;
+	std::cout << "Password: ";
+	std::cin >> password;
+
+	std::string salt = mosp::GenerateSalt();
+
+	mongo::BSONObjBuilder builder;
+	builder.append("username", username);
+	builder.append("password", mosp::HashPassword(password, salt));
+	builder.append("salt", salt);
+
+	db->insert("mosp.users", builder.obj());
+
+	std::cout << "User " << username << " added successfully." << std::endl;
 }

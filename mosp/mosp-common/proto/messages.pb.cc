@@ -105,9 +105,10 @@ void protobuf_AssignDesc_messages_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Vector3));
   ConnectRequestMessage_descriptor_ = file->message_type(3);
-  static const int ConnectRequestMessage_offsets_[2] = {
+  static const int ConnectRequestMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, name_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, username_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ConnectRequestMessage, password_),
   };
   ConnectRequestMessage_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -254,26 +255,27 @@ void protobuf_AddDesc_messages_2eproto() {
     "\n\016messages.proto\022\004mosp\"\'\n\013BaseMessage\022\030\n"
     "\004type\030\001 \001(\0162\n.mosp.Type\"\037\n\007Vector2\022\t\n\001x\030"
     "\001 \002(\002\022\t\n\001y\030\002 \002(\002\"*\n\007Vector3\022\t\n\001x\030\001 \002(\002\022\t"
-    "\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"O\n\025ConnectRequestMe"
+    "\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"e\n\025ConnectRequestMe"
     "ssage\022(\n\004type\030\001 \001(\0162\n.mosp.Type:\016Connect"
-    "Request\022\014\n\004name\030\002 \002(\t\"\302\001\n\026ConnectRespons"
-    "eMessage\022)\n\004type\030\001 \001(\0162\n.mosp.Type:\017Conn"
-    "ectResponse\022\017\n\007success\030\002 \002(\010\022\037\n\010position"
-    "\030\003 \002(\0132\r.mosp.Vector2\022\021\n\tclient_id\030\004 \002(\005"
-    "\022\014\n\004name\030\005 \002(\t\022*\n\005error\030\006 \001(\0162\033.mosp.CON"
-    "NECT_REQUEST_ERROR\"\201\001\n\024PlayerConnectMess"
-    "age\022\'\n\004type\030\001 \001(\0162\n.mosp.Type:\rPlayerCon"
-    "nect\022\014\n\004name\030\002 \002(\t\022\021\n\tclient_id\030\003 \002(\005\022\037\n"
-    "\010position\030\004 \002(\0132\r.mosp.Vector2\"X\n\027Player"
-    "DisconnectMessage\022*\n\004type\030\001 \001(\0162\n.mosp.T"
-    "ype:\020PlayerDisconnect\022\021\n\tclient_id\030\002 \002(\005"
-    "\"o\n\022PlayerMovedMessage\022%\n\004type\030\001 \001(\0162\n.m"
-    "osp.Type:\013PlayerMoved\022\021\n\tclient_id\030\002 \002(\005"
-    "\022\037\n\010position\030\003 \002(\0132\r.mosp.Vector2*i\n\004Typ"
-    "e\022\022\n\016ConnectRequest\020\001\022\023\n\017ConnectResponse"
-    "\020\002\022\021\n\rPlayerConnect\020\003\022\024\n\020PlayerDisconnec"
-    "t\020\004\022\017\n\013PlayerMoved\020\005*9\n\025CONNECT_REQUEST_"
-    "ERROR\022\017\n\013NAME_EXISTS\020\001\022\017\n\013SERVER_FULL\020\002", 919);
+    "Request\022\020\n\010username\030\002 \002(\t\022\020\n\010password\030\003 "
+    "\002(\t\"\302\001\n\026ConnectResponseMessage\022)\n\004type\030\001"
+    " \001(\0162\n.mosp.Type:\017ConnectResponse\022\017\n\007suc"
+    "cess\030\002 \002(\010\022\037\n\010position\030\003 \001(\0132\r.mosp.Vect"
+    "or2\022\021\n\tclient_id\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022*\n\005"
+    "error\030\006 \001(\0162\033.mosp.CONNECT_REQUEST_ERROR"
+    "\"\201\001\n\024PlayerConnectMessage\022\'\n\004type\030\001 \001(\0162"
+    "\n.mosp.Type:\rPlayerConnect\022\014\n\004name\030\002 \002(\t"
+    "\022\021\n\tclient_id\030\003 \002(\005\022\037\n\010position\030\004 \002(\0132\r."
+    "mosp.Vector2\"X\n\027PlayerDisconnectMessage\022"
+    "*\n\004type\030\001 \001(\0162\n.mosp.Type:\020PlayerDisconn"
+    "ect\022\021\n\tclient_id\030\002 \002(\005\"o\n\022PlayerMovedMes"
+    "sage\022%\n\004type\030\001 \001(\0162\n.mosp.Type:\013PlayerMo"
+    "ved\022\021\n\tclient_id\030\002 \002(\005\022\037\n\010position\030\003 \002(\013"
+    "2\r.mosp.Vector2*i\n\004Type\022\022\n\016ConnectReques"
+    "t\020\001\022\023\n\017ConnectResponse\020\002\022\021\n\rPlayerConnec"
+    "t\020\003\022\024\n\020PlayerDisconnect\020\004\022\017\n\013PlayerMoved"
+    "\020\005*L\n\025CONNECT_REQUEST_ERROR\022\017\n\013NAME_EXIS"
+    "TS\020\001\022\017\n\013SERVER_FULL\020\002\022\021\n\rINVALID_LOGIN\020\003", 960);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "messages.proto", &protobuf_RegisterTypes);
   BaseMessage::default_instance_ = new BaseMessage();
@@ -326,6 +328,7 @@ bool CONNECT_REQUEST_ERROR_IsValid(int value) {
   switch(value) {
     case 1:
     case 2:
+    case 3:
       return true;
     default:
       return false;
@@ -1143,7 +1146,8 @@ void Vector3::Swap(Vector3* other) {
 
 #ifndef _MSC_VER
 const int ConnectRequestMessage::kTypeFieldNumber;
-const int ConnectRequestMessage::kNameFieldNumber;
+const int ConnectRequestMessage::kUsernameFieldNumber;
+const int ConnectRequestMessage::kPasswordFieldNumber;
 #endif  // !_MSC_VER
 
 ConnectRequestMessage::ConnectRequestMessage()
@@ -1166,7 +1170,8 @@ void ConnectRequestMessage::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   type_ = 1;
-  name_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  username_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  password_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1176,8 +1181,11 @@ ConnectRequestMessage::~ConnectRequestMessage() {
 }
 
 void ConnectRequestMessage::SharedDtor() {
-  if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete name_;
+  if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete username_;
+  }
+  if (password_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete password_;
   }
   if (this != default_instance_) {
   }
@@ -1205,11 +1213,16 @@ ConnectRequestMessage* ConnectRequestMessage::New() const {
 }
 
 void ConnectRequestMessage::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+  if (_has_bits_[0 / 32] & 7) {
     type_ = 1;
-    if (has_name()) {
-      if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        name_->clear();
+    if (has_username()) {
+      if (username_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        username_->clear();
+      }
+    }
+    if (has_password()) {
+      if (password_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        password_->clear();
       }
     }
   }
@@ -1242,20 +1255,37 @@ bool ConnectRequestMessage::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(18)) goto parse_name;
+        if (input->ExpectTag(18)) goto parse_username;
         break;
       }
 
-      // required string name = 2;
+      // required string username = 2;
       case 2: {
         if (tag == 18) {
-         parse_name:
+         parse_username:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
+                input, this->mutable_username()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->name().data(), this->name().length(),
+            this->username().data(), this->username().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "name");
+            "username");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_password;
+        break;
+      }
+
+      // required string password = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_password:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_password()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->password().data(), this->password().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "password");
         } else {
           goto handle_unusual;
         }
@@ -1294,14 +1324,24 @@ void ConnectRequestMessage::SerializeWithCachedSizes(
       1, this->type(), output);
   }
 
-  // required string name = 2;
-  if (has_name()) {
+  // required string username = 2;
+  if (has_username()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), this->name().length(),
+      this->username().data(), this->username().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "name");
+      "username");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->name(), output);
+      2, this->username(), output);
+  }
+
+  // required string password = 3;
+  if (has_password()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->password().data(), this->password().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "password");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->password(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -1320,15 +1360,26 @@ void ConnectRequestMessage::SerializeWithCachedSizes(
       1, this->type(), target);
   }
 
-  // required string name = 2;
-  if (has_name()) {
+  // required string username = 2;
+  if (has_username()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), this->name().length(),
+      this->username().data(), this->username().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "name");
+      "username");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->name(), target);
+        2, this->username(), target);
+  }
+
+  // required string password = 3;
+  if (has_password()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->password().data(), this->password().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "password");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->password(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -1349,11 +1400,18 @@ int ConnectRequestMessage::ByteSize() const {
         ::google::protobuf::internal::WireFormatLite::EnumSize(this->type());
     }
 
-    // required string name = 2;
-    if (has_name()) {
+    // required string username = 2;
+    if (has_username()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
-          this->name());
+          this->username());
+    }
+
+    // required string password = 3;
+    if (has_password()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->password());
     }
 
   }
@@ -1386,8 +1444,11 @@ void ConnectRequestMessage::MergeFrom(const ConnectRequestMessage& from) {
     if (from.has_type()) {
       set_type(from.type());
     }
-    if (from.has_name()) {
-      set_name(from.name());
+    if (from.has_username()) {
+      set_username(from.username());
+    }
+    if (from.has_password()) {
+      set_password(from.password());
     }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
@@ -1406,7 +1467,7 @@ void ConnectRequestMessage::CopyFrom(const ConnectRequestMessage& from) {
 }
 
 bool ConnectRequestMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
+  if ((_has_bits_[0] & 0x00000006) != 0x00000006) return false;
 
   return true;
 }
@@ -1414,7 +1475,8 @@ bool ConnectRequestMessage::IsInitialized() const {
 void ConnectRequestMessage::Swap(ConnectRequestMessage* other) {
   if (other != this) {
     std::swap(type_, other->type_);
-    std::swap(name_, other->name_);
+    std::swap(username_, other->username_);
+    std::swap(password_, other->password_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -1568,7 +1630,7 @@ bool ConnectResponseMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required .mosp.Vector2 position = 3;
+      // optional .mosp.Vector2 position = 3;
       case 3: {
         if (tag == 26) {
          parse_position:
@@ -1581,7 +1643,7 @@ bool ConnectResponseMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required int32 client_id = 4;
+      // optional int32 client_id = 4;
       case 4: {
         if (tag == 32) {
          parse_client_id:
@@ -1596,7 +1658,7 @@ bool ConnectResponseMessage::MergePartialFromCodedStream(
         break;
       }
 
-      // required string name = 5;
+      // optional string name = 5;
       case 5: {
         if (tag == 42) {
          parse_name:
@@ -1669,18 +1731,18 @@ void ConnectResponseMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->success(), output);
   }
 
-  // required .mosp.Vector2 position = 3;
+  // optional .mosp.Vector2 position = 3;
   if (has_position()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, this->position(), output);
   }
 
-  // required int32 client_id = 4;
+  // optional int32 client_id = 4;
   if (has_client_id()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->client_id(), output);
   }
 
-  // required string name = 5;
+  // optional string name = 5;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
@@ -1717,19 +1779,19 @@ void ConnectResponseMessage::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->success(), target);
   }
 
-  // required .mosp.Vector2 position = 3;
+  // optional .mosp.Vector2 position = 3;
   if (has_position()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         3, this->position(), target);
   }
 
-  // required int32 client_id = 4;
+  // optional int32 client_id = 4;
   if (has_client_id()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->client_id(), target);
   }
 
-  // required string name = 5;
+  // optional string name = 5;
   if (has_name()) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->name().data(), this->name().length(),
@@ -1769,21 +1831,21 @@ int ConnectResponseMessage::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // required .mosp.Vector2 position = 3;
+    // optional .mosp.Vector2 position = 3;
     if (has_position()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->position());
     }
 
-    // required int32 client_id = 4;
+    // optional int32 client_id = 4;
     if (has_client_id()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->client_id());
     }
 
-    // required string name = 5;
+    // optional string name = 5;
     if (has_name()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -1858,7 +1920,7 @@ void ConnectResponseMessage::CopyFrom(const ConnectResponseMessage& from) {
 }
 
 bool ConnectResponseMessage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001e) != 0x0000001e) return false;
+  if ((_has_bits_[0] & 0x00000002) != 0x00000002) return false;
 
   if (has_position()) {
     if (!this->position().IsInitialized()) return false;

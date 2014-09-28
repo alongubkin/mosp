@@ -7,6 +7,7 @@
 #endif
 
 #include "mongo/client/dbclient.h"
+#include "mongo/bson/bson.h"
 
 #include <thread>
 #include "enet/enet.h"
@@ -22,6 +23,8 @@ public:
 
 	bool IsRunning() { return isRunning; }
 	const std::vector<Client*>& GetClients() const { return clients; }
+
+	mongo::DBClientConnection* GetDatabase() const { return db; }
 
 	template <typename T>
 	void Broadcast(const T& message);
@@ -46,6 +49,8 @@ private:
 	void OnConnect(const ENetEvent &evt);
 	void OnReceive(const ENetEvent &evt);
 	void OnDisconnect(const ENetEvent &evt);
+
+	void CreateFakeUsers();
 };
 
 template <typename T>

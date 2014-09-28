@@ -30,6 +30,9 @@
     <ClCompile Include="event_handler.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="password_utils.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="server.h">

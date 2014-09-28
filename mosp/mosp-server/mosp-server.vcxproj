@@ -87,6 +87,7 @@
     <ClCompile Include="client.cc" />
     <ClCompile Include="event_handler.cc" />
     <ClCompile Include="main.cc" />
+    <ClCompile Include="password_utils.cc" />
     <ClCompile Include="server.cc" />
     <ClCompile Include="ticker.cc" />
   </ItemGroup>
