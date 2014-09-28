@@ -189,3 +189,4 @@ FakesAssemblies/
 !third_party/ogre3d/bin/debug/
 
 !third_party/libcurl/bin
+!third_party/openssl/bin

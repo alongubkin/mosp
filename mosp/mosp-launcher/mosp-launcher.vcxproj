@@ -80,6 +80,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cc" />
+    <ClCompile Include="md5_manager.cc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="md5_manager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
