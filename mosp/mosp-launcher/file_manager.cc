@@ -47,8 +47,8 @@ Manifest FileManager::GenerateLocalManifest()
 
 		if (file.is_reg)
 		{
-			unsigned char* fileContents = LoadFile(file.name);
-			MD5Manager::GetMD5String(fileContents, )
+			File fileContents = LoadFile(file.name);
+			//MD5Manager::GetMD5String()
 		}
 		else if (file.is_dir)
 		{
