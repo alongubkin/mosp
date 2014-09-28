@@ -79,7 +79,7 @@ void EventHandler::OnPlayerMoved(Server* server, Client* sender, const mosp::Pla
 	playerMoved.set_client_id(sender->GetId());
 	playerMoved.set_allocated_position(new mosp::Vector2(message.position()));
 
-	Logger::Info("clientid: %d - position: %f, %f\n", sender->GetId(), message.position().x(), message.position().y());
+	Logger::Info("clientid: %d - position: %f, %f", sender->GetId(), message.position().x(), message.position().y());
 
 	server->Broadcast(playerMoved, sender);
 }

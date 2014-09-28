@@ -51,7 +51,7 @@ void Server::Run()
 
 void Server::Listen()
 {
-	Logger::Info("Server is now online and listening to incoming traffic\n");
+	Logger::Info("Server is now online and listening to incoming traffic");
 
 	ENetEvent event;
 
