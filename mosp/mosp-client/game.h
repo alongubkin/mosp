@@ -5,6 +5,7 @@
 #include "enet/enet.h"
 #include "terrain.h"
 #include "entity.h"
+#include "creature.h"
 #include "controller_player.h"
 
 #include "network_manager.h"

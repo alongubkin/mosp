@@ -80,8 +80,8 @@ void Client::OnConnect(ENetEvent& evt)
 
 	mosp::ConnectRequestMessage msg;
 	msg.set_type(mosp::Type::ConnectRequest); //Should make it default via proto
-	msg.set_username("alon");
-	msg.set_password("1234");
+	msg.set_username("SharkDX");
+	msg.set_password("sharkdx");
 
 	Send(msg);
 }

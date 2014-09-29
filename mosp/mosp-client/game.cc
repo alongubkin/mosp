@@ -64,7 +64,7 @@ void Game::Run()
 	timer->reset();
 	unsigned long lastFrame = timer->getMilliseconds();
 
-	while (!window->isClosed()) // && !keyboard->isKeyDown(OIS::KC_ESCAPE))
+	while (!window->isClosed() && !inputManager->isKeyDown(OIS::KC_ESCAPE))
 	{
 		float delta = 0.001f * (timer->getMilliseconds() - lastFrame);
 		lastFrame = timer->getMilliseconds();
@@ -170,7 +170,7 @@ void Game::SetupRenderer()
 
 void Game::SetupWindow()
 {
-	window = ogreRoot->createRenderWindow("Ogre Test", 640, 480, false);
+	window = ogreRoot->createRenderWindow("Ogre Test", 1280, 720, false);
 	window->setVSyncEnabled(true);
 	window->setActive(true);
 	window->setAutoUpdated(false);

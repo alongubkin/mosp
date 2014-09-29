@@ -85,6 +85,7 @@
   <ItemGroup>
     <ClInclude Include="animation_manager.h" />
     <ClInclude Include="client.h" />
+    <ClInclude Include="creature.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="input_manager.h" />
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="client.cc" />
+    <ClCompile Include="creature.cc" />
     <ClCompile Include="entity.cc" />
     <ClCompile Include="game.cc" />
     <ClCompile Include="input_manager.cc" />

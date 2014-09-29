@@ -15,6 +15,8 @@ public:
 	void Update();
 	void Close();
 
+	bool isKeyDown(OIS::KeyCode key);
+
 private:
 	Game* _game;
 

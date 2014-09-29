@@ -122,3 +122,8 @@ void InputManager::HandleMouseInput(ControllerPlayer* player)
 
 	_wasMouseDown = mouseState.buttonDown(OIS::MouseButtonID::MB_Left);
 }
+
+bool InputManager::isKeyDown(OIS::KeyCode key)
+{
+	return _keyboard->isKeyDown(key);
+}
