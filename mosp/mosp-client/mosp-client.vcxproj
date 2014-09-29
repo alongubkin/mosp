@@ -75,6 +75,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="config.cfg" />
     <None Include="resources.cfg" />
   </ItemGroup>
   <ItemGroup>
