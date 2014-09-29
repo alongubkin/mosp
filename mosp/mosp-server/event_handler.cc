@@ -41,6 +41,22 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 			return;
 		}
 
+		// Prevent login if the user is already connected
+		std::string userId = user["_id"].OID().str();
+		for (auto it = server->GetClients().begin(); it != server->GetClients().end(); it++)
+		{
+			if ((*it)->GetUserId() == userId)
+			{
+				mosp::ConnectResponseMessage responseMessage;
+				responseMessage.set_type(mosp::Type::ConnectResponse);
+				responseMessage.set_success(false);
+				responseMessage.set_error(mosp::CONNECT_REQUEST_ERROR::NAME_EXISTS);
+
+				Logger::Info("User %s tried to login even though he is already connected.", message.username().c_str());
+				return;
+			}
+		}
+
 		Logger::Info("User %s logged in successfully.", message.username().c_str());
 
 		sender->SetName(message.username());
@@ -50,6 +66,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 		spawnPoint.set_y(0.0f);
 
 		sender->SetTargetPosition(spawnPoint);
+		sender->SetUserId(userId);
 
 		// Send an OK response
 		mosp::ConnectResponseMessage responseMessage;

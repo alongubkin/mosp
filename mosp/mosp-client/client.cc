@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "client.h"
 #include "proto/messages.pb.h"
+#include "config.h"
 
 Client::Client()
 {
@@ -25,7 +26,7 @@ void Client::Connect(std::string ip, int port)
 {
 	ENetAddress address;
 	enet_address_set_host(&address, ip.c_str());
-	address.port = 1234;
+	address.port = port;
 	server = enet_host_connect(client, &address, 2, 0);
 
 	if (server == NULL)
@@ -80,8 +81,8 @@ void Client::OnConnect(ENetEvent& evt)
 
 	mosp::ConnectRequestMessage msg;
 	msg.set_type(mosp::Type::ConnectRequest); //Should make it default via proto
-	msg.set_username("SharkDX");
-	msg.set_password("sharkdx");
+	msg.set_username(Config::GetProperty("username"));
+	msg.set_password(Config::GetProperty("password"));
 
 	Send(msg);
 }

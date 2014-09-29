@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "game.h"
+#include "config.h"
 
 Game::Game()
 {
@@ -23,6 +24,7 @@ Game::Game()
 
 	LocateResources();
 	
+	Config::Load();
 	networkManager = new NetworkManager(this);
 	viewportManager = new ViewportManager(this);
 	inputManager = new InputManager(this);

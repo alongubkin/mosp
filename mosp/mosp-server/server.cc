@@ -118,8 +118,8 @@ void Server::OnDisconnect(const ENetEvent &evt)
 
 void Server::CreateFakeUsers()
 {
-	if (db->count("mosp.users") > 0)
-		return;
+	//if (db->count("mosp.users") > 0)
+		//return;
 
 	std::cout << "It looks like there are no users in the database." << std::endl
 			  << "Would you like to add one [Y/n]? ";
@@ -141,6 +141,7 @@ void Server::CreateFakeUsers()
 	std::string salt = mosp::GenerateSalt();
 
 	mongo::BSONObjBuilder builder;
+	builder.genOID();
 	builder.append("username", username);
 	builder.append("password", mosp::HashPassword(password, salt));
 	builder.append("salt", salt);
