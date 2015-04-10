@@ -18,6 +18,9 @@
     <None Include="resources.cfg">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="config.cfg">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation_manager.h">
