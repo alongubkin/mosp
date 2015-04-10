@@ -37,6 +37,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 			responseMessage.set_type(mosp::Type::ConnectResponse);
 			responseMessage.set_success(false);
 			responseMessage.set_error(mosp::CONNECT_REQUEST_ERROR::INVALID_LOGIN);
+			sender->Send(responseMessage);
 
 			return;
 		}
@@ -51,8 +52,10 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 				responseMessage.set_type(mosp::Type::ConnectResponse);
 				responseMessage.set_success(false);
 				responseMessage.set_error(mosp::CONNECT_REQUEST_ERROR::NAME_EXISTS);
+				sender->Send(responseMessage);
 
 				Logger::Info("User %s tried to login even though he is already connected.", message.username().c_str());
+
 				return;
 			}
 		}
@@ -116,6 +119,7 @@ void EventHandler::OnConnectRequest(Server* server, Client* sender, const mosp::
 		responseMessage.set_type(mosp::Type::ConnectResponse);
 		responseMessage.set_success(false);
 		responseMessage.set_error(mosp::CONNECT_REQUEST_ERROR::INVALID_LOGIN);
+		sender->Send(responseMessage);
 	}
 }
 

@@ -8,13 +8,19 @@ Game::Game()
 	Ogre::Timer* initTimer = new Ogre::Timer();
 	initTimer->reset();
 
+	// Uncomment this to disable console logging.
+	Ogre::LogManager * lm = new Ogre::LogManager();
+	lm->createLog("Ogre.log", true, false, false);
+	
+
+	// Creates the main ogre engine instance.
 	ogreRoot = new Ogre::Root();
 
 	SetupPlugins();
 	SetupRenderer();
 	ogreRoot->initialise(false);
 	SetupWindow();
-
+	
 	sceneManager = ogreRoot->createSceneManager(Ogre::ST_GENERIC);
 	sceneManager->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 	sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_STENCIL_ADDITIVE);

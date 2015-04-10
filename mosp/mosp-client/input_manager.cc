@@ -98,6 +98,7 @@ void InputManager::HandleKeyboardInput(ControllerPlayer* player)
 
 	if (movement != Ogre::Vector3::ZERO)
 	{
+		//(movement * 10) % 5
 		player->SetTarget(player->getPos().x + movement.x, player->getPos().z + movement.z);
 	}
 }

@@ -8,7 +8,6 @@ Client::Client(ENetPeer* peer, unsigned int clientId)
 
 Client::~Client()
 {
-	
 }
 
 

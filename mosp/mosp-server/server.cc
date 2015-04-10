@@ -113,13 +113,13 @@ void Server::OnDisconnect(const ENetEvent &evt)
 	Logger::Info("Client %d has disconnected", client->GetId());
 
 	delete client;
-	evt.peer->data = nullptr;
+	evt.peer->data = nullptr; // isn't 'delete client' already supposed to reset the peer?
 }
 
 void Server::CreateFakeUsers()
 {
-	//if (db->count("mosp.users") > 0)
-		//return;
+	if (db->count("mosp.users") > 0)
+		return;
 
 	std::cout << "It looks like there are no users in the database." << std::endl
 			  << "Would you like to add one [Y/n]? ";

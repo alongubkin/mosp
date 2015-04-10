@@ -24,6 +24,14 @@ Client::~Client()
 
 void Client::Connect(std::string ip, int port)
 {
+	if ( NumberOfTries > 0 )
+		printf("Retrying #%d to %s:%d...\n", NumberOfTries, ip.c_str(), port);
+	else
+		printf("Connecting to %s:%d...\n", ip.c_str(), port);
+
+	isConnected = false;
+	connectStartTime = time(NULL);
+
 	ENetAddress address;
 	enet_address_set_host(&address, ip.c_str());
 	address.port = port;
@@ -32,7 +40,7 @@ void Client::Connect(std::string ip, int port)
 	if (server == NULL)
 	{
 		fprintf(stderr, "No available peers for initiating an ENet connection.\n");
-		exit(EXIT_FAILURE);
+		
 	}
 }
 
@@ -43,6 +51,20 @@ void Client::Run()
 
 	while (isRunning)
 	{
+		// If we are trying to connect, check if it's time-out.
+		if (server != NULL && !isConnected && time(NULL) - connectStartTime > 3)
+		{
+			// Get ip address string
+			char destIpStr[15];
+			enet_address_get_host_ip(&server->address, destIpStr, 15);
+
+
+			// Try re-connecting...
+			enet_peer_reset(server);
+			NumberOfTries++;
+			Connect(destIpStr, server->address.port);
+			
+		}
 		while (enet_host_service(client, &event, 100) > 0)
 		{
 			switch (event.type)
@@ -77,6 +99,9 @@ std::queue<ENetPacket*> Client::CopyQueue()
 
 void Client::OnConnect(ENetEvent& evt)
 {
+	isConnected = true;
+	NumberOfTries = 0;
+
 	printf("Connection to remote server succeeded!\n");
 
 	mosp::ConnectRequestMessage msg;

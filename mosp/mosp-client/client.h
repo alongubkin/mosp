@@ -22,6 +22,10 @@ private:
 	ENetHost* client;
 	ENetPeer* server;
 	bool isRunning;
+	bool isConnected = false;
+	long connectStartTime;
+	char NumberOfTries = 0;
+
 	std::mutex incomingPacketsQueueMutex;
 	std::queue<ENetPacket*> incomingPackets;
 

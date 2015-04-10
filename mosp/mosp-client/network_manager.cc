@@ -69,6 +69,12 @@ void NetworkManager::HandlePacket(ENetPacket* packet)
 
 void NetworkManager::HandleConnectResponseMessage(const mosp::ConnectResponseMessage& message)
 {
+	if (message.success() == false)
+	{
+		printf("Connect error: %s\n", mosp::CONNECT_REQUEST_ERROR_Name(message.error()).c_str());
+		return;
+	}
+
 	_currentClientId = message.client_id();
 
 	auto player = new ControllerPlayer(_game, message.name());
